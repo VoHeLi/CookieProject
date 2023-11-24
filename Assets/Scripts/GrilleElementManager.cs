@@ -63,7 +63,14 @@ public class GrilleElementManager : MonoBehaviour
                 break;
             }
         }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            RemoveElementFromCase();
+        }
     }
+
+    
 
     private void LoadInitialElements()
     {
@@ -95,6 +102,7 @@ public class GrilleElementManager : MonoBehaviour
     {
         if (elementObjects[i, j] != null)
         {
+            Debug.Log("test");
             if (elementObjects[i, j].GetComponent<Element>().type == elementMaps[i, j]) //TODO create Element class
             {
                 return;
@@ -145,5 +153,14 @@ public class GrilleElementManager : MonoBehaviour
         elementMaps[i, j] = currentPlacingElement;
         UpdateElementObject(i, j);
     }
+    private void RemoveElementFromCase()
+    {
+        Debug.Log("Remove element from case");
 
+        int i = 0, j = 0;
+        if (!GlobalGrid.GetMouseCase(ref i, ref j)) return;
+
+        elementMaps[i, j] = Element.TypeElement.None;
+        UpdateElementObject(i, j);
+    }
 }
