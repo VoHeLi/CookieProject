@@ -102,7 +102,6 @@ public class GrilleElementManager : MonoBehaviour
     {
         if (elementObjects[i, j] != null)
         {
-            Debug.Log("test");
             if (elementObjects[i, j].GetComponent<Element>().type == elementMaps[i, j]) //TODO create Element class
             {
                 return;
@@ -130,6 +129,7 @@ public class GrilleElementManager : MonoBehaviour
 
         GameObject elementObject = Instantiate(elementPrefabs[(int)elementMaps[i, j]], new Vector3(i * GlobalGrid.caseSize, j * GlobalGrid.caseSize, 0), Quaternion.identity);
         elementObject.transform.parent = transform;
+        elementObjects[i, j] = elementObject;
     }
 
     private void BeginElementPlacement()
