@@ -40,4 +40,14 @@ public class GlobalGrid : MonoBehaviour
     {
         get { return _instance._nbCaseY; }
     }
+
+    public static bool GetMouseCase(ref int i, ref int j)
+    {
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mousePos = new Vector2(mouseWorldPos.x, mouseWorldPos.y);
+
+        i = Mathf.FloorToInt(0.5f + mousePos.x / GlobalGrid.caseSize);
+        j = Mathf.FloorToInt(0.5f + mousePos.y / GlobalGrid.caseSize);
+        return GlobalGrid.IsInGrid(i, j);
+    }
 }

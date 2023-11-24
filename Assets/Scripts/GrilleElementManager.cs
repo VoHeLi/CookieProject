@@ -14,6 +14,7 @@ public class GrilleElementManager : MonoBehaviour
 
 
     private Element.TypeElement currentPlacingElement = Element.TypeElement.None;
+    private GameObject currentPlacingElementObject = null;
 
     void Start()
     {
@@ -33,8 +34,21 @@ public class GrilleElementManager : MonoBehaviour
 
     private void Update()
     {
+        //current Placing Element at good position
+        if (currentPlacingElement != Element.TypeElement.None)
+        {
+            int i = 0, j = 0;
+            if (!GlobalGrid.GetMouseCase(ref i, ref j))
+            {
+                  currentPlacingElementObject.transform.position = new Vector3(-1000, -1000, 0);
+                  return;
+            }
+
+            currentPlacingElementObject.transform.position = new Vector3(i * GlobalGrid.caseSize, j * GlobalGrid.caseSize, 0);
+        }
+
         //DEBUG
-        if(currentPlacingElement != Element.TypeElement.None && Input.GetMouseButtonDown(0))
+        if (currentPlacingElement != Element.TypeElement.None && Input.GetMouseButtonDown(0))
         {
             EndObjectPlacement();
         }
@@ -113,16 +127,20 @@ public class GrilleElementManager : MonoBehaviour
     private void BeginElementPlacement()
     {
         Debug.Log("Begin element placement : " + currentPlacingElement.ToString());
+        if (currentPlacingElementObject != null)
+        {
+            Destroy(currentPlacingElementObject);
+
+        }
+
+        if (currentPlacingElement == Element.TypeElement.None) return;
+
+        currentPlacingElementObject = Instantiate(elementPrefabs[(int)currentPlacingElement], Vector3.zero, Quaternion.identity);
     }
     private void EndObjectPlacement()
     {
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 mousePos = new Vector2(mouseWorldPos.x, mouseWorldPos.y);
-
-        int i = Mathf.FloorToInt(0.5f + mousePos.x / GlobalGrid.caseSize);
-        int j = Mathf.FloorToInt(0.5f + mousePos.y / GlobalGrid.caseSize);
-
-        if (!GlobalGrid.IsInGrid(i, j)) return;
+        int i = 0, j = 0;
+        if (!GlobalGrid.GetMouseCase(ref i, ref j)) return;
 
         elementMaps[i, j] = currentPlacingElement;
         UpdateElementObject(i, j);
