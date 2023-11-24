@@ -12,6 +12,9 @@ public class GrilleElementManager : MonoBehaviour
     [HideInInspector] public Element.TypeElement[,] elementMaps;
     [HideInInspector] public GameObject[,] elementObjects;
 
+
+    private Element.TypeElement currentPlacingElement = Element.TypeElement.None;
+
     void Start()
     {
         elementMaps = new Element.TypeElement[GlobalGrid.nbCaseX, GlobalGrid.nbCaseY];
@@ -28,6 +31,26 @@ public class GrilleElementManager : MonoBehaviour
         LoadInitialElements();
     }
 
+    private void Update()
+    {
+        //DEBUG
+        if(currentPlacingElement != Element.TypeElement.None && Input.GetMouseButtonDown(0))
+        {
+            EndObjectPlacement();
+        }
+
+        KeyCode[] keyCodes = new KeyCode[] { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8 };
+        for(int i = 0; i < keyCodes.Length; i++)
+        {
+            if (Input.GetKeyDown(keyCodes[i]))
+            {
+                currentPlacingElement = (Element.TypeElement)i;
+                BeginElementPlacement();
+                break;
+            }
+        }
+    }
+
     private void LoadInitialElements()
     {
         //TODO : Load initial elements from level data
@@ -40,10 +63,10 @@ public class GrilleElementManager : MonoBehaviour
         elementMaps[5, 1] = Element.TypeElement.Ventilateur_left;
         elementMaps[6, 1] = Element.TypeElement.Poteau;
 
-        UpdateAllElementObject();   
+        UpdateAllElementObjects();   
     }
 
-    void UpdateAllElementObject()
+    void UpdateAllElementObjects()
     {
         for(int i = 0; i < GlobalGrid.nbCaseX; i++)
         {
@@ -86,4 +109,23 @@ public class GrilleElementManager : MonoBehaviour
         GameObject elementObject = Instantiate(elementPrefabs[(int)elementMaps[i, j]], new Vector3(i * GlobalGrid.caseSize, j * GlobalGrid.caseSize, 0), Quaternion.identity);
         elementObject.transform.parent = transform;
     }
+
+    private void BeginElementPlacement()
+    {
+        Debug.Log("Begin element placement : " + currentPlacingElement.ToString());
+    }
+    private void EndObjectPlacement()
+    {
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mousePos = new Vector2(mouseWorldPos.x, mouseWorldPos.y);
+
+        int i = Mathf.FloorToInt(0.5f + mousePos.x / GlobalGrid.caseSize);
+        int j = Mathf.FloorToInt(0.5f + mousePos.y / GlobalGrid.caseSize);
+
+        if (!GlobalGrid.IsInGrid(i, j)) return;
+
+        elementMaps[i, j] = currentPlacingElement;
+        UpdateElementObject(i, j);
+    }
+
 }

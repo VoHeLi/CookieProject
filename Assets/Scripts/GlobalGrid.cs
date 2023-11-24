@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,11 @@ public class GlobalGrid : MonoBehaviour
             Debug.LogError("Multiple instances of GlobalGrid!");
         }
         _instance = this;
+    }
+
+    public static bool IsInGrid(int i, int j)
+    {
+        return i >= 0 && i < nbCaseX && j >= 0 && j < nbCaseY;
     }
 
     public static float caseSize
