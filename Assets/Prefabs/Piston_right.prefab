@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2075316382833702489}
   - component: {fileID: -4173931088841982948}
   m_Layer: 0
-  m_Name: Piston
+  m_Name: Piston_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -165,7 +165,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c3807334597e685438f99e074d5ad43a, type: 3}
   - {fileID: 21300000, guid: 4e2c9800bb56fd94d94d396918044d47, type: 3}
   pistonRightDefault: {fileID: 21300000, guid: 4e2c9800bb56fd94d94d396918044d47, type: 3}
-  pistoRightCable: {fileID: 21300000, guid: 02769e654ba05fc4da6a92d46063659b, type: 3}
+  pistonRightCable: {fileID: 21300000, guid: 02769e654ba05fc4da6a92d46063659b, type: 3}
   pistonLeftExtention:
   - {fileID: 21300000, guid: 47139344f4e428243b187abf9e1d6faa, type: 3}
   - {fileID: 21300000, guid: f62f437b1246f8f4db36f6685e2c810f, type: 3}
@@ -174,6 +174,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f62f437b1246f8f4db36f6685e2c810f, type: 3}
   - {fileID: 21300000, guid: 47139344f4e428243b187abf9e1d6faa, type: 3}
   pistonLeftDefault: {fileID: 21300000, guid: 47139344f4e428243b187abf9e1d6faa, type: 3}
-  pistoLeftCable: {fileID: 21300000, guid: b00f903d5e02160428548177d02a0ce8, type: 3}
-  isFacingRight: 0
+  pistonLeftCable: {fileID: 21300000, guid: b00f903d5e02160428548177d02a0ce8, type: 3}
+  isFacingRight: 1
   isFacingLeft: 0
+  isConnected: 0
