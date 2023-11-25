@@ -186,9 +186,6 @@ public class GrilleElementManager : MonoBehaviour
         int i = 0, j = 0;
         if (!GlobalGrid.GetMouseCase(ref i, ref j)) return;
         if (!GetBlock.instance.CanBePlacedOn(i,j)) return;
-        {
-            
-        }
         elementMaps[i, j] = currentPlacingElement;
         UpdateElementObject(i, j);
     }
