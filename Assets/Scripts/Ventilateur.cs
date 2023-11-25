@@ -48,13 +48,13 @@ public class Ventilateur : MonoBehaviour
     void Update()
     {
 
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        /*SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 
         if (isFacingRight && !isExtending)
         {
             spriteRenderer.sprite = pistonRightDefault;
             spriteRenderer.sortingOrder = 1;
-        }
+        }*/
 
     }
 }

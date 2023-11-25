@@ -47,6 +47,7 @@ public class EnergyResolver : MonoBehaviour
     [SerializeField] private List<Element.TypeElement> ventilatorElements;
     [SerializeField] private List<Element.TypeElement> eoliennesElements;
     
+    
     //On va créer un graphe de noeuds, chaque noeud représente un élément avec son rendement, son temps d'animation, ses noeuds sources et ses noeuds finaux
     //On commence de la fin, puis on remonte jusqu'au début
     public void ResolveLevel(GrilleElementManager grilleElementManager)
@@ -119,6 +120,14 @@ public class EnergyResolver : MonoBehaviour
         }
 
         Vector2Int neightbour = newNeighbours[0]; //TODO : TAKE THE HIGHEST PRIORITY NEIGHBOUR
+        foreach(Vector2Int otherPossibility in newNeighbours)
+        {
+            if (grilleElementManager.GetElementTypeAtPosition(otherPossibility.x, otherPossibility.y) == Element.TypeElement.Poteau)
+            {
+                neightbour = otherPossibility;
+                break;
+            }
+        }
             
         GraphNode neighbourNode = new GraphNode();
         neighbourNode.rendement = 0.9f;
