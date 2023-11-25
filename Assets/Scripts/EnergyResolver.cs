@@ -308,6 +308,12 @@ public class EnergyResolver : MonoBehaviour
         if (ventilatorElements.Contains(node.type))
         {
             DisplayWind(node);
+            GrilleElementManager.instance.elementObjects[node.spatialPosition.x, node.spatialPosition.y].GetComponent<Ventilateur>().StartAnimation();
+        }
+
+        if (eoliennesElements.Contains(node.type))
+        {
+            GrilleElementManager.instance.elementObjects[node.spatialPosition.x, node.spatialPosition.y].GetComponent<Ventilateur>().StartAnimation();
         }
 
         if(node.spawnBall)
