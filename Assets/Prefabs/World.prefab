@@ -35758,6 +35758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ground: {fileID: 2925746189923381552}
+  _sky: {fileID: 5402498786447890745}
   _gates: {fileID: 2152195242472295166}
 --- !u!1 &7162507356916951654
 GameObject:
