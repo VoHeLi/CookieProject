@@ -29,10 +29,17 @@ public class Element : MonoBehaviour
         Eolienne_up = 11,
         Eolienne_down = 12,
         Piston_left = 13,
-        Piston_right = 14
+        Piston_right = 14,
+        Sponge_cornerBottomLeft = 15,
+        Sponge_cornerBottomRight = 16,
+        Sponge_cornerTopLeft = 17,
+        Sponge_cornerTopRight = 18,
+        Antipiston_left = 19,
+        Antipiston_right = 20,
+
         //TODO : Add other elements
     }
-    public const int ELEMENT_TYPE_COUNT = 15;
+    public const int ELEMENT_TYPE_COUNT = 21;
 
     public enum ElementToSelect
     {

@@ -95,6 +95,23 @@ public class GrilleElementManager : MonoBehaviour
             BeginElementPlacement();
         }
 
+        if(Input.GetKeyDown(KeyCode.N))
+        {
+            currentPlacingElement = (Element.TypeElement)15;
+            BeginElementPlacement();
+        }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            currentPlacingElement = (Element.TypeElement)19;
+            BeginElementPlacement();
+        }
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            currentPlacingElement = (Element.TypeElement)20;
+            BeginElementPlacement();
+        }
+
         if (Input.GetMouseButtonDown(1))
         {
             RemoveElementFromCase();
@@ -227,13 +244,14 @@ public class GrilleElementManager : MonoBehaviour
     }
     private void RemoveElementFromCase()
     {
-        Debug.Log("Remove element from case");
+        
 
         int i = 0, j = 0;
         if (!GlobalGrid.GetMouseCase(ref i, ref j)) return;
 
         if (elementMaps[i, j] == Element.TypeElement.Poteau && GetElementTypeAtPosition(i, j+1) == Element.TypeElement.Poteau) return;
 
+        Debug.Log("Remove element from case");
         elementMaps[i, j] = Element.TypeElement.None;
         UpdateElementObject(i, j);
     }

@@ -10,9 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8972868910949752399}
   - component: {fileID: 2870189689536987576}
-  - component: {fileID: 3201277216762963558}
+  - component: {fileID: -7837779028654859649}
+  - component: {fileID: 2075316382833702489}
+  - component: {fileID: 8284604784460407500}
   m_Layer: 0
-  m_Name: Cable
+  m_Name: Antipiston_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 99ceb5a1622d9e94dab9afc12313a8bb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 47139344f4e428243b187abf9e1d6faa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,7 +87,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3201277216762963558
+--- !u!114 &-7837779028654859649
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,11 +96,74 @@ MonoBehaviour:
   m_GameObject: {fileID: 2539536271585897927}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7dc53bafd89ed04f958ac82755a026c, type: 3}
+  m_Script: {fileID: 11500000, guid: ec2d6f4df6d311f4b80807b0b53f15b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
-  defaultSprite: {fileID: 21300000, guid: 71689daae5eaba044bb83f82826c9392, type: 3}
-  cableLeft: {fileID: 21300000, guid: 0f7e4dddfd4c1d24685bef0bddd48651, type: 3}
-  cableRight: {fileID: 21300000, guid: 81f7542434f1f314393c9dfbf73d8be1, type: 3}
-  cableLine: {fileID: 21300000, guid: 99ceb5a1622d9e94dab9afc12313a8bb, type: 3}
+  type: 20
+--- !u!61 &2075316382833702489
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2539536271585897927}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.029544592, y: -0.1264507}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.58165, y: 0.28384086}
+  m_EdgeRadius: 0
+--- !u!114 &8284604784460407500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2539536271585897927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0464f5d1c31826c4a97c18ec302a9f17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pistonRightExtention: []
+  pistonRightDefault: {fileID: 0}
+  pistonRightCable: {fileID: 0}
+  pistonLeftExtention: []
+  pistonLeftDefault: {fileID: 0}
+  pistonLeftCable: {fileID: 0}
+  isFacingRight: 0
+  isFacingLeft: 1
+  ball: {fileID: 0}
+  ballMass: 0
