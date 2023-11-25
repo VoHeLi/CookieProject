@@ -27,7 +27,7 @@ public class Piston : MonoBehaviour
     private bool isExtending = false;
 
 
-    [SerializeField] private bool isConnected;
+    private bool isConnected;
     private bool isCableAttached = false;
 
 

@@ -38,9 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Cable
+    uniqueID: 2113292705
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Cable
-    uniqueID: 2113292705
+  - name: Fan
+    uniqueID: 1872705891
     locked: 0

@@ -75,6 +75,17 @@ public class GrilleElementManager : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            currentPlacingElement = (Element.TypeElement)14;
+            BeginElementPlacement();
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            currentPlacingElement = (Element.TypeElement)13;
+            BeginElementPlacement();
+        }
+
         if (Input.GetMouseButtonDown(1))
         {
             RemoveElementFromCase();
