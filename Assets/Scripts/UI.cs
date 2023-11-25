@@ -83,7 +83,7 @@ public class UI : MonoBehaviour
     public void startSimulation()
     {
         Debug.Log("Start Game Simulation");
-        energyResolver.ResolveLevel(grilleElementManager);
+        energyResolver.ResolveLevelPart(grilleElementManager, grilleElementManager.sourcePosition);
     }
 
     // Enable pause menu
