@@ -1,11 +1,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class EnergyResolver : MonoBehaviour
 {
-    struct GraphNode
+    public static EnergyResolver instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogError("Multiple instances of EnergyResolver!");
+        }
+        instance = this;
+    }
+
+    public struct GraphNode
     {
         public float rendement;
         public float animationTime;
@@ -14,6 +27,9 @@ public class EnergyResolver : MonoBehaviour
         public Vector2Int spatialPosition;
         public Element.TypeElement type;
     }
+
+    [SerializeField] private GameObject debugEnergyPrefab;
+    private List<GameObject> debugEnergyObjects = new List<GameObject>();
 
     private bool[,] visitedElements;
 
@@ -26,26 +42,42 @@ public class EnergyResolver : MonoBehaviour
     //On commence de la fin, puis on remonte jusqu'au début
     public void ResolveLevel(GrilleElementManager grilleElementManager)
     {
+        if(grilleElementManager.sourcePosition.x == -1000)
+        {
+            Debug.LogError("No source position set!");
+            return;
+        }
+
         visitedElements = new bool[GlobalGrid.nbCaseX, GlobalGrid.nbCaseY];
 
         Queue<GraphNode> nodesToProcess = new Queue<GraphNode>();
 
-        GraphNode targetNode = new GraphNode();
-        targetNode.rendement = 1f;
-        targetNode.animationTime = 0f;
-        targetNode.sourceNodes = new List<GraphNode>();
-        targetNode.destNodes = new List<GraphNode>();
-        targetNode.spatialPosition = grilleElementManager.sourcePosition;
-        targetNode.type = Element.TypeElement.TargetBattery;
+        GraphNode beginNode = new GraphNode();
+        beginNode.rendement = 1f;
+        beginNode.animationTime = 0f;
+        beginNode.sourceNodes = new List<GraphNode>();
+        beginNode.destNodes = new List<GraphNode>();
+        beginNode.spatialPosition = grilleElementManager.sourcePosition;
+        beginNode.type = Element.TypeElement.Batterie;
 
-        visitedElements[targetNode.spatialPosition.x, targetNode.spatialPosition.y] = true;
+        visitedElements[beginNode.spatialPosition.x, beginNode.spatialPosition.y] = true;
 
+
+        nodesToProcess.Enqueue(beginNode);
         while (nodesToProcess.Count > 0)
         {
             GraphNode currentNode = nodesToProcess.Dequeue();
 
+            /*if(currentNode.type == Element.TypeElement.Batterie)
+            {
+                continue;
+            }*/
+           
             ProcessElectricityNode(currentNode, grilleElementManager, nodesToProcess);
+
         }
+
+        DisplayGraphAnimation(beginNode);
 
     }
 
@@ -53,28 +85,41 @@ public class EnergyResolver : MonoBehaviour
     {
         List<Vector2Int> neighbours = GetElectricityNeighbours(node.spatialPosition.x, node.spatialPosition.y, grilleElementManager);
 
+        //Remove already explored Node 
+
+        List<Vector2Int> newNeighbours = new List<Vector2Int>();
         foreach (Vector2Int neighbour in neighbours)
         {
-            if (visitedElements[neighbour.x, neighbour.y])
+            if (!visitedElements[neighbour.x, neighbour.y])
             {
-                continue;
+                newNeighbours.Add(neighbour);
             }
-
-            GraphNode neighbourNode = new GraphNode();
-            neighbourNode.rendement = 1f;
-            neighbourNode.animationTime = 0f;
-            neighbourNode.sourceNodes = new List<GraphNode>();
-            neighbourNode.destNodes = new List<GraphNode>();
-            neighbourNode.spatialPosition = neighbour;
-            neighbourNode.type = grilleElementManager.GetElementTypeAtPosition(neighbour.x, neighbour.y);
-
-            visitedElements[neighbour.x, neighbour.y] = true;
-
-            node.destNodes.Add(neighbourNode);
-            neighbourNode.sourceNodes.Add(node);
-
-            nodesToProcess.Enqueue(neighbourNode);
         }
+
+        if(newNeighbours.Count == 0)
+        {
+            return;
+        }
+
+        Vector2Int neightbour = newNeighbours[0]; //TODO : TAKE THE HIGHEST PRIORITY NEIGHBOUR
+            
+        GraphNode neighbourNode = new GraphNode();
+        neighbourNode.rendement = 0.9f;
+        neighbourNode.animationTime = 0f;
+        neighbourNode.sourceNodes = new List<GraphNode>();
+        neighbourNode.destNodes = new List<GraphNode>();
+        neighbourNode.spatialPosition = neightbour;
+        neighbourNode.type = grilleElementManager.GetElementTypeAtPosition(neightbour.x, neightbour.y);
+
+        visitedElements[neightbour.x, neightbour.y] = true;
+
+        node.destNodes.Add(neighbourNode);
+        neighbourNode.sourceNodes.Add(node);
+
+
+        Debug.Log("Adding node to process : " + neighbourNode.spatialPosition);
+        nodesToProcess.Enqueue(neighbourNode);
+        
     }
 
     private List<Vector2Int> GetElectricityNeighbours(int targetX, int targetY, GrilleElementManager grilleElementManager)
@@ -106,5 +151,65 @@ public class EnergyResolver : MonoBehaviour
 
 
         return neighbours;
+    }
+
+    public void DisplayGraphAnimation(GraphNode beginNode)
+    {
+        if(debugEnergyObjects != null)
+        {
+            ClearEnergyObjects();
+        }
+
+        debugEnergyObjects = new List<GameObject>();
+
+        Queue<GraphNode> nodesToProcess = new Queue<GraphNode>();
+        nodesToProcess.Enqueue(beginNode);
+
+        float energy = 1.0f; //DEBUG ENERGY
+
+        while (nodesToProcess.Count > 0)
+        {
+            GraphNode currentNode = nodesToProcess.Dequeue();
+
+            if (currentNode.type == Element.TypeElement.TargetBattery)
+            {
+                continue;
+            }
+
+            energy *= currentNode.rendement;
+
+            DisplayNode(currentNode, energy);
+
+            foreach (GraphNode destNode in currentNode.destNodes)
+            {
+                nodesToProcess.Enqueue(destNode);
+            }
+        }
+    }
+
+    public void DisplayNode(GraphNode node, float energy)
+    {
+        GameObject debugEnergyObject = Instantiate(debugEnergyPrefab, new Vector3(node.spatialPosition.x * GlobalGrid.caseSize, node.spatialPosition.y * GlobalGrid.caseSize, 0), Quaternion.identity);
+        debugEnergyObject.transform.parent = transform;
+        debugEnergyObject.transform.localScale = Vector3.one * energy;
+        debugEnergyObjects.Add(debugEnergyObject);
+    }
+
+    public void ClearEnergyObjects()
+    {
+        foreach (GameObject debugEnergyObject in debugEnergyObjects)
+        {
+            Destroy(debugEnergyObject);
+        }
+        debugEnergyObjects.Clear();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Resolving level...");
+            ResolveLevel(GrilleElementManager.instance);
+        }
     }
 }

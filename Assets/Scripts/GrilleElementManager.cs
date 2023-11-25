@@ -5,7 +5,16 @@ using UnityEngine;
 
 public class GrilleElementManager : MonoBehaviour
 {
-    
+    public static GrilleElementManager instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogError("Multiple instances of GrilleElementManager!");
+        }
+        instance = this;
+    }
 
     [SerializeField] private GameObject[] elementPrefabs;
 
@@ -79,14 +88,14 @@ public class GrilleElementManager : MonoBehaviour
         //TODO : Load initial elements from level data
 
         //TEMP_TEST
-        elementMaps[0,1] = Element.TypeElement.Batterie;
+        /*elementMaps[0,1] = Element.TypeElement.Batterie;
         elementMaps[1,1] = Element.TypeElement.Cable;
         elementMaps[2,1] = Element.TypeElement.Cable;
         elementMaps[3, 1] = Element.TypeElement.Ventilateur_right;
         elementMaps[5, 1] = Element.TypeElement.Ventilateur_left;
         elementMaps[6, 1] = Element.TypeElement.Poteau;
 
-        UpdateAllElementObjects();   
+        UpdateAllElementObjects();   */
     }
 
     void UpdateAllElementObjects()
@@ -139,10 +148,14 @@ public class GrilleElementManager : MonoBehaviour
         elementObject.transform.parent = transform;
         elementObjects[i, j] = elementObject;
 
-        if (elementMaps[i, j] == Element.TypeElement.TargetBattery)
+        if (elementMaps[i, j] == Element.TypeElement.Batterie)
         {
-            elementMaps[sourcePosition.x, sourcePosition.y] = Element.TypeElement.None;
-            UpdateElementObject(sourcePosition.x, sourcePosition.y);
+            if(GlobalGrid.IsInGrid(sourcePosition.x, sourcePosition.y))
+            {
+                elementMaps[sourcePosition.x, sourcePosition.y] = Element.TypeElement.None;
+                UpdateElementObject(sourcePosition.x, sourcePosition.y);
+            }
+            
             sourcePosition = new Vector2Int(i, j);
         }
     }
