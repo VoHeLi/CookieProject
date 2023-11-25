@@ -12,6 +12,8 @@ public class GrilleElementManager : MonoBehaviour
     [HideInInspector] public Element.TypeElement[,] elementMaps;
     [HideInInspector] public GameObject[,] elementObjects;
 
+    public Vector2Int sourcePosition = new Vector2Int(-1000, -1000);
+
 
     private Element.TypeElement currentPlacingElement = Element.TypeElement.None;
     private GameObject currentPlacingElementObject = null;
@@ -53,7 +55,7 @@ public class GrilleElementManager : MonoBehaviour
             EndObjectPlacement();
         }
 
-        KeyCode[] keyCodes = new KeyCode[] { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8 };
+        KeyCode[] keyCodes = new KeyCode[] { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8, KeyCode.Alpha9 };
         for(int i = 0; i < keyCodes.Length; i++)
         {
             if (Input.GetKeyDown(keyCodes[i]))
@@ -106,6 +108,12 @@ public class GrilleElementManager : MonoBehaviour
             {
                 return;
             }
+
+            if(i == sourcePosition.x || j == sourcePosition.y)
+            {
+                sourcePosition = new Vector2Int(-1000, -1000);
+            }
+
             Destroy(elementObjects[i, j]);
             elementObjects[i, j] = null;
         }
@@ -130,6 +138,13 @@ public class GrilleElementManager : MonoBehaviour
         GameObject elementObject = Instantiate(elementPrefabs[(int)elementMaps[i, j]], new Vector3(i * GlobalGrid.caseSize, j * GlobalGrid.caseSize, 0), Quaternion.identity);
         elementObject.transform.parent = transform;
         elementObjects[i, j] = elementObject;
+
+        if (elementMaps[i, j] == Element.TypeElement.TargetBattery)
+        {
+            elementMaps[sourcePosition.x, sourcePosition.y] = Element.TypeElement.None;
+            UpdateElementObject(sourcePosition.x, sourcePosition.y);
+            sourcePosition = new Vector2Int(i, j);
+        }
     }
 
     private void BeginElementPlacement()
@@ -162,5 +177,13 @@ public class GrilleElementManager : MonoBehaviour
 
         elementMaps[i, j] = Element.TypeElement.None;
         UpdateElementObject(i, j);
+    }
+
+    public Element.TypeElement GetElementTypeAtPosition(int i, int j)
+    {
+        //Check if in grid
+        if (!GlobalGrid.IsInGrid(i, j)) return Element.TypeElement.None;
+
+        return elementMaps[i, j];
     }
 }

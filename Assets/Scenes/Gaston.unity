@@ -280,6 +280,54 @@ MonoBehaviour:
   border: 50
   maxZoomDistance: 15
   minZoomDistance: 1
+--- !u!1 &760441766
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 760441767}
+  - component: {fileID: 760441768}
+  m_Layer: 0
+  m_Name: EnergyResolver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &760441767
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 760441766}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &760441768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 760441766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7daf08392017f354faf14d6d4a0eae52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftElectricityElements: 010000000200000006000000070000000400000005000000
+  rightElectricityElements: 010000000300000006000000070000000400000005000000
+  upElectricityElements: 010000000400000006000000070000000200000003000000
+  downElectricityElements: 010000000500000006000000070000000200000003000000
 --- !u!1 &1235543304
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,9 +381,12 @@ MonoBehaviour:
   - {fileID: 1839107066073422376, guid: 827b8d23cd143474ca4a594ac6d27285, type: 3}
   - {fileID: 1958623610247343638, guid: 6ed3c9a898d32fc4ca8dae775ca41afe, type: 3}
   - {fileID: 2677536799563943731, guid: 37435d732fc134941a58aa8400ee1951, type: 3}
+  - {fileID: 2677536799563943731, guid: a20b9c700f3687a48aace4d8fb2105b7, type: 3}
+  targetPosition: {x: -1, y: -1}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 634865913}
   - {fileID: 341213423}
+  - {fileID: 760441767}

@@ -14,9 +14,10 @@ public class Element : MonoBehaviour
         Ventilateur_down = 5,
         Poteau = 6,
         Batterie = 7,
+        TargetBattery = 8,
         //TODO : Add other elements
     }
-    public const int ELEMENT_TYPE_COUNT = 8;
+    public const int ELEMENT_TYPE_COUNT = 9;
 
 
     public TypeElement type = TypeElement.None;
