@@ -48,8 +48,17 @@ public class GrilleElementManager : MonoBehaviour
         //current Placing Element at good position
         if (currentPlacingElement != Element.TypeElement.None)
         {
+            int flags = 0;
+            if (currentPlacingElement == Element.TypeElement.Poteau)
+            {
+                flags = 2;
+            }
+            else if (currentPlacingElement == Element.TypeElement.Ventilateur_up || currentPlacingElement == Element.TypeElement.Ventilateur_down)
+            {
+                flags = 1;
+            }
             int i = 0, j = 0;
-            if (!GlobalGrid.GetMouseCase(ref i, ref j))
+            if (!GlobalGrid.GetMouseCase(ref i, ref j) || !GetBlock.instance.CanBePlacedOn(i, j, flags))
             {
                   currentPlacingElementObject.transform.position = new Vector3(-1000, -1000, 0);
                   return;
@@ -185,7 +194,18 @@ public class GrilleElementManager : MonoBehaviour
     {
         int i = 0, j = 0;
         if (!GlobalGrid.GetMouseCase(ref i, ref j)) return;
-        if (!GetBlock.instance.CanBePlacedOn(i,j)) return;
+
+        int flags = 0;
+        if (currentPlacingElement == Element.TypeElement.Poteau)
+        {
+            flags = 2;
+        }
+        else if (currentPlacingElement == Element.TypeElement.Eolienne_up || currentPlacingElement == Element.TypeElement.Ventilateur_down)
+        {
+            flags = 1;
+        }
+
+        if (!GetBlock.instance.CanBePlacedOn(i,j, flags)) return;
         elementMaps[i, j] = currentPlacingElement;
         UpdateElementObject(i, j);
     }
@@ -195,6 +215,8 @@ public class GrilleElementManager : MonoBehaviour
 
         int i = 0, j = 0;
         if (!GlobalGrid.GetMouseCase(ref i, ref j)) return;
+
+        if (elementMaps[i, j] == Element.TypeElement.Poteau && GetElementTypeAtPosition(i, j+1) == Element.TypeElement.Poteau) return;
 
         elementMaps[i, j] = Element.TypeElement.None;
         UpdateElementObject(i, j);

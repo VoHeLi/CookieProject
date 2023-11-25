@@ -200,15 +200,17 @@ public class EnergyResolver : MonoBehaviour
             rendement *= 0.8f;
             distance++;
 
-            if (!GlobalGrid.IsInGrid(nextBlock.x, nextBlock.y) || GetBlock.instance.CanWindGoThrought(nextBlock.x, nextBlock.y))
+            if (!GlobalGrid.IsInGrid(nextBlock.x, nextBlock.y) || !GetBlock.instance.CanWindGoThrought(nextBlock.x, nextBlock.y))
             {
+                node.distanceToNextNode = distance;
                 nextBlock -= windDir;
-                break;
+                return;
             }
 
             if(distance >= 20)
             {
-                  break;
+                node.distanceToNextNode = distance;
+                return;
             }
         }
 
@@ -216,7 +218,7 @@ public class EnergyResolver : MonoBehaviour
         Debug.Log("Distance to next Node : " + distance + " SpatialPos : " + node.spatialPosition.ToString());
         node.distanceToNextNode = distance;
 
-        GraphNode neighbourNode = new GraphNode(); //TODO : REFACTORISER
+        GraphNode neighbourNode = new GraphNode();
         neighbourNode.rendement = rendement;
         neighbourNode.animationTime = 0.2f*distance;
         neighbourNode.sourceNodes = new List<GraphNode>();

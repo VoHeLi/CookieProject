@@ -45,14 +45,23 @@ public class GetBlock : MonoBehaviour
         }
     }
 
-    public bool CanBePlacedOn(int xtile, int ytile)
+    //flags : default = 0, 1 = can be placed on roof, 2 = poteau
+    public bool CanBePlacedOn(int xtile, int ytile, int flags)
     {
+
+
 
         return (GlobalGrid.IsInGrid(xtile, ytile) && 
                 !_ground.HasTile(new Vector3Int(xtile, ytile)) && 
                 !_gates.HasTile(new Vector3Int(xtile, ytile)) && 
-                (_ground.HasTile(new Vector3Int(xtile, ytile + 1)) || 
-                 _ground.HasTile(new Vector3Int(xtile, ytile - 1))));
+                    (
+                     (_ground.HasTile(new Vector3Int(xtile, ytile + 1)) && flags == 1)) || 
+                     (
+                        (_ground.HasTile(new Vector3Int(xtile, ytile - 1)) || 
+                        (flags == 2 && GrilleElementManager.instance.GetElementTypeAtPosition(xtile, ytile-1) == Element.TypeElement.Poteau)         
+                     )
+                    )
+                 );
             
     }
 
