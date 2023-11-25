@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  defaultSprite: {fileID: 7482667652216324306, guid: 8e98dbb30405d8a4389f549adfcaf08b, type: 3}
-  cableLeft: {fileID: 7482667652216324306, guid: f5aa63288b08e8447a2831f3d807201e, type: 3}
-  cableRight: {fileID: 7482667652216324306, guid: 2c0ecf011eff47e46bdd575e14aa3011, type: 3}
-  cableLine: {fileID: 7482667652216324306, guid: e119106c952c17a4a94418afc2cf3fc8, type: 3}
+  defaultSprite: {fileID: 21300000, guid: 71689daae5eaba044bb83f82826c9392, type: 3}
+  cableLeft: {fileID: 21300000, guid: 0f7e4dddfd4c1d24685bef0bddd48651, type: 3}
+  cableRight: {fileID: 21300000, guid: 81f7542434f1f314393c9dfbf73d8be1, type: 3}
+  cableLine: {fileID: 21300000, guid: 99ceb5a1622d9e94dab9afc12313a8bb, type: 3}
