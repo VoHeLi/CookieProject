@@ -139,7 +139,7 @@ MonoBehaviour:
   isFacingUp: 0
   isFacingDown: 0
   isBlowing: 0
-  isConnected: 1
+  isConnected: 0
   stopAnimation: 0
 --- !u!61 &-2779407670096606782
 BoxCollider2D:

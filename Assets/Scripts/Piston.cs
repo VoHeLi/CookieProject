@@ -52,10 +52,8 @@ public class Piston : MonoBehaviour
 
             if (isFacingRight)
             {
-                // GameObject cableGameObject = new GameObject("CableObject");
-                GameObject rightPistonCable = Instantiate(new GameObject("CableObject"), this.transform);
-                // Destroy(cableGameObject);
 
+                GameObject rightPistonCable = Instantiate(new GameObject("CableObject"), this.transform);
                 SpriteRenderer cableSpriteRenderer = rightPistonCable.AddComponent<SpriteRenderer>();
                 cableSpriteRenderer.sprite = pistonRightCable;
                 cableSpriteRenderer.sortingOrder = 0;
