@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class GrilleElementManager : MonoBehaviour
 {
-    public static GrilleElementManager instance ;
+    public static GrilleElementManager instance;
 
     private void Awake()
     {
@@ -26,9 +27,44 @@ public class GrilleElementManager : MonoBehaviour
 
     private Element.TypeElement currentPlacingElement = Element.TypeElement.None;
     private GameObject currentPlacingElementObject = null;
+    private int[] curentElementPossibilities;
 
-    void Start()
+    private Dictionary<int, int[]> relation_Element_Selection = new Dictionary<int, int[]>();
+    private Dictionary<int[], int> elementIndexMemory = new Dictionary<int[], int>();
+
+    public Dictionary<int, int[]> getRelationElementSelection()
     {
+        return relation_Element_Selection;
+    }
+
+
+    public void completeDictionnaries()
+    {
+        int[] possibilities_1 = new int[] { 1 };
+        int[] possibilities_2 = new int[] { 2, 3, 4, 5 };
+        int[] possibilities_3 = new int[] { 6 };
+        int[] possibilities_4 = new int[] { 9, 10, 11, 12 };
+        int[] possibilities_5 = new int[] { 13, 14 };
+
+        relation_Element_Selection.Add(1, possibilities_1);
+        relation_Element_Selection.Add(2, possibilities_2);
+        relation_Element_Selection.Add(3, possibilities_3);
+        relation_Element_Selection.Add(4, possibilities_4);
+        relation_Element_Selection.Add(5, possibilities_5);
+        Debug.Log(relation_Element_Selection[1]);
+
+        // Pour mémoriser dans quel état on était lors de la précédente sélection de l'objet
+        elementIndexMemory.Add(possibilities_1, 0);
+        elementIndexMemory.Add(possibilities_2, 0);
+        elementIndexMemory.Add(possibilities_3, 0);
+        elementIndexMemory.Add(possibilities_4, 0);
+        elementIndexMemory.Add(possibilities_5, 0);
+    }    
+
+void Start()
+    {
+        completeDictionnaries();
+
         elementMaps = new Element.TypeElement[GlobalGrid.nbCaseX, GlobalGrid.nbCaseY];
         for(int i = 0; i < GlobalGrid.nbCaseX; i++)
         {
@@ -66,13 +102,19 @@ public class GrilleElementManager : MonoBehaviour
             else currentPlacingElementObject.transform.position = new Vector3(i * GlobalGrid.caseSize, j * GlobalGrid.caseSize, 0);
         }
 
+        // Changer le type de currentElement choisi
+        if (currentPlacingElement != Element.TypeElement.None && Input.GetKeyDown(KeyCode.E))
+        {
+            increaseCurrentElementIndex();
+        }
+
         //DEBUG
         if (currentPlacingElement != Element.TypeElement.None && Input.GetMouseButtonDown(0))
         {
             EndObjectPlacement();
         }
 
-        KeyCode[] keyCodes = new KeyCode[] { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8, KeyCode.Alpha9, KeyCode.Alpha0, KeyCode.Z, KeyCode.E, KeyCode.R, KeyCode.T, KeyCode.Y };
+        KeyCode[] keyCodes = new KeyCode[] { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8, KeyCode.Alpha9, KeyCode.Alpha0, KeyCode.R, KeyCode.T, KeyCode.Y, KeyCode.U, KeyCode.I };
         for(int i = 0; i < keyCodes.Length; i++)
         {
             if (Input.GetKeyDown(keyCodes[i]))
@@ -242,7 +284,32 @@ public class GrilleElementManager : MonoBehaviour
 
     public void setCurrentPlacingElement(int i)
     {
-        switch (i)
-        {
+        curentElementPossibilities = relation_Element_Selection[i];
+        currentPlacingElement = (Element.TypeElement)curentElementPossibilities[elementIndexMemory[curentElementPossibilities]];
+        BeginElementPlacement();
+    }
 
+    public void increaseCurrentElementIndex()
+    {
+        elementIndexMemory[curentElementPossibilities]++;
+        if (curentElementPossibilities.Length <= elementIndexMemory[curentElementPossibilities])
+        {
+            elementIndexMemory[curentElementPossibilities] = 0;
+        }
+
+        currentPlacingElement = (Element.TypeElement)curentElementPossibilities[elementIndexMemory[curentElementPossibilities]];
+        BeginElementPlacement();
+    }
+
+    public void decreaseCurrentElementIndex()
+    {
+        elementIndexMemory[curentElementPossibilities]--;
+        if (elementIndexMemory[curentElementPossibilities] < 0)
+        {
+            elementIndexMemory[curentElementPossibilities] = curentElementPossibilities.Length - 1;
+        }
+
+        currentPlacingElement = (Element.TypeElement)curentElementPossibilities[elementIndexMemory[curentElementPossibilities]];
+        BeginElementPlacement();
+    }
 }
