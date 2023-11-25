@@ -17,14 +17,19 @@ public class UI : MonoBehaviour
     {
         startAgain(); // Desable the pause menu
 
+        //Create a new navigation
+        Navigation newNav = new Navigation();
+        newNav.mode = Navigation.Mode.Horizontal;
+
         Texture2D tex = Resources.Load<Texture2D>("Logo_AnimINT");
-        createButton(0, tex);
-        createButton(1, tex);
-        createButton(2, tex);        
+
+        createButton(0, tex, newNav);
+        createButton(1, tex, newNav);
+        createButton(2, tex, newNav);        
     }
 
     // Create a button for selecting an element
-    private void createButton(int index, Texture2D tex)
+    private void createButton(int index, Texture2D tex, Navigation newNav)
     {
         GameObject buttonBackground = Object.Instantiate(buttonPrefab, Vector3.zero, Quaternion.identity);
         RectTransform rectTrans = buttonBackground.GetComponent<RectTransform>();
@@ -46,6 +51,9 @@ public class UI : MonoBehaviour
         // Add function to the button
         Button button = childO.GetComponent<Button>();
         button.onClick.AddListener(delegate { chooseItem(index); });
+
+        //Assign the new navigation to the button
+        button.navigation = newNav;
     }
 
     // Select the element wanted
@@ -55,7 +63,7 @@ public class UI : MonoBehaviour
     }
 
     // Start the game's simulation
-    public void startGame()
+    public void startSimulation()
     {
         Debug.Log("Game Start");
     }
