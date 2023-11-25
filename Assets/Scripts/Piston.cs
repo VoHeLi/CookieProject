@@ -21,6 +21,9 @@ public class Piston : MonoBehaviour
     [SerializeField] private bool isFacingRight;
     [SerializeField] private bool isFacingLeft;
 
+    private SpriteRenderer pistonSpriteRenderer;
+    private SpriteRenderer cableSpriteRenderer;
+
     private bool isExtending = false;
 
 
@@ -31,31 +34,33 @@ public class Piston : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        pistonSpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isFacingRight && !isExtending)
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (isConnected)
         {
-            GetComponent<SpriteRenderer>().sortingOrder = 0;
-            GetComponent<SpriteRenderer>().sprite = pistonRightDefault;
+
+            spriteRenderer.sprite = pistonRightCable;
+            spriteRenderer.sortingOrder = 1;
         }
-        if (isFacingLeft && !isExtending)
+        else
         {
-            GetComponent<SpriteRenderer>().sortingOrder = 0;
-            GetComponent<SpriteRenderer>().sprite = pistonLeftDefault;
-        }
-        if (isFacingRight && isConnected)
-        {
-            GetComponent<SpriteRenderer>().sortingOrder = 1;
-            GetComponent<SpriteRenderer>().sprite = pistonRightCable;
-        }
-        if (isFacingRight && isConnected)
-        {
-            GetComponent<SpriteRenderer>().sortingOrder = 1;
-            GetComponent<SpriteRenderer>().sprite = pistonLeftCable;
+
+            if (isFacingRight && !isExtending)
+            {
+                spriteRenderer.sprite = pistonRightDefault;
+            }
+            else if (isFacingLeft && !isExtending)
+            {
+                spriteRenderer.sprite = pistonLeftDefault;
+            }
+
+            spriteRenderer.sortingOrder = 0;
         }
     }
 
@@ -64,8 +69,14 @@ public class Piston : MonoBehaviour
     private void OnMouseDown()
     {
         Debug.Log("Click");
-        StartCoroutine(startPistonRightAnimation());
         
+        if (isFacingLeft)
+        {
+            StartCoroutine(startPistonLeftAnimation());
+        } else
+        {
+            StartCoroutine(startPistonRightAnimation());
+        }
     }
 
     IEnumerator startPistonRightAnimation()
