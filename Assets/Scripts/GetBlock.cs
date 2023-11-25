@@ -49,7 +49,7 @@ public class GetBlock : MonoBehaviour
     public bool CanBePlacedOn(int xtile, int ytile, int flags)
     {
 
-
+        //Debug.Log(xtile + " : " + ytile);
 
         return (GlobalGrid.IsInGrid(xtile, ytile) && 
                 !_ground.HasTile(new Vector3Int(xtile, ytile)) && 

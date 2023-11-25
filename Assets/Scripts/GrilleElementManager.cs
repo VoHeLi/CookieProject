@@ -17,6 +17,7 @@ public class GrilleElementManager : MonoBehaviour
     }
 
     [SerializeField] private GameObject[] elementPrefabs;
+    [SerializeField] private List<Vector2Int> initialSetup;
 
     [HideInInspector] public Element.TypeElement[,] elementMaps;
     [HideInInspector] public GameObject[,] elementObjects;
@@ -60,6 +61,7 @@ public class GrilleElementManager : MonoBehaviour
             int i = 0, j = 0;
             if (!GlobalGrid.GetMouseCase(ref i, ref j) || !GetBlock.instance.CanBePlacedOn(i, j, flags))
             {
+                Debug.Log("toto");
                   currentPlacingElementObject.transform.position = new Vector3(-1000, -1000, 0);
             }
 
@@ -104,6 +106,11 @@ public class GrilleElementManager : MonoBehaviour
 
     private void LoadInitialElements()
     {
+
+        elementMaps[initialSetup[0].x, initialSetup[0].y] = Element.TypeElement.Batterie;
+        elementMaps[initialSetup[1].x, initialSetup[1].y] = Element.TypeElement.TargetBattery;
+
+        UpdateAllElementObjects();
         //TODO : Load initial elements from level data
 
         //TEMP_TEST
@@ -238,5 +245,36 @@ public class GrilleElementManager : MonoBehaviour
         if (!GlobalGrid.IsInGrid(i, j)) return Element.TypeElement.None;
 
         return elementMaps[i, j];
+    }
+
+    public void setCurrentPlacingElement(int i)
+    {
+        switch (i)
+        {
+            case 1: // Cable
+                currentPlacingElement = (Element.TypeElement)1;
+                break;
+
+            case 2: // Ventilateur
+                currentPlacingElement = (Element.TypeElement)2;
+                break;
+
+            case 3: // Poteau
+                currentPlacingElement = (Element.TypeElement)6;
+                break;
+
+            case 4: // Eolienne
+                currentPlacingElement = (Element.TypeElement)9;
+                break;
+
+            case 5: // Piston
+                currentPlacingElement = (Element.TypeElement)13;
+                break;
+
+            default:
+                Debug.Log("Incorrect Element");
+                break;
+        }
+        BeginElementPlacement();
     }
 }

@@ -46,6 +46,7 @@ public class EnergyResolver : MonoBehaviour
 
     [SerializeField] private List<Element.TypeElement> ventilatorElements;
     [SerializeField] private List<Element.TypeElement> eoliennesElements;
+    [SerializeField] private List<Element.TypeElement> pistonsElements;
     
     
     //On va créer un graphe de noeuds, chaque noeud représente un élément avec son rendement, son temps d'animation, ses noeuds sources et ses noeuds finaux
@@ -158,14 +159,7 @@ public class EnergyResolver : MonoBehaviour
         List<Vector2Int> neighbours = new List<Vector2Int>();
 
 
-        if (leftElectricityElements.Contains(leftElement) && rightElectricityElements.Contains(currentElement))
-        {
-            neighbours.Add(new Vector2Int(targetX - 1, targetY));
-        }
-        if (rightElectricityElements.Contains(rightElement) && leftElectricityElements.Contains(currentElement))
-        {
-            neighbours.Add(new Vector2Int(targetX + 1, targetY));
-        }
+
         if (upElectricityElements.Contains(upElement) && downElectricityElements.Contains(currentElement))
         {
             neighbours.Add(new Vector2Int(targetX, targetY + 1));
@@ -173,6 +167,14 @@ public class EnergyResolver : MonoBehaviour
         if (downElectricityElements.Contains(downElement) && upElectricityElements.Contains(currentElement))
         {
             neighbours.Add(new Vector2Int(targetX, targetY - 1));
+        }
+        if (leftElectricityElements.Contains(leftElement) && rightElectricityElements.Contains(currentElement))
+        {
+            neighbours.Add(new Vector2Int(targetX - 1, targetY));
+        }
+        if (rightElectricityElements.Contains(rightElement) && leftElectricityElements.Contains(currentElement))
+        {
+            neighbours.Add(new Vector2Int(targetX + 1, targetY));
         }
 
 
