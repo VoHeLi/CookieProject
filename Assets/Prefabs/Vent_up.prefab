@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 5560022864670111932}
   - component: {fileID: 4390132164212704245}
   - component: {fileID: -5481866979592746729}
+  - component: {fileID: -3149323637451861401}
+  - component: {fileID: -2851042532876775564}
   m_Layer: 0
   m_Name: Vent_up
   m_TagString: Untagged
@@ -98,3 +100,89 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
+--- !u!114 &-3149323637451861401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7810342651301071746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7b8b78cca63f8244aeaefffc2a968af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ventilateurRightAnimation: []
+  ventilateurRightDefault: {fileID: 0}
+  ventilateurRightBase: {fileID: 0}
+  ventilateurRightCable: {fileID: 0}
+  ventilateurLeftAnimation: []
+  ventilateurLeftDefault: {fileID: 0}
+  ventilateurLeftBase: {fileID: 0}
+  ventilateurLeftCable: {fileID: 0}
+  ventilateurUpAnimation:
+  - {fileID: 21300000, guid: a332b5086e430d74a9577109068f3ebf, type: 3}
+  - {fileID: 21300000, guid: 07d39cec2b6182b46ad15e1c6256ca7c, type: 3}
+  - {fileID: 21300000, guid: cf6b34f4c87513d4ba5e24d8b894b8d2, type: 3}
+  - {fileID: 21300000, guid: aba4da92b471db34ca16c56eda22e20f, type: 3}
+  ventilateurUpDefault: {fileID: 21300000, guid: a332b5086e430d74a9577109068f3ebf, type: 3}
+  ventilateurUpBase: {fileID: 21300000, guid: b9157988c8895b041bd78b6f106c6e05, type: 3}
+  ventilateurUpCableRight: {fileID: 21300000, guid: 6d2abf0677d0df04ab5c1da24913037f, type: 3}
+  ventilateurUpCableLeft: {fileID: 21300000, guid: b4248ffcf9c6f6d4a93d5e13ec0138bb, type: 3}
+  ventilateurDownAnimation: []
+  ventilateurDownDefault: {fileID: 0}
+  ventilateurDownBase: {fileID: 0}
+  ventilateurDownCableRight: {fileID: 0}
+  ventilateurDownCableLeft: {fileID: 0}
+  isFacingRight: 0
+  isFacingLeft: 0
+  isFacingUp: 1
+  isFacingDown: 0
+  isBlowing: 0
+  isConnected: 0
+  stopAnimation: 0
+--- !u!61 &-2851042532876775564
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7810342651301071746}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0

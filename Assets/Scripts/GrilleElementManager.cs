@@ -18,6 +18,7 @@ public class GrilleElementManager : MonoBehaviour
     }
 
     [SerializeField] private GameObject[] elementPrefabs;
+    [SerializeField] private List<Vector2Int> initialSetup;
 
     [HideInInspector] public Element.TypeElement[,] elementMaps;
     [HideInInspector] public GameObject[,] elementObjects;
@@ -146,6 +147,11 @@ void Start()
 
     private void LoadInitialElements()
     {
+
+        elementMaps[initialSetup[0].x, initialSetup[0].y] = Element.TypeElement.Batterie;
+        elementMaps[initialSetup[1].x, initialSetup[1].y] = Element.TypeElement.TargetBattery;
+
+        UpdateAllElementObjects();
         //TODO : Load initial elements from level data
 
         //TEMP_TEST

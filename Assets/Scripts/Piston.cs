@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,9 @@ public class Piston : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private bool isFacingRight;
     [SerializeField] private bool isFacingLeft;
+
+    [SerializeField] private Rigidbody2D ball;
+    [SerializeField] private float ballMass;
 
     private SpriteRenderer pistonSpriteRenderer;
     private SpriteRenderer cableSpriteRenderer;
@@ -48,10 +52,8 @@ public class Piston : MonoBehaviour
 
             if (isFacingRight)
             {
-                GameObject cableGameObject = new GameObject("CableObject");
-                GameObject rightPistonCable = Instantiate(cableGameObject, this.transform);
-                Destroy(cableGameObject);
 
+                GameObject rightPistonCable = Instantiate(new GameObject("CableObject"), this.transform);
                 SpriteRenderer cableSpriteRenderer = rightPistonCable.AddComponent<SpriteRenderer>();
                 cableSpriteRenderer.sprite = pistonRightCable;
                 cableSpriteRenderer.sortingOrder = 0;
@@ -139,5 +141,16 @@ public class Piston : MonoBehaviour
             yield return new WaitForSeconds(.1f);
         }
         isExtending = false;
+    }
+
+    public void LaunchBall(Vector2Int ballDirection, float energy)
+    {
+        ball.bodyType = RigidbodyType2D.Dynamic;
+        
+        float speed = Mathf.Sqrt(2 * energy / ballMass);
+        
+        ball.velocity = speed * new Vector2(ballDirection.x, ballDirection.y);
+
+        Debug.Log("test");
     }
 }

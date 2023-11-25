@@ -35820,6 +35820,7 @@ MonoBehaviour:
   - {fileID: 8889992262668001080, guid: 564f6a63983327e4c8dd984a68669d7b, type: 3}
   - {fileID: 2539536271585897927, guid: 0378a1631aa87fc49b751d39ccbf662b, type: 3}
   - {fileID: 2539536271585897927, guid: 2ea69c2a476571f44b21bdddeb19f418, type: 3}
+  initialSetup: []
   sourcePosition: {x: -1000, y: -1000}
 --- !u!1 &7796720995272768719
 GameObject:

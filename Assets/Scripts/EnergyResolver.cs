@@ -28,7 +28,10 @@ public class EnergyResolver : MonoBehaviour
         public Vector2Int spatialPosition;
         public Element.TypeElement type;
         public int distanceToNextNode;
+        public bool spawnBall = false;
+        public Vector2Int ballDirection;
     }
+
 
     [SerializeField] private GameObject debugEnergyPrefab;
     private List<GameObject> debugEnergyObjects = new List<GameObject>();
@@ -51,7 +54,7 @@ public class EnergyResolver : MonoBehaviour
     
     //On va créer un graphe de noeuds, chaque noeud représente un élément avec son rendement, son temps d'animation, ses noeuds sources et ses noeuds finaux
     //On commence de la fin, puis on remonte jusqu'au début
-    public void ResolveLevel(GrilleElementManager grilleElementManager)
+    public void ResolveLevelPart(GrilleElementManager grilleElementManager, Vector2Int startPosition)
     {
         if(grilleElementManager.sourcePosition.x == -1000)
         {
@@ -68,8 +71,9 @@ public class EnergyResolver : MonoBehaviour
         beginNode.animationTime = 0.1f;
         beginNode.sourceNodes = new List<GraphNode>();
         beginNode.destNodes = new List<GraphNode>();
-        beginNode.spatialPosition = grilleElementManager.sourcePosition;
+        beginNode.spatialPosition = startPosition;
         beginNode.type = Element.TypeElement.Batterie;
+        beginNode.distanceToNextNode = 0;
 
         visitedElements[beginNode.spatialPosition.x, beginNode.spatialPosition.y] = true;
 
@@ -88,6 +92,12 @@ public class EnergyResolver : MonoBehaviour
             if (ventilatorElements.Contains(currentNode.type))
             {
                 ProcessVentilateurNode(currentNode, grilleElementManager, nodesToProcess);
+                continue;
+            }
+
+            if (pistonsElements.Contains(currentNode.type))
+            {
+                ProcessPistonNode(currentNode, grilleElementManager, nodesToProcess);
                 continue;
             }
 
@@ -247,6 +257,11 @@ public class EnergyResolver : MonoBehaviour
         nodesToProcess.Enqueue(neighbourNode);
     }
 
+    private void ProcessPistonNode(GraphNode node, GrilleElementManager grilleElementManager, Queue<GraphNode> nodesToProcess)
+    {
+        node.spawnBall = true;
+        node.ballDirection = node.type == Element.TypeElement.Piston_right ? Vector2Int.right : Vector2Int.left;
+    }
     public IEnumerator DisplayGraphAnimation(GraphNode beginNode)
     {
         if(debugEnergyObjects != null)
@@ -292,33 +307,49 @@ public class EnergyResolver : MonoBehaviour
 
         if (ventilatorElements.Contains(node.type))
         {
-            GameObject wind = Instantiate(windPrefab, new Vector3(node.spatialPosition.x * GlobalGrid.caseSize, node.spatialPosition.y * GlobalGrid.caseSize, 0), Quaternion.identity);
-            wind.transform.parent = transform;
-            debugEnergyObjects.Add(wind);
+            DisplayWind(node);
+            GrilleElementManager.instance.elementObjects[node.spatialPosition.x, node.spatialPosition.y].GetComponent<Ventilateur>().StartAnimation();
+        }
 
-            WindParticleSettings windParticleSettings = wind.GetComponent<WindParticleSettings>();
-            windParticleSettings.SetWindLength(node.distanceToNextNode);
-            
-            switch(node.type)
-            {
-                case Element.TypeElement.Ventilateur_up:
-                    wind.transform.rotation = Quaternion.Euler(0, 0, 90);
-                    wind.transform.position += Vector3.up * GlobalGrid.caseSize * 0.5f;
-                    break;
-                case Element.TypeElement.Ventilateur_left:
-                    wind.transform.rotation = Quaternion.Euler(0, 0, 180);
-                    wind.transform.position -= Vector3.right * GlobalGrid.caseSize * 0.5f;
-                    break;
-                case Element.TypeElement.Ventilateur_right:
-                    wind.transform.rotation = Quaternion.Euler(0, 0, 0);
-                    wind.transform.position -= Vector3.left * GlobalGrid.caseSize * 0.5f;
-                    break;
-                case Element.TypeElement.Ventilateur_down:
-                    wind.transform.rotation = Quaternion.Euler(0, 0, 270);
-                    wind.transform.position += Vector3.down * GlobalGrid.caseSize * 0.5f;
-                    break;
-            }
+        if (eoliennesElements.Contains(node.type))
+        {
+            GrilleElementManager.instance.elementObjects[node.spatialPosition.x, node.spatialPosition.y].GetComponent<Ventilateur>().StartAnimation();
+        }
 
+        if(node.spawnBall)
+        {
+            Debug.Log("test2");
+            GrilleElementManager.instance.elementObjects[node.spatialPosition.x, node.spatialPosition.y].GetComponent<Piston>().LaunchBall(node.ballDirection, energy);
+        }
+    }
+
+    private void DisplayWind(GraphNode node)
+    {
+        GameObject wind = Instantiate(windPrefab, new Vector3(node.spatialPosition.x * GlobalGrid.caseSize, node.spatialPosition.y * GlobalGrid.caseSize, 0), Quaternion.identity);
+        wind.transform.parent = transform;
+        debugEnergyObjects.Add(wind);
+
+        WindParticleSettings windParticleSettings = wind.GetComponent<WindParticleSettings>();
+        windParticleSettings.SetWindLength(node.distanceToNextNode);
+
+        switch (node.type)
+        {
+            case Element.TypeElement.Ventilateur_up:
+                wind.transform.rotation = Quaternion.Euler(0, 0, 90);
+                wind.transform.position += Vector3.up * GlobalGrid.caseSize * 0.5f;
+                break;
+            case Element.TypeElement.Ventilateur_left:
+                wind.transform.rotation = Quaternion.Euler(0, 0, 180);
+                wind.transform.position -= Vector3.right * GlobalGrid.caseSize * 0.5f;
+                break;
+            case Element.TypeElement.Ventilateur_right:
+                wind.transform.rotation = Quaternion.Euler(0, 0, 0);
+                wind.transform.position -= Vector3.left * GlobalGrid.caseSize * 0.5f;
+                break;
+            case Element.TypeElement.Ventilateur_down:
+                wind.transform.rotation = Quaternion.Euler(0, 0, 270);
+                wind.transform.position += Vector3.down * GlobalGrid.caseSize * 0.5f;
+                break;
         }
     }
 
@@ -336,7 +367,7 @@ public class EnergyResolver : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("Resolving level...");
-            ResolveLevel(GrilleElementManager.instance);
+            ResolveLevelPart(GrilleElementManager.instance, GrilleElementManager.instance.sourcePosition);
         }
     }
 }
