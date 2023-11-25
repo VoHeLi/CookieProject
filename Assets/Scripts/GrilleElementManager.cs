@@ -118,9 +118,10 @@ public class GrilleElementManager : MonoBehaviour
                 return;
             }
 
-            if(i == sourcePosition.x || j == sourcePosition.y)
+            if(i == sourcePosition.x && j == sourcePosition.y)
             {
                 sourcePosition = new Vector2Int(-1000, -1000);
+                Debug.Log("Source position changed : " + sourcePosition.ToString());
             }
 
             Destroy(elementObjects[i, j]);
@@ -153,10 +154,12 @@ public class GrilleElementManager : MonoBehaviour
             if(GlobalGrid.IsInGrid(sourcePosition.x, sourcePosition.y))
             {
                 elementMaps[sourcePosition.x, sourcePosition.y] = Element.TypeElement.None;
-                UpdateElementObject(sourcePosition.x, sourcePosition.y);
+                Destroy(elementObjects[sourcePosition.x, sourcePosition.y]);
+                elementObjects[sourcePosition.x, sourcePosition.y] = null;
             }
             
             sourcePosition = new Vector2Int(i, j);
+            Debug.Log("Source position changed : " + sourcePosition.ToString());
         }
     }
 
