@@ -69,19 +69,19 @@ public class MovementManager : MonoBehaviour
             // Recadrage de la caméra si en se déplaçant ou dezoomant on sort des limites du niveau
             if (transform.position.y > GlobalGrid.nbCaseY * GlobalGrid.caseSize - cameraHalfHeight)
             {
-                transform.position = new Vector3(transform.position.x, GlobalGrid.nbCaseY * GlobalGrid.caseSize - cameraHalfHeight, 0f);
+                transform.position = new Vector3(transform.position.x, GlobalGrid.nbCaseY * GlobalGrid.caseSize - cameraHalfHeight, -10f);
             }
             if (transform.position.y < cameraHalfHeight)
             {
-                transform.position = new Vector3(transform.position.x, cameraHalfHeight, 0f);
+                transform.position = new Vector3(transform.position.x, cameraHalfHeight, -10f);
             }
             if (transform.position.x > GlobalGrid.nbCaseX * GlobalGrid.caseSize - cameraHalfWidth)
             {
-                transform.position = new Vector3(GlobalGrid.nbCaseX * GlobalGrid.caseSize - cameraHalfWidth, transform.position.y, 0f) ;
+                transform.position = new Vector3(GlobalGrid.nbCaseX * GlobalGrid.caseSize - cameraHalfWidth, transform.position.y, -10f) ;
             }
             if (transform.position.x < cameraHalfWidth)
             {
-                transform.position = new Vector3(cameraHalfWidth, transform.position.y, 0f);
+                transform.position = new Vector3(cameraHalfWidth, transform.position.y, -10f);
             }
         }
 
