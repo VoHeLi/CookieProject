@@ -44,6 +44,8 @@ public class Ventilateur : MonoBehaviour
     private bool isCableAttached = false;
     private bool isBaseAttached = false;
 
+    private bool isCableSideRight;
+
     public bool stopAnimation = false;
 
 
@@ -101,6 +103,63 @@ public class Ventilateur : MonoBehaviour
             isBaseAttached = true;
         }
 
+        // Attachement des cables
+        if (isFacingRight && !isCableAttached)
+        {
+            GameObject rightVentilateurCable = Instantiate(new GameObject("CableObject"), this.transform);
+            SpriteRenderer cableSpriteRenderer = rightVentilateurCable.AddComponent<SpriteRenderer>();
+            cableSpriteRenderer.sprite = ventilateurRightCable;
+            cableSpriteRenderer.sortingOrder = 0;
+
+            isCableAttached = true;
+        }
+        if (isFacingLeft && !isCableAttached)
+        {
+            GameObject leftVentilateurCable = Instantiate(new GameObject("CableObject"), this.transform);
+            SpriteRenderer cableSpriteRenderer = leftVentilateurCable.AddComponent<SpriteRenderer>();
+            cableSpriteRenderer.sprite = ventilateurLeftCable;
+            cableSpriteRenderer.sortingOrder = 0;
+
+            isCableAttached = true;
+        }
+        if (isFacingUp && !isCableAttached)
+        {
+            GameObject rightVentilateurCable = Instantiate(new GameObject("CableObject"), this.transform);
+            SpriteRenderer cableSpriteRenderer = rightVentilateurCable.AddComponent<SpriteRenderer>();
+            if (isCableSideRight)
+            {
+                cableSpriteRenderer.sprite = ventilateurUpCableRight;
+            } else
+            {
+                cableSpriteRenderer.sprite = ventilateurUpCableLeft;
+            }
+            cableSpriteRenderer.sortingOrder = 0;
+
+            isCableAttached = true;
+        }
+        if (isFacingDown && !isCableAttached)
+        {
+            GameObject downVentilateurCable = Instantiate(new GameObject("CableObject"), this.transform);
+            SpriteRenderer cableSpriteRenderer = downVentilateurCable.AddComponent<SpriteRenderer>();
+            if (isCableSideRight)
+            {
+                cableSpriteRenderer.sprite = ventilateurDownCableRight;
+            }
+            else
+            {
+                cableSpriteRenderer.sprite = ventilateurDownCableLeft;
+            }
+            cableSpriteRenderer.sortingOrder = 0;
+
+            isCableAttached = true;
+        }
+
+        if (isCableAttached && !isConnected)
+        {
+            Destroy(transform.GetChild(0).gameObject);
+            isCableAttached = false;
+        }
+
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 
         if (isFacingRight && !isBlowing)
@@ -128,9 +187,9 @@ public class Ventilateur : MonoBehaviour
 
 
     // TODO : lancer les animations quand l'electricité ou le vent passe dans les pales
-    private void OnMouseDown()
+    private void StartAnimation()
     {
-        Debug.Log("Click");
+        // Debug.Log("Click");
 
         if (isFacingRight && isConnected)
         {
