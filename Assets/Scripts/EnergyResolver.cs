@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class EnergyResolver : MonoBehaviour
 {
@@ -37,6 +38,9 @@ public class EnergyResolver : MonoBehaviour
     [SerializeField] private List<Element.TypeElement> rightElectricityElements;
     [SerializeField] private List<Element.TypeElement> upElectricityElements;
     [SerializeField] private List<Element.TypeElement> downElectricityElements;
+
+    [SerializeField] private List<Element.TypeElement> ventilatorElements;
+    [SerializeField] private List<Element.TypeElement> eoliennesElements;
     
     //On va créer un graphe de noeuds, chaque noeud représente un élément avec son rendement, son temps d'animation, ses noeuds sources et ses noeuds finaux
     //On commence de la fin, puis on remonte jusqu'au début
@@ -68,10 +72,18 @@ public class EnergyResolver : MonoBehaviour
         {
             GraphNode currentNode = nodesToProcess.Dequeue();
 
-            /*if(currentNode.type == Element.TypeElement.Batterie)
+            if(currentNode.type == Element.TypeElement.TargetBattery)
             {
                 continue;
-            }*/
+            }
+
+
+            if (ventilatorElements.Contains(currentNode.type))
+            {
+                ProcessVentilateurNode(currentNode, grilleElementManager, nodesToProcess);
+                continue;
+            }
+
            
             ProcessElectricityNode(currentNode, grilleElementManager, nodesToProcess);
 
@@ -83,7 +95,7 @@ public class EnergyResolver : MonoBehaviour
 
     private void ProcessElectricityNode(GraphNode node, GrilleElementManager grilleElementManager, Queue<GraphNode> nodesToProcess)
     {
-        List<Vector2Int> neighbours = GetElectricityNeighbours(node.spatialPosition.x, node.spatialPosition.y, grilleElementManager);
+        List<Vector2Int> neighbours = GetElectricityNeighbours(node.spatialPosition.x, node.spatialPosition.y, node.type, grilleElementManager);
 
         //Remove already explored Node 
 
@@ -122,7 +134,7 @@ public class EnergyResolver : MonoBehaviour
         
     }
 
-    private List<Vector2Int> GetElectricityNeighbours(int targetX, int targetY, GrilleElementManager grilleElementManager)
+    private List<Vector2Int> GetElectricityNeighbours(int targetX, int targetY, Element.TypeElement currentElement, GrilleElementManager grilleElementManager)
     {
         Element.TypeElement leftElement = grilleElementManager.GetElementTypeAtPosition(targetX - 1, targetY);
         Element.TypeElement rightElement = grilleElementManager.GetElementTypeAtPosition(targetX + 1, targetY);
@@ -132,25 +144,77 @@ public class EnergyResolver : MonoBehaviour
         List<Vector2Int> neighbours = new List<Vector2Int>();
 
 
-        if (leftElectricityElements.Contains(leftElement))
+        if (leftElectricityElements.Contains(leftElement) && rightElectricityElements.Contains(currentElement))
         {
             neighbours.Add(new Vector2Int(targetX - 1, targetY));
         }
-        if (rightElectricityElements.Contains(rightElement))
+        if (rightElectricityElements.Contains(rightElement) && leftElectricityElements.Contains(currentElement))
         {
             neighbours.Add(new Vector2Int(targetX + 1, targetY));
         }
-        if (upElectricityElements.Contains(upElement))
+        if (upElectricityElements.Contains(upElement) && downElectricityElements.Contains(currentElement))
         {
             neighbours.Add(new Vector2Int(targetX, targetY + 1));
         }
-        if (downElectricityElements.Contains(downElement))
+        if (downElectricityElements.Contains(downElement) && upElectricityElements.Contains(currentElement))
         {
             neighbours.Add(new Vector2Int(targetX, targetY - 1));
         }
 
 
         return neighbours;
+    }
+
+    private void ProcessVentilateurNode(GraphNode node, GrilleElementManager grilleElementManager, Queue<GraphNode> nodesToProcess)
+    {
+        Vector2Int windDir = Vector2Int.zero;
+        switch (node.type)
+        {
+            case Element.TypeElement.Ventilateur_down:
+                windDir = Vector2Int.down;
+                break;
+            case Element.TypeElement.Ventilateur_left:
+                windDir = Vector2Int.left;
+                break;
+            case Element.TypeElement.Ventilateur_right:
+                windDir = Vector2Int.right;
+                break;
+            case Element.TypeElement.Ventilateur_up:
+                windDir = Vector2Int.up;
+                break;
+        }
+
+        float rendement = 0.9f; //TODO : GET REAL RENDEMENT
+        Vector2Int nextBlock = node.spatialPosition + windDir;
+        while(!eoliennesElements.Contains(grilleElementManager.GetElementTypeAtPosition(nextBlock.x, nextBlock.y)))
+        {
+            Debug.Log("Next block : " + nextBlock); 
+
+            nextBlock += windDir;
+            rendement *= 0.8f;
+
+
+            if(rendement < 0.1f)
+            {
+                  break;
+            }
+        }
+
+        GraphNode neighbourNode = new GraphNode(); //TODO : REFACTORISER
+        neighbourNode.rendement = rendement;
+        neighbourNode.animationTime = 0f;
+        neighbourNode.sourceNodes = new List<GraphNode>();
+        neighbourNode.destNodes = new List<GraphNode>();
+        neighbourNode.spatialPosition = nextBlock;
+        neighbourNode.type = grilleElementManager.GetElementTypeAtPosition(nextBlock.x, nextBlock.y);
+        visitedElements[nextBlock.x, nextBlock.y] = true;
+
+        node.destNodes.Add(neighbourNode);
+        neighbourNode.sourceNodes.Add(node);
+
+
+        Debug.Log("Adding node to process : " + neighbourNode.spatialPosition);
+        nodesToProcess.Enqueue(neighbourNode);
     }
 
     public void DisplayGraphAnimation(GraphNode beginNode)
