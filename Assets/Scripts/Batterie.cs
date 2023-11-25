@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pile : MonoBehaviour
+public class Batterie : Element
 {
+
+    public float energy = 100f;
+    
     // Start is called before the first frame update
     void Start()
     {
