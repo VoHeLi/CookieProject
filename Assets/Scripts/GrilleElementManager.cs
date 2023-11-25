@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GrilleElementManager : MonoBehaviour
 {
-    public static GrilleElementManager instance;
+    public static GrilleElementManager instance ;
 
     private void Awake()
     {
@@ -148,7 +148,7 @@ public class GrilleElementManager : MonoBehaviour
         GameObject elementObject = Instantiate(elementPrefabs[(int)elementMaps[i, j]], new Vector3(i * GlobalGrid.caseSize, j * GlobalGrid.caseSize, 0), Quaternion.identity);
         elementObject.GetComponent<Element>().setXPos(i);
         elementObject.GetComponent<Element>().setYPos(j);
-        Debug.Log("Position de l'élément en positon " + (i, j));
+        Debug.Log("Position de l'ï¿½lï¿½ment en positon " + (i, j));
         elementObject.transform.parent = transform;
         elementObjects[i, j] = elementObject;
 
@@ -168,6 +168,8 @@ public class GrilleElementManager : MonoBehaviour
 
     private void BeginElementPlacement()
     {
+        
+        
         Debug.Log("Begin element placement : " + currentPlacingElement.ToString());
         if (currentPlacingElementObject != null)
         {
@@ -183,7 +185,7 @@ public class GrilleElementManager : MonoBehaviour
     {
         int i = 0, j = 0;
         if (!GlobalGrid.GetMouseCase(ref i, ref j)) return;
-
+        if (!GetBlock.CanBePlacedOn(i,j)) return;
         elementMaps[i, j] = currentPlacingElement;
         UpdateElementObject(i, j);
     }

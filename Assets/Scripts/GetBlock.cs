@@ -5,18 +5,30 @@ using UnityEngine.Tilemaps;
 
 public class GetBlock : MonoBehaviour
 {
-    private Plane _plane;
     
-    
-    
-    [SerializeField] 
-    private Tilemap _ground;
+    public static GetBlock instance;
 
-    [SerializeField] private Tilemap _grates;
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogError("Multiple instances of GetBlock!");
+        }
+
+        instance = this;
+    }
+
+
+    [SerializeField] 
+    private static Tilemap instance._ground;
+
+    [SerializeField] 
+    private static Tilemap instance._gates;
+    
     // Start is called before the first frame update
     void Start()
     {
-        _plane = new Plane(new Vector3(0, 0, 1), new Vector3(0, 0, 0));
+        
     }
 
     // Update is called once per frame
@@ -34,12 +46,12 @@ public class GetBlock : MonoBehaviour
         }
     }
 
-    public bool CanBePlacedOn(int xtile, int ytile)
+    public static bool CanBePlacedOn(int xtile, int ytile)
     {
 
         return (GlobalGrid.IsInGrid(xtile, ytile) && 
-                !(_ground.HasTile(new Vector3Int(xtile, ytile))) && 
-                !(_grates.HasTile(new Vector3Int(xtile, ytile))) && 
+                !_ground.HasTile(new Vector3Int(xtile, ytile)) && 
+                !_gates.HasTile(new Vector3Int(xtile, ytile)) && 
                 (_ground.HasTile(new Vector3Int(xtile, ytile + 1)) || 
                  _ground.HasTile(new Vector3Int(xtile, ytile - 1))));
             
