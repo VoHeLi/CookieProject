@@ -35758,6 +35758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ground: {fileID: 2925746189923381552}
+  _sky: {fileID: 5402498786447890745}
   _gates: {fileID: 2152195242472295166}
 --- !u!1 &7162507356916951654
 GameObject:
@@ -35817,7 +35818,7 @@ MonoBehaviour:
   - {fileID: 3786657694004368305, guid: 16cddfaf0135c3946bd7460a6806cabd, type: 3}
   - {fileID: 3482438590224465796, guid: 96a11c8bbb2c4d944a74bf23b7e65714, type: 3}
   - {fileID: 8889992262668001080, guid: 564f6a63983327e4c8dd984a68669d7b, type: 3}
-  - {fileID: 2539536271585897927, guid: 2ea69c2a476571f44b21bdddeb19f418, type: 3}
+  - {fileID: 2539536271585897927, guid: 0378a1631aa87fc49b751d39ccbf662b, type: 3}
   - {fileID: 2539536271585897927, guid: 2ea69c2a476571f44b21bdddeb19f418, type: 3}
   sourcePosition: {x: -1000, y: -1000}
 --- !u!1 &7796720995272768719
@@ -53805,7 +53806,7 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.60784316, g: 0.60784316, b: 0.60784316, a: 1}
   m_Origin: {x: 0, y: 0, z: 0}
   m_Size: {x: 87, y: 75, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}

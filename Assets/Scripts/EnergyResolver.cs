@@ -200,7 +200,7 @@ public class EnergyResolver : MonoBehaviour
             rendement *= 0.8f;
             distance++;
 
-            if (!GlobalGrid.IsInGrid(nextBlock.x, nextBlock.y))
+            if (!GlobalGrid.IsInGrid(nextBlock.x, nextBlock.y) || GetBlock.instance.CanWindGoThrought(nextBlock.x, nextBlock.y))
             {
                 nextBlock -= windDir;
                 break;
