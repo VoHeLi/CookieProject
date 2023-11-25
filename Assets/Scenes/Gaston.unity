@@ -390,6 +390,8 @@ MonoBehaviour:
   - {fileID: 3786657694004368305, guid: 16cddfaf0135c3946bd7460a6806cabd, type: 3}
   - {fileID: 3482438590224465796, guid: 96a11c8bbb2c4d944a74bf23b7e65714, type: 3}
   - {fileID: 8889992262668001080, guid: 564f6a63983327e4c8dd984a68669d7b, type: 3}
+  - {fileID: 2539536271585897927, guid: 2ea69c2a476571f44b21bdddeb19f418, type: 3}
+  - {fileID: 2539536271585897927, guid: 2ea69c2a476571f44b21bdddeb19f418, type: 3}
   sourcePosition: {x: -1000, y: -1000}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

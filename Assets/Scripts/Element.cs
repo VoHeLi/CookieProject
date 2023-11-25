@@ -32,7 +32,7 @@ public class Element : MonoBehaviour
         Piston_right = 14
         //TODO : Add other elements
     }
-    public const int ELEMENT_TYPE_COUNT = 13;
+    public const int ELEMENT_TYPE_COUNT = 15;
 
 
     public TypeElement type = TypeElement.None;

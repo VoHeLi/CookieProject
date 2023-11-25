@@ -20,10 +20,10 @@ public class GetBlock : MonoBehaviour
 
 
     [SerializeField] 
-    private static Tilemap instance._ground;
+    private static Tilemap _ground;
 
     [SerializeField] 
-    private static Tilemap instance._gates;
+    private static Tilemap _gates;
     
     // Start is called before the first frame update
     void Start()
