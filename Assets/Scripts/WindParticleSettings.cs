@@ -24,7 +24,8 @@ public class WindParticleSettings : MonoBehaviour
         float minTrailLifeTime = minTrailLength / (float)lifetime;
         float maxTrailLifeTime = maxTrailLength / (float)lifetime;
 
-        _particleSystem.startLifetime = lifetime;
+        ParticleSystem.MainModule mainData = _particleSystem.main;
+        mainData.startLifetime = new ParticleSystem.MinMaxCurve(lifetime);
 
         ParticleSystem.TrailModule trailData = _particleSystem.trails;
         trailData.lifetime = new ParticleSystem.MinMaxCurve(minTrailLifeTime, maxTrailLifeTime);

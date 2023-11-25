@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -19,7 +20,7 @@ public class EnergyResolver : MonoBehaviour
         instance = this;
     }
 
-    public struct GraphNode
+    public class GraphNode
     {
         public float rendement;
         public float animationTime;
@@ -27,10 +28,15 @@ public class EnergyResolver : MonoBehaviour
         public List<GraphNode> destNodes;
         public Vector2Int spatialPosition;
         public Element.TypeElement type;
+        public int distanceToNextNode;
     }
 
     [SerializeField] private GameObject debugEnergyPrefab;
     private List<GameObject> debugEnergyObjects = new List<GameObject>();
+
+    [SerializeField] private GameObject windPrefab;
+
+    private List<GameObject> particleEffects;
 
     private bool[,] visitedElements;
 
@@ -184,6 +190,7 @@ public class EnergyResolver : MonoBehaviour
                 break;
         }
 
+        int distance = 1;
         float rendement = 0.9f; //TODO : GET REAL RENDEMENT
         Vector2Int nextBlock = node.spatialPosition + windDir;
         while(!eoliennesElements.Contains(grilleElementManager.GetElementTypeAtPosition(nextBlock.x, nextBlock.y)))
@@ -192,13 +199,23 @@ public class EnergyResolver : MonoBehaviour
 
             nextBlock += windDir;
             rendement *= 0.8f;
+            distance++;
 
+            if (!GlobalGrid.IsInGrid(nextBlock.x, nextBlock.y))
+            {
+                nextBlock -= windDir;
+                break;
+            }
 
-            if(rendement < 0.1f)
+            if(distance >= 20)
             {
                   break;
             }
         }
+
+
+        Debug.Log("Distance to next Node : " + distance + " SpatialPos : " + node.spatialPosition.ToString());
+        node.distanceToNextNode = distance;
 
         GraphNode neighbourNode = new GraphNode(); //TODO : REFACTORISER
         neighbourNode.rendement = rendement;
@@ -207,11 +224,12 @@ public class EnergyResolver : MonoBehaviour
         neighbourNode.destNodes = new List<GraphNode>();
         neighbourNode.spatialPosition = nextBlock;
         neighbourNode.type = grilleElementManager.GetElementTypeAtPosition(nextBlock.x, nextBlock.y);
-        visitedElements[nextBlock.x, nextBlock.y] = true;
+        visitedElements[nextBlock.x, nextBlock.y] = true; //TODO CHECK IN GRILLE
+
+
 
         node.destNodes.Add(neighbourNode);
         neighbourNode.sourceNodes.Add(node);
-
 
         Debug.Log("Adding node to process : " + neighbourNode.spatialPosition);
         nodesToProcess.Enqueue(neighbourNode);
@@ -257,6 +275,37 @@ public class EnergyResolver : MonoBehaviour
         debugEnergyObject.transform.parent = transform;
         debugEnergyObject.transform.localScale = Vector3.one * energy;
         debugEnergyObjects.Add(debugEnergyObject);
+
+        if (ventilatorElements.Contains(node.type))
+        {
+            GameObject wind = Instantiate(windPrefab, new Vector3(node.spatialPosition.x * GlobalGrid.caseSize, node.spatialPosition.y * GlobalGrid.caseSize, 0), Quaternion.identity);
+            wind.transform.parent = transform;
+            debugEnergyObjects.Add(wind);
+
+            WindParticleSettings windParticleSettings = wind.GetComponent<WindParticleSettings>();
+            windParticleSettings.SetWindLength(node.distanceToNextNode);
+            
+            switch(node.type)
+            {
+                case Element.TypeElement.Ventilateur_up:
+                    wind.transform.rotation = Quaternion.Euler(0, 0, 90);
+                    wind.transform.position += Vector3.up * GlobalGrid.caseSize * 0.5f;
+                    break;
+                case Element.TypeElement.Ventilateur_left:
+                    wind.transform.rotation = Quaternion.Euler(0, 0, 180);
+                    wind.transform.position -= Vector3.right * GlobalGrid.caseSize * 0.5f;
+                    break;
+                case Element.TypeElement.Ventilateur_right:
+                    wind.transform.rotation = Quaternion.Euler(0, 0, 0);
+                    wind.transform.position -= Vector3.left * GlobalGrid.caseSize * 0.5f;
+                    break;
+                case Element.TypeElement.Ventilateur_down:
+                    wind.transform.rotation = Quaternion.Euler(0, 0, 270);
+                    wind.transform.position += Vector3.down * GlobalGrid.caseSize * 0.5f;
+                    break;
+            }
+
+        }
     }
 
     public void ClearEnergyObjects()
