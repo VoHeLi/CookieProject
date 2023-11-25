@@ -244,30 +244,5 @@ public class GrilleElementManager : MonoBehaviour
     {
         switch (i)
         {
-            case 1: // Cable
-                currentPlacingElement = (Element.TypeElement)1;
-                break;
 
-            case 2: // Ventilateur
-                currentPlacingElement = (Element.TypeElement)2;
-                break;
-
-            case 3: // Poteau
-                currentPlacingElement = (Element.TypeElement)6;
-                break;
-
-            case 4: // Eolienne
-                currentPlacingElement = (Element.TypeElement)9;
-                break;
-
-            case 5: // Piston
-                currentPlacingElement = (Element.TypeElement)13;
-                break;
-
-            default:
-                Debug.Log("Incorrect Element");
-                break;
-        }
-        BeginElementPlacement();
-    }
 }

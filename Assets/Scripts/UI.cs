@@ -24,20 +24,10 @@ public class UI : MonoBehaviour
         Navigation newNav = new Navigation();
         newNav.mode = Navigation.Mode.Horizontal;
 
-
-
-
         Texture2D tex = Resources.Load<Texture2D>("Logo_AnimINT");
-
-        //createButton(0, tex, newNav);
-        //createButton(1, tex, newNav);
-        //createButton(2, tex, newNav);  
-
-        Debug.Log(Element.ELEMENT_TO_SELECT_COUNT);
 
         for (int i = 1; i < Element.ELEMENT_TO_SELECT_COUNT; i++)
         {
-            Debug.Log(i - (float)Element.ELEMENT_TO_SELECT_COUNT / 2f);
             createButton(i - (float)Element.ELEMENT_TO_SELECT_COUNT / 2f, i, tex, newNav);
         }
     }
