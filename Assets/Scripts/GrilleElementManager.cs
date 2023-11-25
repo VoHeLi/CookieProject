@@ -17,6 +17,7 @@ public class GrilleElementManager : MonoBehaviour
     }
 
     [SerializeField] private GameObject[] elementPrefabs;
+    [SerializeField] private List<Vector2Int> initialSetup;
 
     [HideInInspector] public Element.TypeElement[,] elementMaps;
     [HideInInspector] public GameObject[,] elementObjects;
@@ -60,6 +61,7 @@ public class GrilleElementManager : MonoBehaviour
             int i = 0, j = 0;
             if (!GlobalGrid.GetMouseCase(ref i, ref j) || !GetBlock.instance.CanBePlacedOn(i, j, flags))
             {
+                Debug.Log("toto");
                   currentPlacingElementObject.transform.position = new Vector3(-1000, -1000, 0);
             }
 
@@ -104,6 +106,11 @@ public class GrilleElementManager : MonoBehaviour
 
     private void LoadInitialElements()
     {
+
+        elementMaps[initialSetup[0].x, initialSetup[0].y] = Element.TypeElement.Batterie;
+        elementMaps[initialSetup[1].x, initialSetup[1].y] = Element.TypeElement.TargetBattery;
+
+        UpdateAllElementObjects();
         //TODO : Load initial elements from level data
 
         //TEMP_TEST
