@@ -191,19 +191,19 @@ public class Ventilateur : MonoBehaviour
     {
         // Debug.Log("Click");
 
-        if (isFacingRight && isConnected)
+        if (isFacingRight)
         {
             StartCoroutine(startVentRightAnimation());
         }
-        else if (isFacingLeft && isConnected)
+        else if (isFacingLeft)
         {
             StartCoroutine(startVentLeftAnimation());
         }
-        else if (isFacingUp && isConnected)
+        else if (isFacingUp)
         {
             StartCoroutine(startVentUpAnimation());
         }
-        else if (isFacingDown && isConnected)
+        else if (isFacingDown)
         {
             StartCoroutine(startVentDownAnimation());
         }
