@@ -24,9 +24,13 @@ public class Element : MonoBehaviour
         Poteau = 6,
         Batterie = 7,
         TargetBattery = 8,
+        Eolienne_left = 9,
+        Eolienne_right = 10,
+        Eolienne_up = 11,
+        Eolienne_down = 12,
         //TODO : Add other elements
     }
-    public const int ELEMENT_TYPE_COUNT = 9;
+    public const int ELEMENT_TYPE_COUNT = 13;
 
 
     public TypeElement type = TypeElement.None;

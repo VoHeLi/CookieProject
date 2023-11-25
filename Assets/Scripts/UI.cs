@@ -5,25 +5,26 @@ using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
-    [SerializeField] Canvas canvas;
+    [SerializeField] GameObject bottomImage;
     [SerializeField] GameObject buttonPrefab;
+    [SerializeField] GameObject pausePanel;
     [SerializeField] float buttonSize;
-    private List<GameObject> gameObjectList;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        GameObject bottomImage = canvas.transform.GetChild(1).gameObject;
+        startAgain(); // Desable the pause menu
+
         Texture2D tex = Resources.Load<Texture2D>("Logo_AnimINT");
-        createButton(bottomImage, 0, tex);
-        createButton(bottomImage, 1, tex);
-        createButton(bottomImage, 2, tex);        
+        createButton(0, tex);
+        createButton(1, tex);
+        createButton(2, tex);        
     }
 
     // Create a button for selecting an element
-    private void createButton(GameObject bottomImage, int index, Texture2D tex)
+    private void createButton(int index, Texture2D tex)
     {
         GameObject buttonBackground = Object.Instantiate(buttonPrefab, Vector3.zero, Quaternion.identity);
         RectTransform rectTrans = buttonBackground.GetComponent<RectTransform>();
@@ -53,6 +54,12 @@ public class UI : MonoBehaviour
         Debug.Log("Button press" + i);
     }
 
+    // Start the game's simulation
+    public void startGame()
+    {
+        Debug.Log("Game Start");
+    }
+
 
 
 
@@ -60,12 +67,18 @@ public class UI : MonoBehaviour
     // Enable pause menu
     public void pause()
     {
-        Debug.Log("pause");
+        pausePanel.SetActive(true);
     }
 
-    // Start the game's simulation
-    public void startGame()
+    // Disable pause menu
+    public void startAgain()
     {
-        Debug.Log("Game Start");
+        pausePanel.SetActive(false);
+    }
+
+    // Quit the game
+    public void quit()
+    {
+        Application.Quit();
     }
 }
