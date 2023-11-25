@@ -147,6 +147,7 @@ public class GrilleElementManager : MonoBehaviour
         GameObject elementObject = Instantiate(elementPrefabs[(int)elementMaps[i, j]], new Vector3(i * GlobalGrid.caseSize, j * GlobalGrid.caseSize, 0), Quaternion.identity);
         elementObject.GetComponent<Element>().setXPos(i);
         elementObject.GetComponent<Element>().setYPos(j);
+        Debug.Log("Position de l'élément en positon " + (i, j));
         elementObject.transform.parent = transform;
         elementObjects[i, j] = elementObject;
 

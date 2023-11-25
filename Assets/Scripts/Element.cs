@@ -8,6 +8,11 @@ public class Element : MonoBehaviour
     private int xPos;
     private int yPos;
 
+    private void Start()
+    {
+        Debug.Log("Je suis positioné2 en " + (getXPos(), getYPos()));
+    }
+
     public enum TypeElement
     {
         None = 0,
