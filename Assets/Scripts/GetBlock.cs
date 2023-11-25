@@ -39,7 +39,7 @@ public class GetBlock : MonoBehaviour
             int xtile = 0, ytile = 0;
             if (GlobalGrid.GetMouseCase(ref xtile,ref ytile))
             {
-                Debug.Log("Can wind go throught? " + CanWindGoThrought(xtile,ytile));
+                Debug.Log("Can be placed on? " + CanBePlacedOn(xtile,ytile,0));
             }
             
         }
@@ -55,13 +55,12 @@ public class GetBlock : MonoBehaviour
                 !_ground.HasTile(new Vector3Int(xtile, ytile)) && 
                 !_gates.HasTile(new Vector3Int(xtile, ytile)) && 
                     (
-                     (_ground.HasTile(new Vector3Int(xtile, ytile + 1)) && flags == 1)) || 
-                     (
-                        (_ground.HasTile(new Vector3Int(xtile, ytile - 1)) || 
+                        (_ground.HasTile(new Vector3Int(xtile, ytile + 1)) && flags == 1) || 
+                        _ground.HasTile(new Vector3Int(xtile, ytile - 1)) || 
                         (flags == 2 && GrilleElementManager.instance.GetElementTypeAtPosition(xtile, ytile-1) == Element.TypeElement.Poteau)         
                      )
                     )
-                 );
+                    ;
             
     }
 
