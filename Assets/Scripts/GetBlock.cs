@@ -55,5 +55,11 @@ public class GetBlock : MonoBehaviour
                  _ground.HasTile(new Vector3Int(xtile, ytile - 1))));
             
     }
+
+    public bool CanWindGoThrought(int xTile, int yTile)
+    {
+        //TODO
+        return true;
+    }
     
 }
