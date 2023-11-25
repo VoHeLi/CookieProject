@@ -61,7 +61,6 @@ public class GrilleElementManager : MonoBehaviour
             int i = 0, j = 0;
             if (!GlobalGrid.GetMouseCase(ref i, ref j) || !GetBlock.instance.CanBePlacedOn(i, j, flags))
             {
-                Debug.Log("toto");
                   currentPlacingElementObject.transform.position = new Vector3(-1000, -1000, 0);
             }
 
