@@ -104,7 +104,7 @@ public class Ventilateur : MonoBehaviour
         }
 
         // Attachement des cables
-        if (isFacingRight && !isCableAttached)
+        /* if (isFacingRight && !isCableAttached)
         {
             GameObject rightVentilateurCable = Instantiate(new GameObject("CableObject"), this.transform);
             SpriteRenderer cableSpriteRenderer = rightVentilateurCable.AddComponent<SpriteRenderer>();
@@ -152,7 +152,7 @@ public class Ventilateur : MonoBehaviour
             cableSpriteRenderer.sortingOrder = 0;
 
             isCableAttached = true;
-        }
+        } */
 
         if (isCableAttached && !isConnected)
         {
@@ -187,7 +187,7 @@ public class Ventilateur : MonoBehaviour
 
 
     // TODO : lancer les animations quand l'electricité ou le vent passe dans les pales
-    private void StartAnimation()
+    public void StartAnimation()
     {
         // Debug.Log("Click");
 
