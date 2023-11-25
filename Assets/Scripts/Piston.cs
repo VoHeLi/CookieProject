@@ -94,10 +94,13 @@ public class Piston : MonoBehaviour
         }
 
         // Si cable voisins, cable attaché
-        if (isFacingLeft && GrilleElementManager.instance.GetElementTypeAtPosition(GetComponent<Element>().getXPos() + 1, GetComponent<Element>().getYPos()) == Element.TypeElement.Cable)
+        Element.TypeElement voisinGauche = GrilleElementManager.instance.GetElementTypeAtPosition(GetComponent<Element>().getXPos() - 1, GetComponent<Element>().getYPos());
+        Element.TypeElement voisinDroite = GrilleElementManager.instance.GetElementTypeAtPosition(GetComponent<Element>().getXPos() + 1, GetComponent<Element>().getYPos());
+
+        if (isFacingLeft && ((voisinDroite == Element.TypeElement.Cable) || (voisinDroite == Element.TypeElement.Batterie) || (voisinDroite == Element.TypeElement.Poteau)))
         {
             isConnected = true;
-        } else if (isFacingRight && GrilleElementManager.instance.GetElementTypeAtPosition(GetComponent<Element>().getXPos() - 1, GetComponent<Element>().getYPos()) == Element.TypeElement.Cable) {
+        } else if (isFacingRight && ((voisinGauche == Element.TypeElement.Cable) || (voisinGauche == Element.TypeElement.Batterie) || (voisinGauche == Element.TypeElement.Poteau))) {
             isConnected = true;
         } else
         {
