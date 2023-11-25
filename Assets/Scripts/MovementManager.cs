@@ -19,7 +19,7 @@ public class MovementManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = new Vector3((GlobalGrid.nbCaseX * GlobalGrid.caseSize / 2), (GlobalGrid.nbCaseY * GlobalGrid.caseSize / 2), 0f);
+        transform.position = new Vector3((GlobalGrid.nbCaseX * GlobalGrid.caseSize / 2), (GlobalGrid.nbCaseY * GlobalGrid.caseSize / 2), -10f);
     }
 
     // Update is called once per frame
