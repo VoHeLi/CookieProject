@@ -28,6 +28,8 @@ public class Element : MonoBehaviour
         Eolienne_right = 10,
         Eolienne_up = 11,
         Eolienne_down = 12,
+        Piston_left = 13,
+        Piston_right = 14
         //TODO : Add other elements
     }
     public const int ELEMENT_TYPE_COUNT = 13;
