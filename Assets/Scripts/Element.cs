@@ -34,6 +34,17 @@ public class Element : MonoBehaviour
     }
     public const int ELEMENT_TYPE_COUNT = 15;
 
+    public enum ElementToSelect
+    {
+        None = 0,
+        Cable = 1,
+        Ventilateur = 2,
+        Poteau = 3,
+        Eolienne = 4,
+        Piston = 5
+        //TODO : Add other elements
+    }
+    public const int ELEMENT_TO_SELECT_COUNT = 6;
 
     public TypeElement type = TypeElement.None;
 
