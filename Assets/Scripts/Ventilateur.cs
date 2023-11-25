@@ -40,11 +40,14 @@ public class Ventilateur : MonoBehaviour
 
     [SerializeField] private bool isBlowing;
 
-    [SerializeField] private bool isConnected;
+    [SerializeField] private bool isConnected = false;
     private bool isCableAttached = false;
     private bool isBaseAttached = false;
+    private bool isBaseAttachedRight = false;
+    private bool isBaseAttachedLeft = false;
 
-    private bool isCableSideRight;
+    private bool isConnectedRight;
+    private bool isConnectedLeft;
 
     public bool stopAnimation = false;
 
@@ -103,61 +106,113 @@ public class Ventilateur : MonoBehaviour
             isBaseAttached = true;
         }
 
+
+        // Si cable voisins, cable attaché
+        Element.TypeElement voisinGauche = GrilleElementManager.instance.GetElementTypeAtPosition(GetComponent<Element>().getXPos() - 1, GetComponent<Element>().getYPos());
+        Element.TypeElement voisinDroite = GrilleElementManager.instance.GetElementTypeAtPosition(GetComponent<Element>().getXPos() + 1, GetComponent<Element>().getYPos());
+
+        if (isFacingLeft && ((voisinDroite == Element.TypeElement.Cable) || (voisinDroite == Element.TypeElement.Batterie) || (voisinDroite == Element.TypeElement.Poteau)))
+        {
+            isConnected = true;
+        }
+        else if (isFacingRight && ((voisinGauche == Element.TypeElement.Cable) || (voisinGauche == Element.TypeElement.Batterie) || (voisinGauche == Element.TypeElement.Poteau)))
+        {
+            isConnected = true;
+        }
+        else if (isFacingLeft || isFacingRight)
+        {
+            isConnected = false;
+        }
+
+        if (isFacingUp && ((voisinGauche == Element.TypeElement.Cable) || (voisinGauche == Element.TypeElement.Batterie) || (voisinGauche == Element.TypeElement.Poteau)))
+        {
+            isConnected = true;
+            isConnectedRight = true;
+        } 
+        else if (isFacingUp && ((voisinDroite == Element.TypeElement.Cable) || (voisinDroite == Element.TypeElement.Batterie) || (voisinDroite == Element.TypeElement.Poteau)))
+        {
+            isConnected = true;
+            isConnectedLeft = true;
+        } 
+        else if (isFacingDown && ((voisinGauche == Element.TypeElement.Cable) || (voisinGauche == Element.TypeElement.Batterie) || (voisinGauche == Element.TypeElement.Poteau)))
+        {
+            isConnected = true;
+            isConnectedRight = true;
+        }
+        else if (isFacingDown && ((voisinDroite == Element.TypeElement.Cable) || (voisinDroite == Element.TypeElement.Batterie) || (voisinDroite == Element.TypeElement.Poteau)))
+        {
+            isConnected = true;
+            isConnectedLeft = true;
+        } else if (isFacingUp || isFacingDown)
+        {
+            isConnected = false;
+            isConnectedLeft = false;
+            isConnectedRight = false;
+        }
+
         // Attachement des cables
-        /* if (isFacingRight && !isCableAttached)
-        {
-            GameObject rightVentilateurCable = Instantiate(new GameObject("CableObject"), this.transform);
-            SpriteRenderer cableSpriteRenderer = rightVentilateurCable.AddComponent<SpriteRenderer>();
-            cableSpriteRenderer.sprite = ventilateurRightCable;
-            cableSpriteRenderer.sortingOrder = 0;
+        if (isConnected && (!isCableAttached || !isBaseAttachedRight || !isBaseAttachedLeft)) {
 
-            isCableAttached = true;
-        }
-        if (isFacingLeft && !isCableAttached)
-        {
-            GameObject leftVentilateurCable = Instantiate(new GameObject("CableObject"), this.transform);
-            SpriteRenderer cableSpriteRenderer = leftVentilateurCable.AddComponent<SpriteRenderer>();
-            cableSpriteRenderer.sprite = ventilateurLeftCable;
-            cableSpriteRenderer.sortingOrder = 0;
+            if (isFacingRight && !isCableAttached)
+            {
+                GameObject rightVentilateurCable = Instantiate(new GameObject("CableObject"), this.transform);
+                SpriteRenderer cableSpriteRenderer = rightVentilateurCable.AddComponent<SpriteRenderer>();
+                cableSpriteRenderer.sprite = ventilateurRightCable;
+                cableSpriteRenderer.sortingOrder = 0;
 
-            isCableAttached = true;
-        }
-        if (isFacingUp && !isCableAttached)
-        {
-            GameObject rightVentilateurCable = Instantiate(new GameObject("CableObject"), this.transform);
-            SpriteRenderer cableSpriteRenderer = rightVentilateurCable.AddComponent<SpriteRenderer>();
-            if (isCableSideRight)
-            {
-                cableSpriteRenderer.sprite = ventilateurUpCableRight;
-            } else
-            {
-                cableSpriteRenderer.sprite = ventilateurUpCableLeft;
+                isCableAttached = true;
             }
-            cableSpriteRenderer.sortingOrder = 0;
+            if (isFacingLeft && !isCableAttached)
+            {
+                GameObject leftVentilateurCable = Instantiate(new GameObject("CableObject"), this.transform);
+                SpriteRenderer cableSpriteRenderer = leftVentilateurCable.AddComponent<SpriteRenderer>();
+                cableSpriteRenderer.sprite = ventilateurLeftCable;
+                cableSpriteRenderer.sortingOrder = 0;
 
-            isCableAttached = true;
+                isCableAttached = true;
+            }
+            if (isFacingUp)
+            {
+                GameObject rightVentilateurCable = Instantiate(new GameObject("CableObject"), this.transform);
+                SpriteRenderer cableSpriteRenderer = rightVentilateurCable.AddComponent<SpriteRenderer>();
+                if (isConnectedRight && !isBaseAttachedRight)
+                {
+                    cableSpriteRenderer.sprite = ventilateurUpCableRight;
+                    isBaseAttachedRight = true;
+                }
+                if (isConnectedLeft && !isBaseAttachedLeft)
+                {
+                    cableSpriteRenderer.sprite = ventilateurUpCableLeft;
+                    isBaseAttachedLeft = true;
+                }
+                cableSpriteRenderer.sortingOrder = 0;
+
+                isCableAttached = true;
+            }
+            if (isFacingDown)
+            {
+                GameObject downVentilateurCable = Instantiate(new GameObject("CableObject"), this.transform);
+                SpriteRenderer cableSpriteRenderer = downVentilateurCable.AddComponent<SpriteRenderer>();
+                if (isConnectedRight)
+                {
+                    cableSpriteRenderer.sprite = ventilateurDownCableRight;
+                }
+                if (isConnectedLeft)
+                {
+                    cableSpriteRenderer.sprite = ventilateurDownCableLeft;
+                }
+                cableSpriteRenderer.sortingOrder = 0;
+
+                isCableAttached = true;
+            }
         }
-        if (isFacingDown && !isCableAttached)
-        {
-            GameObject downVentilateurCable = Instantiate(new GameObject("CableObject"), this.transform);
-            SpriteRenderer cableSpriteRenderer = downVentilateurCable.AddComponent<SpriteRenderer>();
-            if (isCableSideRight)
-            {
-                cableSpriteRenderer.sprite = ventilateurDownCableRight;
-            }
-            else
-            {
-                cableSpriteRenderer.sprite = ventilateurDownCableLeft;
-            }
-            cableSpriteRenderer.sortingOrder = 0;
-
-            isCableAttached = true;
-        } */
 
         if (isCableAttached && !isConnected)
         {
             Destroy(transform.GetChild(0).gameObject);
             isCableAttached = false;
+            isBaseAttachedRight = false;
+            isBaseAttachedLeft = false;
         }
 
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
@@ -183,10 +238,23 @@ public class Ventilateur : MonoBehaviour
             spriteRenderer.sortingOrder = 2;
         }
 
+        GameObject[] allGameObjects = GameObject.FindObjectsOfType<GameObject>();
+
+
+        foreach (var obj in allGameObjects)
+        {
+            if (obj.transform.parent == null && obj.name == "CableObject")
+            {
+                Destroy(obj);
+            }
+        }
+
+
     }
 
 
-    // TODO : lancer les animations quand l'electricité ou le vent passe dans les pales
+
+
     public void StartAnimation()
     {
         // Debug.Log("Click");
