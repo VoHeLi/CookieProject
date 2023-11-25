@@ -50,9 +50,9 @@ public class Ventilateur : MonoBehaviour
 
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 
-        if (isFacingRight && !isExtending)
+        if (isFacingRight)
         {
-            spriteRenderer.sprite = pistonRightDefault;
+            spriteRenderer.sprite = ventilateurRightDefault;
             spriteRenderer.sortingOrder = 1;
         }
 
