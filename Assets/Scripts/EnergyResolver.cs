@@ -64,7 +64,7 @@ public class EnergyResolver : MonoBehaviour
 
         GraphNode beginNode = new GraphNode();
         beginNode.rendement = 1f;
-        beginNode.animationTime = 0f;
+        beginNode.animationTime = 0.1f;
         beginNode.sourceNodes = new List<GraphNode>();
         beginNode.destNodes = new List<GraphNode>();
         beginNode.spatialPosition = grilleElementManager.sourcePosition;
@@ -95,7 +95,7 @@ public class EnergyResolver : MonoBehaviour
 
         }
 
-        DisplayGraphAnimation(beginNode);
+        StartCoroutine(DisplayGraphAnimation(beginNode));
 
     }
 
@@ -123,7 +123,7 @@ public class EnergyResolver : MonoBehaviour
             
         GraphNode neighbourNode = new GraphNode();
         neighbourNode.rendement = 0.9f;
-        neighbourNode.animationTime = 0f;
+        neighbourNode.animationTime = 0.2f;
         neighbourNode.sourceNodes = new List<GraphNode>();
         neighbourNode.destNodes = new List<GraphNode>();
         neighbourNode.spatialPosition = neightbour;
@@ -219,7 +219,7 @@ public class EnergyResolver : MonoBehaviour
 
         GraphNode neighbourNode = new GraphNode(); //TODO : REFACTORISER
         neighbourNode.rendement = rendement;
-        neighbourNode.animationTime = 0f;
+        neighbourNode.animationTime = 0.2f*distance;
         neighbourNode.sourceNodes = new List<GraphNode>();
         neighbourNode.destNodes = new List<GraphNode>();
         neighbourNode.spatialPosition = nextBlock;
@@ -235,7 +235,7 @@ public class EnergyResolver : MonoBehaviour
         nodesToProcess.Enqueue(neighbourNode);
     }
 
-    public void DisplayGraphAnimation(GraphNode beginNode)
+    public IEnumerator DisplayGraphAnimation(GraphNode beginNode)
     {
         if(debugEnergyObjects != null)
         {
@@ -252,6 +252,8 @@ public class EnergyResolver : MonoBehaviour
         while (nodesToProcess.Count > 0)
         {
             GraphNode currentNode = nodesToProcess.Dequeue();
+
+            yield return new WaitForSeconds(currentNode.animationTime);
 
             if (currentNode.type == Element.TypeElement.TargetBattery)
             {
