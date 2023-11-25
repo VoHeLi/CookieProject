@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class Element : MonoBehaviour
 {
+
+    private int xPos;
+    private int yPos;
+
+    private void Start()
+    {
+        Debug.Log("Je suis positioné2 en " + (getXPos(), getYPos()));
+    }
+
     public enum TypeElement
     {
         None = 0,
@@ -25,4 +34,21 @@ public class Element : MonoBehaviour
 
 
     public TypeElement type = TypeElement.None;
+
+    public int getXPos()
+    {
+        return this.xPos;
+    }
+    public int getYPos()
+    {
+        return this.yPos;
+    }
+    public void setXPos(int x)
+    {
+        this.xPos = x;
+    }
+    public void setYPos(int y)
+    {
+        this.yPos = y;
+    }
 }

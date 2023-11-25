@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8972868910949752399}
   - component: {fileID: 2870189689536987576}
   - component: {fileID: -7837779028654859649}
+  - component: {fileID: 3201277216762963558}
   m_Layer: 0
   m_Name: Cable
   m_TagString: Untagged
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 1149679b2f440ef48ab86a218db21494, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -98,3 +99,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+--- !u!114 &3201277216762963558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2539536271585897927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7dc53bafd89ed04f958ac82755a026c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
+  defaultSprite: {fileID: 7482667652216324306, guid: 8e98dbb30405d8a4389f549adfcaf08b, type: 3}
+  cableLeft: {fileID: 7482667652216324306, guid: f5aa63288b08e8447a2831f3d807201e, type: 3}
+  cableRight: {fileID: 7482667652216324306, guid: 2c0ecf011eff47e46bdd575e14aa3011, type: 3}
+  cableLine: {fileID: 7482667652216324306, guid: e119106c952c17a4a94418afc2cf3fc8, type: 3}

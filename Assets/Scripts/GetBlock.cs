@@ -6,9 +6,13 @@ using UnityEngine.Tilemaps;
 public class GetBlock : MonoBehaviour
 {
     private Plane _plane;
-
+    
+    
+    
     [SerializeField] 
-    private Tilemap _tilemap;
+    private Tilemap _ground;
+
+    [SerializeField] private Tilemap _grates;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,20 +24,25 @@ public class GetBlock : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            
-            float enter = 0.0f;
 
-            if (_plane.Raycast(ray, out enter))
+            int xtile = 0, ytile = 0;
+            if (GlobalGrid.GetMouseCase(ref xtile,ref ytile))
             {
-                
-                Vector2 hitPoint = ray.GetPoint(enter);
-                int xtile = Mathf.FloorToInt(hitPoint.x);
-                int ytile = Mathf.FloorToInt(hitPoint.y);
-                Vector3Int f = new Vector3Int(xtile, ytile, 0);
-                Debug.Log(_tilemap.HasTile(f));
+                Debug.Log("Can be placed on? " + CanBePlacedOn(xtile,ytile));
             }
-
+            
         }
     }
+
+    public bool CanBePlacedOn(int xtile, int ytile)
+    {
+
+        return (GlobalGrid.IsInGrid(xtile, ytile) && 
+                !(_ground.HasTile(new Vector3Int(xtile, ytile))) && 
+                !(_grates.HasTile(new Vector3Int(xtile, ytile))) && 
+                (_ground.HasTile(new Vector3Int(xtile, ytile + 1)) || 
+                 _ground.HasTile(new Vector3Int(xtile, ytile - 1))));
+            
+    }
+    
 }
