@@ -18,11 +18,11 @@ public class GetBlock : MonoBehaviour
         instance = this;
     }
     
-    [SerializeField] 
-    private Tilemap _ground;
+    [SerializeField] private Tilemap _ground;
 
-    [SerializeField] 
-    private Tilemap _gates;
+    [SerializeField] private Tilemap _sky;
+    
+    [SerializeField] private Tilemap _gates;
     
     // Start is called before the first frame update
     void Start()
@@ -39,7 +39,7 @@ public class GetBlock : MonoBehaviour
             int xtile = 0, ytile = 0;
             if (GlobalGrid.GetMouseCase(ref xtile,ref ytile))
             {
-                Debug.Log("Can be placed on? " + CanBePlacedOn(xtile,ytile));
+                Debug.Log("Can wind go throught? " + CanWindGoThrought(xtile,ytile));
             }
             
         }
@@ -58,8 +58,10 @@ public class GetBlock : MonoBehaviour
 
     public bool CanWindGoThrought(int xTile, int yTile)
     {
-        //TODO
-        return true;
+        return (GlobalGrid.IsInGrid(xTile, yTile) &&
+                (_gates.HasTile(new Vector3Int(xTile, yTile)) ||
+                 _sky.HasTile(new Vector3Int(xTile, yTile))) &&
+                !_ground.HasTile(new Vector3Int(xTile, yTile))) ;
     }
     
 }
