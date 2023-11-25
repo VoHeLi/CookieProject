@@ -45,7 +45,7 @@ public class MovementManager : MonoBehaviour
         if (!isPaused)
         {
             
-            // Déplacement de la caméra par la souris si elle sort de l'écran
+            // DÃ©placement de la camÃ©ra par la souris si elle sort de l'Ã©cran
             if (Input.mousePosition.x > Screen.width - border && (transform.position.x < GlobalGrid.nbCaseX * GlobalGrid.caseSize - cameraHalfWidth - 0.5f))
             {
                 transform.position = transform.position + Vector3.right * cameraSpeed * Time.deltaTime;
@@ -63,10 +63,10 @@ public class MovementManager : MonoBehaviour
                 transform.position = transform.position + Vector3.down * cameraSpeed * Time.deltaTime;
             }
 
-            // Zoom et dezoom de la caméra
+            // Zoom et dezoom de la camÃ©ra
             GetComponent<Camera>().orthographicSize = Mathf.Clamp(cameraHalfHeight - Input.mouseScrollDelta.y, minZoomDistance, (GlobalGrid.nbCaseX * GlobalGrid.caseSize / 2)/ GetComponent<Camera>().aspect);
 
-            // Recadrage de la caméra si en se déplaçant ou dezoomant on sort des limites du niveau
+            // Recadrage de la camÃ©ra si en se dÃ©plaÃ§ant ou dezoomant on sort des limites du niveau
             if (transform.position.y > GlobalGrid.nbCaseY * GlobalGrid.caseSize - cameraHalfHeight)
             {
                 transform.position = new Vector3(transform.position.x, GlobalGrid.nbCaseY * GlobalGrid.caseSize - cameraHalfHeight, -10f);
