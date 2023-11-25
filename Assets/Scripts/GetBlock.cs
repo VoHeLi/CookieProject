@@ -17,13 +17,12 @@ public class GetBlock : MonoBehaviour
 
         instance = this;
     }
-
+    
+    [SerializeField] 
+    private Tilemap _ground;
 
     [SerializeField] 
-    private static Tilemap _ground;
-
-    [SerializeField] 
-    private static Tilemap _gates;
+    private Tilemap _gates;
     
     // Start is called before the first frame update
     void Start()
@@ -46,7 +45,7 @@ public class GetBlock : MonoBehaviour
         }
     }
 
-    public static bool CanBePlacedOn(int xtile, int ytile)
+    public bool CanBePlacedOn(int xtile, int ytile)
     {
 
         return (GlobalGrid.IsInGrid(xtile, ytile) && 
