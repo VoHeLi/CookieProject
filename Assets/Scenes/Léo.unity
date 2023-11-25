@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 171237331}
   - component: {fileID: 171237330}
   - component: {fileID: 171237329}
-  - component: {fileID: 171237332}
   - component: {fileID: 171237333}
   m_Layer: 0
   m_Name: Main Camera
@@ -161,7 +160,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.32156864, g: 0.40000004, b: 0.53333336, a: 0}
+  m_BackGroundColor: {r: 0.32156864, g: 0.40784317, b: 0.5411765, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -217,20 +216,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &171237332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 171237328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb038fb2049f2b64bbdf812ad6e5eb75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _ground: {fileID: 1300298455}
-  _gates: {fileID: 1462673346}
 --- !u!114 &171237333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,8 +287,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4727234206687837471, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 447178309}
   m_SourcePrefab: {fileID: 100100000, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+--- !u!1 &447178308 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4727234206687837471, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+  m_PrefabInstance: {fileID: 447178307}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &447178309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447178308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb038fb2049f2b64bbdf812ad6e5eb75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ground: {fileID: 1300298455}
+  _gates: {fileID: 1462673346}
 --- !u!1839735485 &1300298455 stripped
 Tilemap:
   m_CorrespondingSourceObject: {fileID: 2925746189923381552, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
