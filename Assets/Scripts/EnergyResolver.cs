@@ -46,6 +46,8 @@ public class EnergyResolver : MonoBehaviour
 
     [SerializeField] private List<Element.TypeElement> ventilatorElements;
     [SerializeField] private List<Element.TypeElement> eoliennesElements;
+    [SerializeField] private List<Element.TypeElement> pistonsElements;
+    
     
     //On va créer un graphe de noeuds, chaque noeud représente un élément avec son rendement, son temps d'animation, ses noeuds sources et ses noeuds finaux
     //On commence de la fin, puis on remonte jusqu'au début
@@ -119,6 +121,14 @@ public class EnergyResolver : MonoBehaviour
         }
 
         Vector2Int neightbour = newNeighbours[0]; //TODO : TAKE THE HIGHEST PRIORITY NEIGHBOUR
+        foreach(Vector2Int otherPossibility in newNeighbours)
+        {
+            if (grilleElementManager.GetElementTypeAtPosition(otherPossibility.x, otherPossibility.y) == Element.TypeElement.Poteau)
+            {
+                neightbour = otherPossibility;
+                break;
+            }
+        }
             
         GraphNode neighbourNode = new GraphNode();
         neighbourNode.rendement = 0.9f;
@@ -149,14 +159,7 @@ public class EnergyResolver : MonoBehaviour
         List<Vector2Int> neighbours = new List<Vector2Int>();
 
 
-        if (leftElectricityElements.Contains(leftElement) && rightElectricityElements.Contains(currentElement))
-        {
-            neighbours.Add(new Vector2Int(targetX - 1, targetY));
-        }
-        if (rightElectricityElements.Contains(rightElement) && leftElectricityElements.Contains(currentElement))
-        {
-            neighbours.Add(new Vector2Int(targetX + 1, targetY));
-        }
+
         if (upElectricityElements.Contains(upElement) && downElectricityElements.Contains(currentElement))
         {
             neighbours.Add(new Vector2Int(targetX, targetY + 1));
@@ -164,6 +167,14 @@ public class EnergyResolver : MonoBehaviour
         if (downElectricityElements.Contains(downElement) && upElectricityElements.Contains(currentElement))
         {
             neighbours.Add(new Vector2Int(targetX, targetY - 1));
+        }
+        if (leftElectricityElements.Contains(leftElement) && rightElectricityElements.Contains(currentElement))
+        {
+            neighbours.Add(new Vector2Int(targetX - 1, targetY));
+        }
+        if (rightElectricityElements.Contains(rightElement) && leftElectricityElements.Contains(currentElement))
+        {
+            neighbours.Add(new Vector2Int(targetX + 1, targetY));
         }
 
 
@@ -200,15 +211,17 @@ public class EnergyResolver : MonoBehaviour
             rendement *= 0.8f;
             distance++;
 
-            if (!GlobalGrid.IsInGrid(nextBlock.x, nextBlock.y) || GetBlock.instance.CanWindGoThrought(nextBlock.x, nextBlock.y))
+            if (!GlobalGrid.IsInGrid(nextBlock.x, nextBlock.y) || !GetBlock.instance.CanWindGoThrought(nextBlock.x, nextBlock.y))
             {
+                node.distanceToNextNode = distance;
                 nextBlock -= windDir;
-                break;
+                return;
             }
 
             if(distance >= 20)
             {
-                  break;
+                node.distanceToNextNode = distance;
+                return;
             }
         }
 
@@ -216,7 +229,7 @@ public class EnergyResolver : MonoBehaviour
         Debug.Log("Distance to next Node : " + distance + " SpatialPos : " + node.spatialPosition.ToString());
         node.distanceToNextNode = distance;
 
-        GraphNode neighbourNode = new GraphNode(); //TODO : REFACTORISER
+        GraphNode neighbourNode = new GraphNode();
         neighbourNode.rendement = rendement;
         neighbourNode.animationTime = 0.2f*distance;
         neighbourNode.sourceNodes = new List<GraphNode>();

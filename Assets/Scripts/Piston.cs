@@ -27,14 +27,15 @@ public class Piston : MonoBehaviour
     private bool isExtending = false;
 
 
-    [SerializeField] private bool isConnected;
+    private bool isConnected;
+    private bool isCableAttached = false;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        pistonSpriteRenderer = GetComponent<SpriteRenderer>();
+        
     }
 
     // Update is called once per frame
@@ -42,26 +43,65 @@ public class Piston : MonoBehaviour
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 
-        if (isConnected)
+        if (isConnected && !isCableAttached)
         {
 
-            spriteRenderer.sprite = pistonRightCable;
+            if (isFacingRight)
+            {
+                GameObject cableGameObject = new GameObject("CableObject");
+                GameObject rightPistonCable = Instantiate(cableGameObject, this.transform);
+                Destroy(cableGameObject);
+
+                SpriteRenderer cableSpriteRenderer = rightPistonCable.AddComponent<SpriteRenderer>();
+                cableSpriteRenderer.sprite = pistonRightCable;
+                cableSpriteRenderer.sortingOrder = 0;
+
+                isCableAttached = true;
+            } else
+            {
+                // Créez un nouvel objet GameObject vide
+                GameObject cableGameObject = new GameObject("CableObject");
+                GameObject leftPistonCable = Instantiate(cableGameObject, this.transform);
+                Destroy(cableGameObject);
+
+                SpriteRenderer cableSpriteRenderer = leftPistonCable.AddComponent<SpriteRenderer>();
+                cableSpriteRenderer.sprite = pistonLeftCable;
+                cableSpriteRenderer.sortingOrder = 0;
+
+                isCableAttached = true;
+            }
+            
+            
+        }
+        
+        if (isCableAttached && !isConnected)
+        {
+            Destroy(transform.GetChild(0).gameObject);
+            isCableAttached = false;
+        }
+
+        if (isFacingRight && !isExtending)
+        {
+            spriteRenderer.sprite = pistonRightDefault;
             spriteRenderer.sortingOrder = 1;
         }
-        else
+        else if (isFacingLeft && !isExtending)
         {
-
-            if (isFacingRight && !isExtending)
-            {
-                spriteRenderer.sprite = pistonRightDefault;
-            }
-            else if (isFacingLeft && !isExtending)
-            {
-                spriteRenderer.sprite = pistonLeftDefault;
-            }
-
-            spriteRenderer.sortingOrder = 0;
+            spriteRenderer.sprite = pistonLeftDefault;
+            spriteRenderer.sortingOrder = 1;
         }
+
+        // Si cable voisins, cable attaché
+        if (isFacingLeft && GrilleElementManager.instance.GetElementTypeAtPosition(GetComponent<Element>().getXPos() + 1, GetComponent<Element>().getYPos()) == Element.TypeElement.Cable)
+        {
+            isConnected = true;
+        } else if (isFacingRight && GrilleElementManager.instance.GetElementTypeAtPosition(GetComponent<Element>().getXPos() - 1, GetComponent<Element>().getYPos()) == Element.TypeElement.Cable) {
+            isConnected = true;
+        } else
+        {
+            isConnected = false;
+        }
+
     }
 
     // TEST
