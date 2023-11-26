@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7b8b78cca63f8244aeaefffc2a968af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 12
   ventilateurRightAnimation: []
   ventilateurRightDefault: {fileID: 0}
   ventilateurRightBase: {fileID: 0}
@@ -140,6 +141,11 @@ MonoBehaviour:
   isFacingDown: 0
   isBlowing: 0
   isConnected: 0
+  isCableAttached: 0
+  isBaseAttachedRight: 0
+  isBaseAttachedLeft: 0
+  isConnectedRight: 0
+  isConnectedLeft: 0
   stopAnimation: 0
 --- !u!61 &-2851042532876775564
 BoxCollider2D:

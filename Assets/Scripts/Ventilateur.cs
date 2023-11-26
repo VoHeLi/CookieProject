@@ -148,12 +148,12 @@ public class Ventilateur : Element
 
         if (isFacingUp && (voisinGauche == Element.TypeElement.None))
         {
-            isConnected = false;
+            // isConnected = false;
             isConnectedRight = false;
         }
         if (isFacingUp && (voisinDroite == Element.TypeElement.None))
         {
-            isConnected = false;
+            // isConnected = false;
             isConnectedLeft = false;
         }
         if (isFacingUp && (voisinDroite == Element.TypeElement.None) && (voisinGauche == Element.TypeElement.None))
@@ -162,12 +162,12 @@ public class Ventilateur : Element
         }
         if (isFacingDown && (voisinGauche == Element.TypeElement.None))
         {
-            isConnected = false;
+            // isConnected = false;
             isConnectedRight = false;
         }
         if (isFacingDown && (voisinDroite == Element.TypeElement.None))
         {
-            isConnected = false;
+            // isConnected = false;
             isConnectedLeft = false;
         }
         if (isFacingDown && (voisinDroite == Element.TypeElement.None) && (voisinGauche == Element.TypeElement.None))
@@ -240,7 +240,7 @@ public class Ventilateur : Element
             }
         }
 
-        /* if (isCableAttached && !isConnected)
+        if (isCableAttached && !isConnected)
         {
             foreach (Transform child in transform)
             {
@@ -249,16 +249,16 @@ public class Ventilateur : Element
             isCableAttached = false;
             isBaseAttachedRight = false;
             isBaseAttachedLeft = false;
-        } */
+        }
 
-        if (isFacingUp && (voisinDroite == Element.TypeElement.None) && ((voisinGauche == Element.TypeElement.Cable) || (voisinGauche == Element.TypeElement.Batterie) || (voisinGauche == Element.TypeElement.Poteau)))
+        /* if (isFacingUp && (voisinDroite == Element.TypeElement.None) && ((voisinGauche == Element.TypeElement.Cable) || (voisinGauche == Element.TypeElement.Batterie) || (voisinGauche == Element.TypeElement.Poteau)))
         {
             foreach (Transform child in transform)
             {
                 if (child.gameObject.name != "Base(Clone)") Destroy(child.gameObject);
             }
 
-        }
+        } */
 
 
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
@@ -289,7 +289,7 @@ public class Ventilateur : Element
 
         foreach (var obj in allGameObjects)
         {
-            if (obj.transform.parent == null && obj.name == "CableObject" && obj.transform.parent == null && obj.name == "Base")
+            if (obj.transform.parent == null && obj.name == "CableObject" || obj.transform.parent == null && obj.name == "Base")
             {
                 Destroy(obj);
             }
