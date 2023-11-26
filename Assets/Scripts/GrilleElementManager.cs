@@ -128,7 +128,7 @@ void Start()
         }
 
         // Changer le type de currentElement choisi
-        if (currentPlacingElement != Element.TypeElement.None && Input.GetKeyDown(KeyCode.E))
+        if (currentPlacingElement != Element.TypeElement.None && Input.GetKeyDown(KeyCode.R))
         {
             increaseCurrentElementIndex();
         }
@@ -139,7 +139,7 @@ void Start()
             EndObjectPlacement();
         }
 
-        KeyCode[] keyCodes = new KeyCode[] { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8, KeyCode.Alpha9, KeyCode.Alpha0, KeyCode.R, KeyCode.T, KeyCode.Y, KeyCode.U, KeyCode.I };
+        KeyCode[] keyCodes = new KeyCode[] { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8, KeyCode.Alpha9, KeyCode.Alpha0, KeyCode.Y, KeyCode.U, KeyCode.I, KeyCode.O, KeyCode.P };
         for(int i = 0; i < keyCodes.Length; i++)
         {
             if (Input.GetKeyDown(keyCodes[i]))
