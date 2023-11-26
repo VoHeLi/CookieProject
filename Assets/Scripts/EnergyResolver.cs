@@ -54,6 +54,9 @@ public class EnergyResolver : MonoBehaviour
 
     public void ResolveLevelPart(GrilleElementManager grilleElementManager, Vector2Int startPosition)
     {
+        if(visitedElements != null)
+        ClearEnergyObjects();
+
         visitedElements = new bool[GlobalGrid.nbCaseX, GlobalGrid.nbCaseY]; //RESET ONLY FOR THE FIRST MECHANICAL PART OF THE LEVEL
         ResolveLevelPart(grilleElementManager, startPosition, 1.0f); //TODO : CHANGE START ENERGY
     }
@@ -67,7 +70,8 @@ public class EnergyResolver : MonoBehaviour
             Debug.LogError("No source position set!");
             return;
         }
-
+        
+        
         
 
         Queue<GraphNode> nodesToProcess = new Queue<GraphNode>();
@@ -375,18 +379,28 @@ public class EnergyResolver : MonoBehaviour
         {
             Destroy(debugEnergyObject);
         }
-        debugEnergyObjects.Clear();
+        //debugEnergyObjects.Clear();
 
         for(int i = 0; i < visitedElements.GetLength(0); i++)
         {
             for(int j = 0; j < visitedElements.GetLength(1); j++)
             {
-                if (visitedElements[i, j] == true)
+                if (visitedElements[i, j])
                 {
                     GrilleElementManager.instance.elementObjects[i, j].GetComponent<Element>().StopAnimation();
+
+                    Element.TypeElement type = GrilleElementManager.instance.elementMaps[i, j];
+                    GrilleElementManager.instance.elementMaps[i, j] = Element.TypeElement.None;
+                    GrilleElementManager.instance.UpdateElementObject(i, j);
+                    GrilleElementManager.instance.elementMaps[i, j] = type;
+                    GrilleElementManager.instance.UpdateElementObject(i, j);
+
+                    GrilleElementManager.instance.LoadInitialElements();
                 }
 
-                visitedElements[i, j] = false;
+
+
+                //visitedElements[i, j] = false;
             }
         }
     }
