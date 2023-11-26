@@ -195,7 +195,7 @@ public class Batterie : Element
     }
     IEnumerator startFillingAnimation()
     {
-        for (float energyLevel = 0f; energyLevel >= 0; energyLevel += 100 / (animationFPS * dureeAnimation))
+        for (float energyLevel = 0f; energyLevel >= 100; energyLevel += 100 / (animationFPS * dureeAnimation))
         {
             energy = energyLevel;
 
