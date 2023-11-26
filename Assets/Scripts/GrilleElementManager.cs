@@ -19,7 +19,7 @@ public class GrilleElementManager : MonoBehaviour
 
     [SerializeField] private GameObject[] elementPrefabs;
     [SerializeField] private List<Vector2Int> initialSetup;
-    [SerializeField] public List<int> inventory = new List<int> { 0, 0, 0, 0, 0, 0 ,0} ;
+    [SerializeField] public List<int> inventory = new List<int> { 0, 0, 0, 0, 0, 0} ;
     [SerializeField] private AudioSource _placementSound;
     [SerializeField] private AudioSource _removeSound;
 
@@ -91,7 +91,6 @@ public class GrilleElementManager : MonoBehaviour
 
     void Start()
     {
-        completeDictionnaries();
         elementMaps = new Element.TypeElement[GlobalGrid.nbCaseX, GlobalGrid.nbCaseY];
         for(int i = 0; i < GlobalGrid.nbCaseX; i++)
         {

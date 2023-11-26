@@ -574,40 +574,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4840183752236941411, guid: 6becb68cedde6ec4ea81e3c458e51b5a, type: 3}
-      propertyPath: upElectricityElements.Array.size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 4840183752236941411, guid: 6becb68cedde6ec4ea81e3c458e51b5a, type: 3}
-      propertyPath: downElectricityElements.Array.size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 4840183752236941411, guid: 6becb68cedde6ec4ea81e3c458e51b5a, type: 3}
-      propertyPath: leftElectricityElements.Array.size
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 4840183752236941411, guid: 6becb68cedde6ec4ea81e3c458e51b5a, type: 3}
-      propertyPath: rightElectricityElements.Array.size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4840183752236941411, guid: 6becb68cedde6ec4ea81e3c458e51b5a, type: 3}
-      propertyPath: upElectricityElements.Array.data[8]
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4840183752236941411, guid: 6becb68cedde6ec4ea81e3c458e51b5a, type: 3}
       propertyPath: upElectricityElements.Array.data[9]
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4840183752236941411, guid: 6becb68cedde6ec4ea81e3c458e51b5a, type: 3}
-      propertyPath: downElectricityElements.Array.data[8]
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4840183752236941411, guid: 6becb68cedde6ec4ea81e3c458e51b5a, type: 3}
-      propertyPath: leftElectricityElements.Array.data[11]
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4840183752236941411, guid: 6becb68cedde6ec4ea81e3c458e51b5a, type: 3}
-      propertyPath: rightElectricityElements.Array.data[9]
-      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7573345354483658201, guid: 6becb68cedde6ec4ea81e3c458e51b5a, type: 3}
       propertyPath: m_Name
