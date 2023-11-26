@@ -147,7 +147,7 @@ void Start()
         }
 
         //DEBUG
-        if ((currentPlacingElement != Element.TypeElement.None && Input.GetMouseButtonDown(0)) || (currentPlacingElement != Element.TypeElement.None && Input.GetKeyDown(KeyCode.A)))
+        if (currentPlacingElement != Element.TypeElement.None && (Input.GetMouseButtonDown(0)) || Input.GetKeyDown(KeyCode.A))
         {
             EndObjectPlacement();
         }
