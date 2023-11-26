@@ -5,6 +5,8 @@ using UnityEngine;
 public class Ventilateur : Element
 { 
 
+    [SerializeField] private AudioSource _windSound;
+
     [Header("Sprites ventilateur right")]
     [SerializeField] private Sprite[] ventilateurRightAnimation;
     [SerializeField] private Sprite ventilateurRightDefault;
@@ -361,7 +363,7 @@ public class Ventilateur : Element
     public void StartAnimation()
     {
         // Debug.Log("Click");
-
+        _windSound.Play(0);
         if (isFacingRight)
         {
             StartCoroutine(startVentRightAnimation());
@@ -396,6 +398,7 @@ public class Ventilateur : Element
 
     public override void StopAnimation()
     {
+        _windSound.Stop();
         stopAnimation = true;
     }
 
