@@ -221,6 +221,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 5850390515886162564, guid: c605d6a9494adca4f8f8c9805855f6a9, type: 3}
+      propertyPath: m_Volume
+      value: 0.048
+      objectReference: {fileID: 0}
     - target: {fileID: 5915496270690944755, guid: c605d6a9494adca4f8f8c9805855f6a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 389.16583
@@ -383,6 +387,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 168055930401147780, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      propertyPath: m_Volume
+      value: 0.301
+      objectReference: {fileID: 0}
     - target: {fileID: 4336971218782696255, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
@@ -485,15 +493,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
       propertyPath: initialSetup.Array.data[0].x
-      value: 51
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
       propertyPath: initialSetup.Array.data[0].y
-      value: 48
+      value: 54
       objectReference: {fileID: 0}
     - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
       propertyPath: initialSetup.Array.data[1].x
-      value: 61
+      value: 51
       objectReference: {fileID: 0}
     - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
       propertyPath: initialSetup.Array.data[1].y
@@ -502,6 +510,18 @@ PrefabInstance:
     - target: {fileID: 7162507356916951654, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214307117872882845, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      propertyPath: m_Volume
+      value: 0.674
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214307117872882845, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      propertyPath: rolloffMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214307117872882845, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      propertyPath: reverbZoneMixCustomCurve.m_Curve.Array.data[0].value
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

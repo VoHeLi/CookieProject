@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,11 +15,13 @@ public class UI : MonoBehaviour
     [SerializeField] float buttonSize;
     [SerializeField] float buttonBackgroundSize;
     [SerializeField] float buttonSpacing;
+    [SerializeField] private AudioSource _electricSound;
 
     [Header("Element Placement")]
-    private EnergyResolver energyResolver;
-    private GrilleElementManager grilleElementManager;
+    [SerializeField] EnergyResolver energyResolver;
+    [SerializeField] GrilleElementManager grilleElementManager;
     [SerializeField] GameObject indication;
+    
 
     private bool isRunning = false;
 
@@ -66,18 +69,18 @@ public class UI : MonoBehaviour
         {
             Debug.Log("Dictionnaires toujours pas complets");
         }
-
         Texture2D tex = Resources.Load<Texture2D>(((Element.TypeElement)grilleElementManager.getRelationElementSelection()[index][0]).ToString());
-
-        Debug.Log(((Element.TypeElement)grilleElementManager.getRelationElementSelection()[index][0]).ToString());
-
         Image buttonImage = childO.gameObject.GetComponent<Image>();
         buttonImage.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));
-
 
         // Add function to the button
         Button button = childO.GetComponent<Button>();
         button.onClick.AddListener(delegate { chooseItem(index); });
+
+        // Set inventory
+        TextMeshPro count = childO.GetChild(0).gameObject.GetComponent<TextMeshPro>();
+        Debug.Log(grilleElementManager.inventory[index-1]);
+        //count.text = (grilleElementManager.inventory[index - 1]).ToString();
 
         //Assign the new navigation to the button
         button.navigation = newNav;
@@ -115,6 +118,7 @@ public class UI : MonoBehaviour
 
             // Start simulation
             isRunning = true;
+            _electricSound.Play(0);
             energyResolver.ResolveLevelPart(grilleElementManager, grilleElementManager.sourcePosition);
         }
         else if (isRunning == true)
@@ -124,6 +128,7 @@ public class UI : MonoBehaviour
 
             // End simulation
             isRunning = false;
+            _electricSound.Stop();
             energyResolver.ClearEnergyObjects();
         }
 
@@ -134,23 +139,27 @@ public class UI : MonoBehaviour
     public void pause()
     {
         pausePanel.SetActive(true);
+        _electricSound.Pause();
     }
 
     // Disable pause menu
     public void startAgain()
     {
         pausePanel.SetActive(false);
+        _electricSound.UnPause();
     }
 
     // Return to the Title Screen
     public void returnToMenu()
     {
         SceneManager.LoadScene("TitleScreen");
+        _electricSound.Stop();
     }
 
     // Quit the game
     public void quit()
     {
         Application.Quit();
+        _electricSound.Stop();
     }
 }

@@ -226,13 +226,15 @@ public class Ventilateur : Element
             {
                 GameObject downVentilateurCable = Instantiate(new GameObject("CableObject"), this.transform);
                 SpriteRenderer cableSpriteRenderer = downVentilateurCable.AddComponent<SpriteRenderer>();
-                if (isConnectedRight && !isBaseAttachedRight)
+                if (isConnectedRight)
                 {
                     cableSpriteRenderer.sprite = ventilateurDownCableRight;
+                    isBaseAttachedRight = true;
                 }
-                if (isConnectedLeft && !isBaseAttachedLeft)
+                if (isConnectedLeft)
                 {
                     cableSpriteRenderer.sprite = ventilateurDownCableLeft;
+                    isBaseAttachedLeft = true;
                 }
                 cableSpriteRenderer.sortingOrder = 0;
 
@@ -259,6 +261,61 @@ public class Ventilateur : Element
             }
 
         } */
+
+        if (isFacingUp && isBaseAttachedLeft && isConnectedRight)
+        {
+            isBaseAttachedLeft = false;
+            isBaseAttachedRight = true;
+            foreach (Transform child in transform)
+            {
+                if (child.gameObject.name != "Base(Clone)") Destroy(child.gameObject);
+            }
+            GameObject rightVentilateurCable = Instantiate(new GameObject("CableObject"), this.transform);
+            SpriteRenderer cableSpriteRenderer = rightVentilateurCable.AddComponent<SpriteRenderer>();
+            cableSpriteRenderer.sprite = ventilateurUpCableRight;
+            cableSpriteRenderer.sortingOrder = 0;
+
+        }
+        if (isFacingUp && isBaseAttachedRight && isConnectedLeft)
+        {
+            isBaseAttachedRight = false;
+            isBaseAttachedLeft = true;
+            foreach (Transform child in transform)
+            {
+                if (child.gameObject.name != "Base(Clone)") Destroy(child.gameObject);
+            }
+            GameObject rightVentilateurCable = Instantiate(new GameObject("CableObject"), this.transform);
+            SpriteRenderer cableSpriteRenderer = rightVentilateurCable.AddComponent<SpriteRenderer>();
+            cableSpriteRenderer.sprite = ventilateurUpCableLeft;
+            cableSpriteRenderer.sortingOrder = 0;
+        }
+        if (isFacingDown && isBaseAttachedLeft && isConnectedRight)
+        {
+            isBaseAttachedLeft = false;
+            isBaseAttachedRight = true;
+            foreach (Transform child in transform)
+            {
+                if (child.gameObject.name != "Base(Clone)") Destroy(child.gameObject);
+            }
+            GameObject rightVentilateurCable = Instantiate(new GameObject("CableObject"), this.transform);
+            SpriteRenderer cableSpriteRenderer = rightVentilateurCable.AddComponent<SpriteRenderer>();
+            cableSpriteRenderer.sprite = ventilateurDownCableRight;
+            cableSpriteRenderer.sortingOrder = 0;
+
+        }
+        if (isFacingDown && isBaseAttachedRight && isConnectedLeft)
+        {
+            isBaseAttachedRight = false;
+            isBaseAttachedLeft = true;
+            foreach (Transform child in transform)
+            {
+                if (child.gameObject.name != "Base(Clone)") Destroy(child.gameObject);
+            }
+            GameObject rightVentilateurCable = Instantiate(new GameObject("CableObject"), this.transform);
+            SpriteRenderer cableSpriteRenderer = rightVentilateurCable.AddComponent<SpriteRenderer>();
+            cableSpriteRenderer.sprite = ventilateurDownCableLeft;
+            cableSpriteRenderer.sortingOrder = 0;
+        }
 
 
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();

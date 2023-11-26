@@ -44,11 +44,12 @@ public class GrilleElementManager : MonoBehaviour
     public void completeDictionnaries()
     {
         int[] possibilities_1 = new int[] { 1 };
-        int[] possibilities_2 = new int[] { 2, 3, 4, 5 };
-        int[] possibilities_3 = new int[] { 6 };
+        int[] possibilities_2 = new int[] { 6 };
+        int[] possibilities_3 = new int[] { 2, 3, 4, 5 };
         int[] possibilities_4 = new int[] { 9, 10, 11, 12 };
         int[] possibilities_5 = new int[] { 13, 14 };
         int[] possibilities_6 = new int[] { 19, 20 };
+        int[] possibilities_7 = new int[] { 15, 16, 17, 18 };
 
         relation_Element_Selection.Add(1, possibilities_1);
         relation_Element_Selection.Add(2, possibilities_2);
@@ -56,6 +57,7 @@ public class GrilleElementManager : MonoBehaviour
         relation_Element_Selection.Add(4, possibilities_4);
         relation_Element_Selection.Add(5, possibilities_5);
         relation_Element_Selection.Add(6, possibilities_6);
+        relation_Element_Selection.Add(7, possibilities_7);
 
         // Pour mémoriser dans quel état on était lors de la précédente sélection de l'objet
         elementIndexMemory.Add(possibilities_1, 0);
@@ -64,6 +66,7 @@ public class GrilleElementManager : MonoBehaviour
         elementIndexMemory.Add(possibilities_4, 0);
         elementIndexMemory.Add(possibilities_5, 0);
         elementIndexMemory.Add(possibilities_6, 0);
+        elementIndexMemory.Add(possibilities_7, 0);
 
         //Debug.Log("Dictionnaires complets");
         isDictionnariesCompleted = true;
@@ -115,7 +118,7 @@ void Start()
             {
                 flags = 2;
             }
-            else if (currentPlacingElement == Element.TypeElement.Ventilateur_up || currentPlacingElement == Element.TypeElement.Ventilateur_down)
+            else if (currentPlacingElement == Element.TypeElement.Eolienne_up || currentPlacingElement == Element.TypeElement.Ventilateur_down)
             {
                 flags = 1;
             }
@@ -187,7 +190,7 @@ void Start()
 
     
 
-    private void LoadInitialElements()
+    public void LoadInitialElements()
     {
 
         elementMaps[initialSetup[0].x, initialSetup[0].y] = Element.TypeElement.Batterie;
@@ -219,7 +222,7 @@ void Start()
         }
     }
 
-    private void UpdateElementObject(int i, int j)
+    public void UpdateElementObject(int i, int j)
     {
         if (elementObjects[i, j] != null)
         {
@@ -259,7 +262,7 @@ void Start()
             return;
         }
 
-        GameObject elementObject = Instantiate(elementPrefabs[(int)elementMaps[i, j]], new Vector3(i * GlobalGrid.caseSize, j * GlobalGrid.caseSize, 0), Quaternion.identity);
+        GameObject elementObject = Instantiate(elementPrefabs[(int)elementMaps[i, j]], new Vector3(i * GlobalGrid.caseSize, j * GlobalGrid.caseSize, 0), elementPrefabs[(int)elementMaps[i, j]].transform.rotation);
         elementObject.GetComponent<Element>().setXPos(i);
         elementObject.GetComponent<Element>().setYPos(j);
         Debug.Log("Position de l'element en positon " + (i, j));
@@ -294,7 +297,7 @@ void Start()
 
         if (currentPlacingElement == Element.TypeElement.None) return;
 
-        currentPlacingElementObject = Instantiate(elementPrefabs[(int)currentPlacingElement], Vector3.zero, Quaternion.identity);
+        currentPlacingElementObject = Instantiate(elementPrefabs[(int)currentPlacingElement], Vector3.zero, elementPrefabs[(int)currentPlacingElement].transform.rotation);
     }
     private void EndObjectPlacement()
     {
@@ -374,10 +377,10 @@ void Start()
 
     public void addToInventory(int gridValue)
     {
-        if (gridValue == 0) return;
+        /*if (gridValue == 0) return;
         int inventoryId = reverseDictionnaries(gridValue);
         inventory[inventoryId]++;
-        Debug.Log("on m'apelle pour incrementer" + inventoryId);
+        Debug.Log("on m'apelle pour incrementer" + inventoryId);*/
     }
 
     public bool RemoveFromInventory(int gridValue)
