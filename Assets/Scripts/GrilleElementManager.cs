@@ -333,7 +333,7 @@ void Start()
 
         Debug.Log("Remove element from case");
         addToInventory((int)elementMaps[i, j]);
-        elementMaps[i, j] = Element.TypeElement.None;
+        //elementMaps[i, j] = Element.TypeElement.None;
         _removeSound.Play(0);
         UpdateElementObject(i, j);
     }
