@@ -19,8 +19,10 @@ public class Batterie : Element
     [SerializeField] private Sprite cableBatterieRight;
     [SerializeField] private Sprite cableBatterieLeft;
 
-    [SerializeField] private Sprite smallSpark;
-    [SerializeField] private Sprite bigSpark;
+    [SerializeField] private Sprite smallSparkRight;
+    [SerializeField] private Sprite smallSparkLeft;
+    [SerializeField] private Sprite bigSparkRight;
+    [SerializeField] private Sprite bigSparkLeft;
 
     [SerializeField] private bool isTargetBatterie;
 
@@ -147,6 +149,7 @@ public class Batterie : Element
     public IEnumerator StartDrainingAnimation()
     {
         int i = 1;
+        Debug.Log(energy);
 
         for (float energyLevel = 100f; energyLevel >= 0; energyLevel -= 100/(animationFPS*dureeAnimation))
         {
@@ -154,13 +157,20 @@ public class Batterie : Element
 
             if (i == 5)
             {
-                if (this.transform.childCount >= 1)
+                foreach (Transform child in transform)
                 {
-                    Destroy(transform.GetChild(0).gameObject);
+                    if (child.gameObject.name != "CableObject(Clone)") Destroy(child.gameObject);
                 }
-                GameObject sparkSmall = Instantiate(new GameObject("CableObject"), this.transform);
+                GameObject sparkSmall = Instantiate(new GameObject("smallSparkSprite"), this.transform);
                 SpriteRenderer smallSparkSpriteRenderer = sparkSmall.AddComponent<SpriteRenderer>();
-                smallSparkSpriteRenderer.sprite = smallSpark;
+                if (isBatterieConnectedRight)
+                {
+                    smallSparkSpriteRenderer.sprite = smallSparkRight;
+                }
+                if (isBatterieConnectedLeft)
+                {
+                    smallSparkSpriteRenderer.sprite = smallSparkLeft;
+                }
                 smallSparkSpriteRenderer.sortingOrder = 2;
             }
             Debug.Log(i);
@@ -170,13 +180,20 @@ public class Batterie : Element
 
             if (i == 10)
             {
-                if (this.transform.childCount >= 1)
+                foreach (Transform child in transform)
                 {
-                    Destroy(transform.GetChild(0).gameObject);
+                    if (child.gameObject.name != "CableObject(Clone)") Destroy(child.gameObject);
                 }
-                GameObject sparkBig = Instantiate(new GameObject("CableObject"), this.transform);
+                GameObject sparkBig = Instantiate(new GameObject("bigSparkSprite"), this.transform);
                 SpriteRenderer bigSparkSpriteRenderer = sparkBig.AddComponent<SpriteRenderer>();
-                bigSparkSpriteRenderer.sprite = bigSpark;
+                if (isBatterieConnectedRight)
+                {
+                    bigSparkSpriteRenderer.sprite = bigSparkRight;
+                }
+                if (isBatterieConnectedLeft)
+                {
+                    bigSparkSpriteRenderer.sprite = bigSparkLeft;
+                }
                 bigSparkSpriteRenderer.sortingOrder = 2;
 
                 i = 1;
@@ -190,29 +207,60 @@ public class Batterie : Element
     }
     public IEnumerator StartFillingAnimation(float blabla)
     {
+
+        int i = 1;
+
         for (float energyLevel = 0f; energyLevel <= 100; energyLevel += 100 / (animationFPS * dureeAnimation))
         {
             energy = energyLevel;
 
-            if (this.transform.childCount >= 1)
+            if (i == 5)
             {
-                Destroy(transform.GetChild(0).gameObject);
+                foreach (Transform child in transform)
+                {
+                    if (child.gameObject.name != "CableObject(Clone)") Destroy(child.gameObject);
+                }
+                GameObject sparkBig = Instantiate(new GameObject("bigSparkSprite"), this.transform);
+                SpriteRenderer bigSparkSpriteRenderer = sparkBig.AddComponent<SpriteRenderer>();
+                if (isBatterieConnectedRight)
+                {
+                    bigSparkSpriteRenderer.sprite = bigSparkRight;
+                }
+                if (isBatterieConnectedLeft)
+                {
+                    bigSparkSpriteRenderer.sprite = bigSparkLeft;
+                }
+                bigSparkSpriteRenderer.sortingOrder = 2;
+
             }
-            GameObject sparkBig = Instantiate(new GameObject("CableObject"), this.transform);
-            SpriteRenderer bigSparkSpriteRenderer = sparkBig.AddComponent<SpriteRenderer>();
-            bigSparkSpriteRenderer.sprite = bigSpark;
-            bigSparkSpriteRenderer.sortingOrder = 2;
+
+            i++;
 
             yield return new WaitForSeconds(1 / animationFPS);
 
-            if (this.transform.childCount >= 1)
+            if (i == 10)
             {
-                Destroy(transform.GetChild(0).gameObject);
+                foreach (Transform child in transform)
+                {
+                    if (child.gameObject.name != "CableObject(Clone)") Destroy(child.gameObject);
+                }
+                GameObject sparkSmall = Instantiate(new GameObject("smallSparkSprite"), this.transform);
+                SpriteRenderer smallSparkSpriteRenderer = sparkSmall.AddComponent<SpriteRenderer>();
+                if (isBatterieConnectedRight)
+                {
+                    smallSparkSpriteRenderer.sprite = smallSparkRight;
+                }
+                if (isBatterieConnectedLeft)
+                {
+                    smallSparkSpriteRenderer.sprite = smallSparkLeft;
+                }
+                smallSparkSpriteRenderer.sortingOrder = 2;
+                i = 1;
             }
-            GameObject sparkSmall = Instantiate(new GameObject("CableObject"), this.transform);
-            SpriteRenderer smallSparkSpriteRenderer = sparkSmall.AddComponent<SpriteRenderer>();
-            smallSparkSpriteRenderer.sprite = smallSpark;
-            smallSparkSpriteRenderer.sortingOrder = 2;
+            else
+            {
+                i++;
+            }
 
             yield return new WaitForSeconds(1 / animationFPS);
 
