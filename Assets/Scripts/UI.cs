@@ -89,7 +89,7 @@ public class UI : MonoBehaviour
 
         // Set inventory
         TextMeshPro count = childO.GetChild(0).gameObject.GetComponent<TextMeshPro>();
-        Debug.Log(grilleElementManager.inventory[index-1]);
+        //Debug.Log(grilleElementManager.inventory[index-1]);
         //count.text = (grilleElementManager.inventory[index - 1]).ToString();
 
         //Assign the new navigation to the button

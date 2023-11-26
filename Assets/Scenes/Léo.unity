@@ -288,6 +288,54 @@ PrefabInstance:
       propertyPath: _placementsound
       value: 
       objectReference: {fileID: 447178308}
+    - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      propertyPath: inventory.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      propertyPath: inventory.Array.data[0]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      propertyPath: inventory.Array.data[1]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      propertyPath: inventory.Array.data[2]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      propertyPath: inventory.Array.data[3]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      propertyPath: inventory.Array.data[4]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      propertyPath: inventory.Array.data[5]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      propertyPath: inventory.Array.data[6]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      propertyPath: initialSetup.Array.data[0].x
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      propertyPath: initialSetup.Array.data[0].y
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      propertyPath: initialSetup.Array.data[1].x
+      value: 53
+      objectReference: {fileID: 0}
+    - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      propertyPath: initialSetup.Array.data[1].y
+      value: 48
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

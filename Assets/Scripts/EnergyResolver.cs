@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class EnergyResolver : MonoBehaviour
 {
     public static EnergyResolver instance;
+
+    public string nextLevel;
 
     private void Awake()
     {
@@ -295,7 +298,7 @@ public class EnergyResolver : MonoBehaviour
             if (currentNode.type == Element.TypeElement.TargetBattery)
             {
                 Debug.Log("Draining...");
-                DrainBattery(currentNode, energy);
+                StartCoroutine(DrainBattery(currentNode, energy));
                 break;
             }
 
@@ -310,13 +313,20 @@ public class EnergyResolver : MonoBehaviour
         }
     }
 
-    private void DrainBattery(GraphNode destNode, float energy)
+    private IEnumerator DrainBattery(GraphNode destNode, float energy)
     {
         Batterie targetBattery = GrilleElementManager.instance.elementObjects[destNode.spatialPosition.x, destNode.spatialPosition.y].GetComponent<Batterie>();
         Batterie sourceBattery = GrilleElementManager.instance.elementObjects[GrilleElementManager.instance.sourcePosition.x, GrilleElementManager.instance.sourcePosition.y].GetComponent<Batterie>();
 
         StartCoroutine(targetBattery.StartFillingAnimation(energy));
         StartCoroutine(sourceBattery.StartDrainingAnimation());
+
+        yield return new WaitForSeconds(5.0f);
+
+        if(nextLevel != null && nextLevel != " ")
+        {
+            SceneManager.LoadSceneAsync(nextLevel);
+        }
     }
 
     public void DisplayNode(GraphNode node, float energy)
