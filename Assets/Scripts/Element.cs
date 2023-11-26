@@ -10,7 +10,7 @@ public class Element : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("Je suis positioné2 en " + (getXPos(), getYPos()));
+        Debug.Log("Je suis positione2 en " + (getXPos(), getYPos()));
     }
 
     public enum TypeElement

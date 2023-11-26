@@ -16,8 +16,8 @@ public class UI : MonoBehaviour
     [SerializeField] float buttonSpacing;
 
     [Header("Element Placement")]
-    [SerializeField] EnergyResolver energyResolver;
-    [SerializeField] GrilleElementManager grilleElementManager;
+    private EnergyResolver energyResolver;
+    private GrilleElementManager grilleElementManager;
     [SerializeField] GameObject indication;
 
     private bool isRunning = false;
@@ -27,6 +27,9 @@ public class UI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        energyResolver = EnergyResolver.instance;
+        grilleElementManager = GrilleElementManager.instance;
+
         startAgain(); // Desable the pause menu
         indication.SetActive(false);
 

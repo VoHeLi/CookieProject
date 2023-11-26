@@ -19,7 +19,7 @@ public class GrilleElementManager : MonoBehaviour
 
     [SerializeField] private GameObject[] elementPrefabs;
     [SerializeField] private List<Vector2Int> initialSetup;
-    [SerializeField] public List<int> inventory;
+    [SerializeField] public List<int> inventory = new List<int> { 0, 0, 0, 0, 0, 0 } ;
 
     [HideInInspector] public Element.TypeElement[,] elementMaps;
     [HideInInspector] public GameObject[,] elementObjects;
@@ -67,6 +67,25 @@ public class GrilleElementManager : MonoBehaviour
         //Debug.Log("Dictionnaires complets");
         isDictionnariesCompleted = true;
     }    
+
+    public int reverseDictionnaries(int index)
+    {
+        foreach(KeyValuePair<int, int[]> element in relation_Element_Selection)
+        {
+           
+            foreach (int value in element.Value)
+            {
+                //Debug.Log(value + " : " + element.Key);
+                if (index == value) return element.Key;
+            }
+            
+        }
+
+        Debug.Log("index " + index + " was not found");
+        return -1;
+    }
+
+
 
 void Start()
     {
@@ -213,6 +232,7 @@ void Start()
             }
 
             Destroy(elementObjects[i, j]);
+            addToInventory((int)elementMaps[i, j]);
             elementObjects[i, j] = null;
 
             // rajouter l'ajout dans l'inventaire
@@ -238,12 +258,11 @@ void Start()
         GameObject elementObject = Instantiate(elementPrefabs[(int)elementMaps[i, j]], new Vector3(i * GlobalGrid.caseSize, j * GlobalGrid.caseSize, 0), Quaternion.identity);
         elementObject.GetComponent<Element>().setXPos(i);
         elementObject.GetComponent<Element>().setYPos(j);
-        Debug.Log("Position de l'�l�ment en positon " + (i, j));
+        Debug.Log("Position de l'element en positon " + (i, j));
         elementObject.transform.parent = transform;
         elementObjects[i, j] = elementObject;
 
-        //enlever l'element dans l'inventaire
-
+        /*
         if (elementMaps[i, j] == Element.TypeElement.Batterie)
         {
             if(GlobalGrid.IsInGrid(sourcePosition.x, sourcePosition.y))
@@ -256,6 +275,7 @@ void Start()
             sourcePosition = new Vector2Int(i, j);
             Debug.Log("Source position changed : " + sourcePosition.ToString());
         }
+        */
     }
 
     private void BeginElementPlacement()
@@ -276,7 +296,7 @@ void Start()
     {
         int i = 0, j = 0;
         if (!GlobalGrid.GetMouseCase(ref i, ref j)) return;
-
+		if (elementMaps[i, j] == Element.TypeElement.Batterie || elementMaps[i, j] == Element.TypeElement.TargetBattery) return;
         int flags = 0;
         if (currentPlacingElement == Element.TypeElement.Poteau)
         {
@@ -288,7 +308,12 @@ void Start()
         }
 
         if (!GetBlock.instance.CanBePlacedOn(i,j, flags)) return;
+
+        if (!RemoveFromInventory((int)currentPlacingElement)) return;
+
         elementMaps[i, j] = currentPlacingElement;
+
+
         UpdateElementObject(i, j);
     }
     private void RemoveElementFromCase()
@@ -301,6 +326,7 @@ void Start()
         if (elementMaps[i, j] == Element.TypeElement.Poteau && GetElementTypeAtPosition(i, j+1) == Element.TypeElement.Poteau) return;
 
         Debug.Log("Remove element from case");
+        addToInventory((int)elementMaps[i, j]);
         elementMaps[i, j] = Element.TypeElement.None;
         UpdateElementObject(i, j);
     }
@@ -331,4 +357,21 @@ void Start()
         currentPlacingElement = (Element.TypeElement)curentElementPossibilities[elementIndexMemory[curentElementPossibilities]];
         BeginElementPlacement();
     }
+
+    public void addToInventory(int gridValue)
+    {
+        if (gridValue == 0) return;
+        int inventoryId = reverseDictionnaries(gridValue);
+        inventory[inventoryId]++;
+    }
+
+    public bool RemoveFromInventory(int gridValue)
+    {
+        // return true and decrement if you can remove from inv, false and do nothing  if not 
+        int inventoryId = reverseDictionnaries(gridValue);
+        if (inventory[inventoryId] < 1) return false;
+        inventory[inventoryId]--;
+        return true;
+    }
+    
 }
