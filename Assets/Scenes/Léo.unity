@@ -284,11 +284,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: World
       objectReference: {fileID: 0}
+    - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      propertyPath: _placementsound
+      value: 
+      objectReference: {fileID: 447178308}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+--- !u!82 &447178308 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2187870526639540422, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+  m_PrefabInstance: {fileID: 447178307}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &456982888
 PrefabInstance:
   m_ObjectHideFlags: 0

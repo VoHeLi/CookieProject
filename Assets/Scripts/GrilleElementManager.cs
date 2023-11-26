@@ -20,6 +20,8 @@ public class GrilleElementManager : MonoBehaviour
     [SerializeField] private GameObject[] elementPrefabs;
     [SerializeField] private List<Vector2Int> initialSetup;
     [SerializeField] public List<int> inventory = new List<int> { 0, 0, 0, 0, 0, 0 ,0} ;
+    [SerializeField] private AudioSource _placementSound;
+    [SerializeField] private AudioSource _removeSound;
 
     [HideInInspector] public Element.TypeElement[,] elementMaps;
     [HideInInspector] public GameObject[,] elementObjects;
@@ -316,6 +318,7 @@ void Start()
 
         elementMaps[i, j] = currentPlacingElement;
 
+        _placementSound.Play(0);
 
         UpdateElementObject(i, j);
     }
@@ -331,6 +334,7 @@ void Start()
         Debug.Log("Remove element from case");
         addToInventory((int)elementMaps[i, j]);
         elementMaps[i, j] = Element.TypeElement.None;
+        _removeSound.Play(0);
         UpdateElementObject(i, j);
     }
 
