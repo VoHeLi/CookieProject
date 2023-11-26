@@ -205,9 +205,9 @@ public class Batterie : Element
             yield return new WaitForSeconds(1 / (animationFPS * 2));
         }
 
-        if (this.transform.childCount >= 1)
+        foreach (Transform child in transform)
         {
-            Destroy(transform.GetChild(0).gameObject);
+            if (child.gameObject.name != "CableObject(Clone)") Destroy(child.gameObject);
         }
     }
     public IEnumerator StartFillingAnimation(float blabla)
@@ -271,9 +271,9 @@ public class Batterie : Element
 
         }
 
-        if (this.transform.childCount >= 1)
+        foreach (Transform child in transform)
         {
-            Destroy(transform.GetChild(0).gameObject);
+            if (child.gameObject.name != "CableObject(Clone)") Destroy(child.gameObject);
         }
     }
 
