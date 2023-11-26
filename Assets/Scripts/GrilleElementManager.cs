@@ -18,6 +18,7 @@ public class GrilleElementManager : MonoBehaviour
 
     [SerializeField] private GameObject[] elementPrefabs;
     [SerializeField] private List<Vector2Int> initialSetup;
+    [SerializeField] public List<int> inventory;
 
     [HideInInspector] public Element.TypeElement[,] elementMaps;
     [HideInInspector] public GameObject[,] elementObjects;
@@ -151,6 +152,8 @@ public class GrilleElementManager : MonoBehaviour
 
             Destroy(elementObjects[i, j]);
             elementObjects[i, j] = null;
+
+            // rajouter l'ajout dans l'inventaire
         }
 
         if (elementMaps[i, j] == Element.TypeElement.None)
@@ -176,6 +179,8 @@ public class GrilleElementManager : MonoBehaviour
         Debug.Log("Position de l'�l�ment en positon " + (i, j));
         elementObject.transform.parent = transform;
         elementObjects[i, j] = elementObject;
+
+        //enlever l'element dans l'inventaire
 
         if (elementMaps[i, j] == Element.TypeElement.Batterie)
         {
