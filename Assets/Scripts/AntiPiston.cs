@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Piston : MonoBehaviour
+public class AntiPiston : MonoBehaviour
 {
 
     [Header("Sprites piston right")]
@@ -94,13 +94,10 @@ public class Piston : MonoBehaviour
         }
 
         // Si cable voisins, cable attaché
-        Element.TypeElement voisinGauche = GrilleElementManager.instance.GetElementTypeAtPosition(GetComponent<Element>().getXPos() - 1, GetComponent<Element>().getYPos());
-        Element.TypeElement voisinDroite = GrilleElementManager.instance.GetElementTypeAtPosition(GetComponent<Element>().getXPos() + 1, GetComponent<Element>().getYPos());
-
-        if (isFacingLeft && ((voisinDroite == Element.TypeElement.Cable) || (voisinDroite == Element.TypeElement.Batterie) || (voisinDroite == Element.TypeElement.Poteau)))
+        if (isFacingLeft && GrilleElementManager.instance.GetElementTypeAtPosition(GetComponent<Element>().getXPos() + 1, GetComponent<Element>().getYPos()) == Element.TypeElement.Cable)
         {
             isConnected = true;
-        } else if (isFacingRight && ((voisinGauche == Element.TypeElement.Cable) || (voisinGauche == Element.TypeElement.Batterie) || (voisinGauche == Element.TypeElement.Poteau))) {
+        } else if (isFacingRight && GrilleElementManager.instance.GetElementTypeAtPosition(GetComponent<Element>().getXPos() - 1, GetComponent<Element>().getYPos()) == Element.TypeElement.Cable) {
             isConnected = true;
         } else
         {
@@ -144,15 +141,22 @@ public class Piston : MonoBehaviour
         isExtending = false;
     }
 
-    public void LaunchBall(Vector2Int ballDirection, float energy)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
-        StartAnimation();
-        ball.bodyType = RigidbodyType2D.Dynamic;
-        
-        float speed = Mathf.Sqrt(2 * energy / ballMass);
-        
-        ball.velocity = speed * new Vector2(ballDirection.x, ballDirection.y);
+        Debug.Log("Truc toucher piston.");
+        if (collision.collider.gameObject.tag == "Ball") //COUILLE
+        {
+            Debug.Log("Baballe toucher piston.");
 
-        Debug.Log("test");
+            Vector2 idealDir = isFacingLeft ? Vector2.right : Vector2.left;
+
+            float speed = Vector2.Dot(collision.rigidbody.velocity, idealDir);
+
+            Destroy(collision.collider.gameObject);
+
+            float energy = 0.5f * ballMass * speed * speed;
+
+            EnergyResolver.instance.ResolveLevelPart(GrilleElementManager.instance, GlobalGrid.GetGridPosition(transform.position), 1.0f); //TODO
+        }
     }
 }
