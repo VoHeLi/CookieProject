@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class GrilleElementManager : MonoBehaviour
@@ -19,7 +18,7 @@ public class GrilleElementManager : MonoBehaviour
 
     [SerializeField] private GameObject[] elementPrefabs;
     [SerializeField] private List<Vector2Int> initialSetup;
-    [SerializeField] public List<int> inventory = new List<int> { 0, 0, 0, 0, 0, 0} ;
+    [SerializeField] public List<int> inventory = new List<int> { 0, 0, 0, 0, 0, 0 ,0} ;
     [SerializeField] private AudioSource _placementSound;
     [SerializeField] private AudioSource _removeSound;
 
@@ -80,7 +79,7 @@ public class GrilleElementManager : MonoBehaviour
            
             foreach (int value in element.Value)
             {
-                Debug.Log(index + " != " + value + " : " + element.Key);
+                //  Debug.Log(index + " != " + value + " : " + element.Key);
                 if (index == value) return element.Key;
             }
             
@@ -92,8 +91,9 @@ public class GrilleElementManager : MonoBehaviour
 
 
 
-    void Start()
+void Start()
     {
+        completeDictionnaries();
         elementMaps = new Element.TypeElement[GlobalGrid.nbCaseX, GlobalGrid.nbCaseY];
         for(int i = 0; i < GlobalGrid.nbCaseX; i++)
         {
@@ -359,7 +359,7 @@ public class GrilleElementManager : MonoBehaviour
         if (elementMaps[i, j] == Element.TypeElement.Poteau && GetElementTypeAtPosition(i, j+1) == Element.TypeElement.Poteau) return;
 
         Debug.Log("Remove element from case");
-        addToInventory((int)elementMaps[i, j]);
+        //addToInventory((int)elementMaps[i, j]);
         elementMaps[i, j] = Element.TypeElement.None;
         _removeSound.Play(0);
         UpdateElementObject(i, j);
@@ -402,16 +402,17 @@ public class GrilleElementManager : MonoBehaviour
 
     public void addToInventory(int gridValue)
     {
-        /*if (gridValue == 0) return;
+        if (gridValue == 0) return;
         int inventoryId = reverseDictionnaries(gridValue);
         inventory[inventoryId]++;
-        Debug.Log("on m'apelle pour incrementer" + inventoryId);*/
+        Debug.Log("on m'apelle pour incrementer" + inventoryId);
     }
 
     public bool RemoveFromInventory(int gridValue)
     {
         // return true and decrement if you can remove from inv, false and do nothing  if not 
         int inventoryId = reverseDictionnaries(gridValue);
+        Debug.Log(inventoryId);
         if (inventory[inventoryId] < 1) return false;
         inventory[inventoryId]--;
         return true;
