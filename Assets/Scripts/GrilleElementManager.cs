@@ -87,7 +87,7 @@ public class GrilleElementManager : MonoBehaviour
 
 
 
-void Start()
+    void Start()
     {
         elementMaps = new Element.TypeElement[GlobalGrid.nbCaseX, GlobalGrid.nbCaseY];
         for(int i = 0; i < GlobalGrid.nbCaseX; i++)

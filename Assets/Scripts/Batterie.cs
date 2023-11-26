@@ -140,16 +140,9 @@ public class Batterie : Element
 
     }
 
-    // TODO : Commencer l'animation pas à un click de la souris mais quand on presse le bouton Start animation
-    private void OnMouseDown()
-    {
-        Debug.Log("Click");
-        StartCoroutine(startDrainingAnimation());
-    }
-
 
     // Coroutine qui baisse le niveau de l'énergie en $dureeAnimation secondes
-    IEnumerator startDrainingAnimation()
+    public IEnumerator StartDrainingAnimation()
     {
         int i = 1;
 
@@ -193,7 +186,7 @@ public class Batterie : Element
             yield return new WaitForSeconds(1 / (animationFPS * 2));
         }
     }
-    IEnumerator startFillingAnimation()
+    public IEnumerator StartFillingAnimation(float energy)
     {
         for (float energyLevel = 0f; energyLevel >= 0; energyLevel += 100 / (animationFPS * dureeAnimation))
         {

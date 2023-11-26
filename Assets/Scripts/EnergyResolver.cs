@@ -91,7 +91,8 @@ public class EnergyResolver : MonoBehaviour
 
             if(currentNode.type == Element.TypeElement.TargetBattery)
             {
-                continue;
+                Debug.Log("finished!");
+                break;
             }
 
 
@@ -289,7 +290,9 @@ public class EnergyResolver : MonoBehaviour
 
             if (currentNode.type == Element.TypeElement.TargetBattery)
             {
-                continue;
+                Debug.Log("Draining...");
+                DrainBattery(currentNode, energy);
+                break;
             }
 
             energy *= currentNode.rendement;
@@ -301,6 +304,15 @@ public class EnergyResolver : MonoBehaviour
                 nodesToProcess.Enqueue(destNode);
             }
         }
+    }
+
+    private void DrainBattery(GraphNode destNode, float energy)
+    {
+        Batterie targetBattery = GrilleElementManager.instance.elementObjects[destNode.spatialPosition.x, destNode.spatialPosition.y].GetComponent<Batterie>();
+        Batterie sourceBattery = GrilleElementManager.instance.elementObjects[GrilleElementManager.instance.sourcePosition.x, GrilleElementManager.instance.sourcePosition.y].GetComponent<Batterie>();
+
+        StartCoroutine(targetBattery.StartFillingAnimation(energy));
+        StartCoroutine(sourceBattery.StartDrainingAnimation());
     }
 
     public void DisplayNode(GraphNode node, float energy)
