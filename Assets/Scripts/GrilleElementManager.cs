@@ -33,12 +33,12 @@ public class GrilleElementManager : MonoBehaviour
 
     private Dictionary<int, int[]> relation_Element_Selection = new Dictionary<int, int[]>();
     private Dictionary<int[], int> elementIndexMemory = new Dictionary<int[], int>();
+    public bool isDictionnariesCompleted = false;
 
     public Dictionary<int, int[]> getRelationElementSelection()
     {
         return relation_Element_Selection;
     }
-
 
     public void completeDictionnaries()
     {
@@ -47,12 +47,14 @@ public class GrilleElementManager : MonoBehaviour
         int[] possibilities_3 = new int[] { 6 };
         int[] possibilities_4 = new int[] { 9, 10, 11, 12 };
         int[] possibilities_5 = new int[] { 13, 14 };
+        int[] possibilities_6 = new int[] { 19, 20 };
 
         relation_Element_Selection.Add(1, possibilities_1);
         relation_Element_Selection.Add(2, possibilities_2);
         relation_Element_Selection.Add(3, possibilities_3);
         relation_Element_Selection.Add(4, possibilities_4);
         relation_Element_Selection.Add(5, possibilities_5);
+        relation_Element_Selection.Add(6, possibilities_6);
 
         // Pour mémoriser dans quel état on était lors de la précédente sélection de l'objet
         elementIndexMemory.Add(possibilities_1, 0);
@@ -60,12 +62,14 @@ public class GrilleElementManager : MonoBehaviour
         elementIndexMemory.Add(possibilities_3, 0);
         elementIndexMemory.Add(possibilities_4, 0);
         elementIndexMemory.Add(possibilities_5, 0);
+        elementIndexMemory.Add(possibilities_6, 0);
+
+        //Debug.Log("Dictionnaires complets");
+        isDictionnariesCompleted = true;
     }    
 
 void Start()
     {
-        completeDictionnaries();
-
         elementMaps = new Element.TypeElement[GlobalGrid.nbCaseX, GlobalGrid.nbCaseY];
         for(int i = 0; i < GlobalGrid.nbCaseX; i++)
         {
@@ -262,8 +266,6 @@ void Start()
         if (currentPlacingElementObject != null)
         {
             Destroy(currentPlacingElementObject);
-            Debug.Log("je suis detruit ptn");
-
         }
 
         if (currentPlacingElement == Element.TypeElement.None) return;
