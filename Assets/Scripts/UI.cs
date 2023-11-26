@@ -152,11 +152,14 @@ public class UI : MonoBehaviour
         Debug.Log(grilleElementManager.inventory[index]);
         countList[index].text = grilleElementManager.inventory[index].ToString();
 
-        //if (countList[index].text == "0")
-        //{
-        //    countList[index].gameObject.GetComponentInParent<Button>();
-        //}
-
+        if (countList[index].text == "0")
+        {
+            countList[index].gameObject.transform.parent.GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            countList[index].gameObject.transform.parent.GetComponent<Button>().interactable = true;
+        }
     }
 
     // Enable pause menu
