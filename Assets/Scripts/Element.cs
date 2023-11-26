@@ -10,7 +10,7 @@ public class Element : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("Je suis positioné2 en " + (getXPos(), getYPos()));
+        Debug.Log("Je suis positione2 en " + (getXPos(), getYPos()));
     }
 
     public enum TypeElement
@@ -29,10 +29,17 @@ public class Element : MonoBehaviour
         Eolienne_up = 11,
         Eolienne_down = 12,
         Piston_left = 13,
-        Piston_right = 14
+        Piston_right = 14,
+        Sponge_cornerBottomLeft = 15,
+        Sponge_cornerBottomRight = 16,
+        Sponge_cornerTopLeft = 17,
+        Sponge_cornerTopRight = 18,
+        Antipiston_left = 19,
+        Antipiston_right = 20,
+
         //TODO : Add other elements
     }
-    public const int ELEMENT_TYPE_COUNT = 15;
+    public const int ELEMENT_TYPE_COUNT = 21;
 
     public enum ElementToSelect
     {
@@ -41,10 +48,10 @@ public class Element : MonoBehaviour
         Ventilateur = 2,
         Poteau = 3,
         Eolienne = 4,
-        Piston = 5
-        //TODO : Add other elements
+        Piston = 5,
+        Antipiston = 6
     }
-    public const int ELEMENT_TO_SELECT_COUNT = 6;
+    public const int ELEMENT_TO_SELECT_COUNT = 7;
 
     public TypeElement type = TypeElement.None;
 
@@ -63,5 +70,10 @@ public class Element : MonoBehaviour
     public void setYPos(int y)
     {
         this.yPos = y;
+    }
+
+    public virtual void StopAnimation()
+    {
+
     }
 }

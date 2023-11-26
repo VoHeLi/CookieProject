@@ -7,7 +7,7 @@ public class MovementManager : MonoBehaviour
     [Header("Movement settings")]
 
     [SerializeField] private float cameraSpeed = 5f;
-    [SerializeField] private float border = 50f;
+    [SerializeField] private float border = 5f;
 
     [Space]
     [Header("Scroll settings")]

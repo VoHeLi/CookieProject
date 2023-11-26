@@ -111,10 +111,8 @@ public class Piston : MonoBehaviour
 
     // TEST
     // TODO : Commencer l'animation pas à un click de la souris mais quand on presse le bouton Start animation
-    private void OnMouseDown()
+    public void StartAnimation()
     {
-        Debug.Log("Click");
-        
         if (isFacingLeft)
         {
             StartCoroutine(startPistonLeftAnimation());
@@ -148,6 +146,7 @@ public class Piston : MonoBehaviour
 
     public void LaunchBall(Vector2Int ballDirection, float energy)
     {
+        StartAnimation();
         ball.bodyType = RigidbodyType2D.Dynamic;
         
         float speed = Mathf.Sqrt(2 * energy / ballMass);

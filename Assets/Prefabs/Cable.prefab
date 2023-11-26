@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8972868910949752399}
   - component: {fileID: 2870189689536987576}
-  - component: {fileID: -7837779028654859649}
   - component: {fileID: 3201277216762963558}
   m_Layer: 0
   m_Name: Cable
@@ -86,19 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-7837779028654859649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2539536271585897927}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec2d6f4df6d311f4b80807b0b53f15b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 1
 --- !u!114 &3201277216762963558
 MonoBehaviour:
   m_ObjectHideFlags: 0

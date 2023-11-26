@@ -40,8 +40,6 @@ public class TitleScreen : MonoBehaviour
 
     }
 
-
-
     // Quit the game
     public void quit()
     {
