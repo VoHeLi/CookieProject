@@ -22,6 +22,7 @@ public class GrilleElementManager : MonoBehaviour
     [SerializeField] public List<int> inventory = new List<int> { 0, 0, 0, 0, 0, 0} ;
     [SerializeField] private AudioSource _placementSound;
     [SerializeField] private AudioSource _removeSound;
+    [SerializeField] private UI ui;
 
     [HideInInspector] public Element.TypeElement[,] elementMaps;
     [HideInInspector] public GameObject[,] elementObjects;
@@ -389,6 +390,7 @@ public class GrilleElementManager : MonoBehaviour
         int inventoryId = reverseDictionnaries(gridValue);
         if (inventory[inventoryId] < 1) return false;
         inventory[inventoryId]--;
+        ui.updateCount(inventoryId);
         return true;
     }
     

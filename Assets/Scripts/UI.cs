@@ -22,6 +22,7 @@ public class UI : MonoBehaviour
     [SerializeField] GameObject indication;
 
     private bool isRunning = false;
+    private List<TMP_Text> countList = new List<TMP_Text>() { null, null, null, null, null, null, null };
 
     // Start is called before the first frame update
     void Start()
@@ -76,9 +77,8 @@ public class UI : MonoBehaviour
         button.onClick.AddListener(delegate { chooseItem(index); });
 
         // Set inventory
-        TextMeshPro count = childO.GetChild(0).gameObject.GetComponent<TextMeshPro>();
-        Debug.Log(grilleElementManager.inventory[index-1]);
-        //count.text = (grilleElementManager.inventory[index - 1]).ToString();
+        countList[index - 1] = childO.GetComponentInChildren<TMP_Text>();
+        countList[index - 1].text = grilleElementManager.inventory[index - 1].ToString();
 
         //Assign the new navigation to the button
         button.navigation = newNav;
@@ -126,9 +126,12 @@ public class UI : MonoBehaviour
             // End simulation
             isRunning = false;
             energyResolver.ClearEnergyObjects();
-        }
+        }        
+    }
 
-        
+    public void updateCount(int index)
+    {
+        countList[index-1].text = grilleElementManager.inventory[index - 1].ToString();
     }
 
     // Enable pause menu
