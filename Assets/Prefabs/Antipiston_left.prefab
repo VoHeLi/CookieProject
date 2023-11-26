@@ -157,12 +157,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0464f5d1c31826c4a97c18ec302a9f17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pistonRightExtention: []
-  pistonRightDefault: {fileID: 0}
-  pistonRightCable: {fileID: 0}
-  pistonLeftExtention: []
-  pistonLeftDefault: {fileID: 0}
-  pistonLeftCable: {fileID: 0}
+  pistonRightExtention:
+  - {fileID: 21300000, guid: 4e2c9800bb56fd94d94d396918044d47, type: 3}
+  - {fileID: 21300000, guid: c3807334597e685438f99e074d5ad43a, type: 3}
+  - {fileID: 21300000, guid: 18225815062ddd843be3f38114f405d6, type: 3}
+  - {fileID: 21300000, guid: 18225815062ddd843be3f38114f405d6, type: 3}
+  - {fileID: 21300000, guid: c3807334597e685438f99e074d5ad43a, type: 3}
+  - {fileID: 21300000, guid: 4e2c9800bb56fd94d94d396918044d47, type: 3}
+  pistonRightDefault: {fileID: 21300000, guid: 4e2c9800bb56fd94d94d396918044d47, type: 3}
+  pistonRightCable: {fileID: 21300000, guid: 02769e654ba05fc4da6a92d46063659b, type: 3}
+  pistonLeftExtention:
+  - {fileID: 21300000, guid: 4e2c9800bb56fd94d94d396918044d47, type: 3}
+  - {fileID: 21300000, guid: c3807334597e685438f99e074d5ad43a, type: 3}
+  - {fileID: 21300000, guid: 18225815062ddd843be3f38114f405d6, type: 3}
+  - {fileID: 21300000, guid: 18225815062ddd843be3f38114f405d6, type: 3}
+  - {fileID: 21300000, guid: c3807334597e685438f99e074d5ad43a, type: 3}
+  - {fileID: 21300000, guid: 4e2c9800bb56fd94d94d396918044d47, type: 3}
+  pistonLeftDefault: {fileID: 21300000, guid: 47139344f4e428243b187abf9e1d6faa, type: 3}
+  pistonLeftCable: {fileID: 21300000, guid: b00f903d5e02160428548177d02a0ce8, type: 3}
   isFacingRight: 1
   isFacingLeft: 0
   ball: {fileID: 0}

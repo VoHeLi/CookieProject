@@ -54,15 +54,15 @@ public class EnergyResolver : MonoBehaviour
 
     public void ResolveLevelPart(GrilleElementManager grilleElementManager, Vector2Int startPosition)
     {
-        if(visitedElements != null)
-        ClearEnergyObjects();
+        /*if(visitedElements != null)
+        ClearEnergyObjects();*/
 
         visitedElements = new bool[GlobalGrid.nbCaseX, GlobalGrid.nbCaseY]; //RESET ONLY FOR THE FIRST MECHANICAL PART OF THE LEVEL
         ResolveLevelPart(grilleElementManager, startPosition, 1.0f); //TODO : CHANGE START ENERGY
     }
 
-        //On va créer un graphe de noeuds, chaque noeud représente un élément avec son rendement, son temps d'animation, ses noeuds sources et ses noeuds finaux
-        //On commence de la fin, puis on remonte jusqu'au début
+        //On va creer un graphe de noeuds, chaque noeud represente un element avec son rendement, son temps d'animation, ses noeuds sources et ses noeuds finaux
+        //On commence de la fin, puis on remonte jusqu'au debut
     public void ResolveLevelPart(GrilleElementManager grilleElementManager, Vector2Int startPosition, float energy)
     {
         if(grilleElementManager.sourcePosition.x == -1000)
@@ -275,10 +275,10 @@ public class EnergyResolver : MonoBehaviour
     }
     public IEnumerator DisplayGraphAnimation(GraphNode beginNode, float energy)
     {
-        if(debugEnergyObjects != null)
+        /*if(debugEnergyObjects != null)
         {
             ClearEnergyObjects();
-        }
+        }*/
 
         debugEnergyObjects = new List<GameObject>();
 
