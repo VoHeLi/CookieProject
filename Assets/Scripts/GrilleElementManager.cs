@@ -118,7 +118,7 @@ public class GrilleElementManager : MonoBehaviour
             {
                 flags = 2;
             }
-            else if (currentPlacingElement == Element.TypeElement.Ventilateur_up || currentPlacingElement == Element.TypeElement.Ventilateur_down)
+            else if (currentPlacingElement == Element.TypeElement.Eolienne_up || currentPlacingElement == Element.TypeElement.Ventilateur_down)
             {
                 flags = 1;
             }

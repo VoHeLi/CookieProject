@@ -489,15 +489,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
       propertyPath: initialSetup.Array.data[0].x
-      value: 51
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
       propertyPath: initialSetup.Array.data[0].y
-      value: 48
+      value: 54
       objectReference: {fileID: 0}
     - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
       propertyPath: initialSetup.Array.data[1].x
-      value: 61
+      value: 51
       objectReference: {fileID: 0}
     - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
       propertyPath: initialSetup.Array.data[1].y
