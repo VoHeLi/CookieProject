@@ -262,7 +262,7 @@ public class GrilleElementManager : MonoBehaviour
             return;
         }
 
-        GameObject elementObject = Instantiate(elementPrefabs[(int)elementMaps[i, j]], new Vector3(i * GlobalGrid.caseSize, j * GlobalGrid.caseSize, 0), Quaternion.identity);
+        GameObject elementObject = Instantiate(elementPrefabs[(int)elementMaps[i, j]], new Vector3(i * GlobalGrid.caseSize, j * GlobalGrid.caseSize, 0), elementPrefabs[(int)elementMaps[i, j]].transform.rotation);
         elementObject.GetComponent<Element>().setXPos(i);
         elementObject.GetComponent<Element>().setYPos(j);
         Debug.Log("Position de l'element en positon " + (i, j));
@@ -297,7 +297,7 @@ public class GrilleElementManager : MonoBehaviour
 
         if (currentPlacingElement == Element.TypeElement.None) return;
 
-        currentPlacingElementObject = Instantiate(elementPrefabs[(int)currentPlacingElement], Vector3.zero, Quaternion.identity);
+        currentPlacingElementObject = Instantiate(elementPrefabs[(int)currentPlacingElement], Vector3.zero, elementPrefabs[(int)currentPlacingElement].transform.rotation);
     }
     private void EndObjectPlacement()
     {
