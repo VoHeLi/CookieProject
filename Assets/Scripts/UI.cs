@@ -78,7 +78,7 @@ public class UI : MonoBehaviour
 
         // Set inventory
         countList[index - 1] = childO.GetComponentInChildren<TMP_Text>();
-        countList[index - 1].text = grilleElementManager.inventory[index - 1].ToString();
+        updateCount(index - 1);
 
         //Assign the new navigation to the button
         button.navigation = newNav;
@@ -131,7 +131,7 @@ public class UI : MonoBehaviour
 
     public void updateCount(int index)
     {
-        countList[index-1].text = grilleElementManager.inventory[index - 1].ToString();
+        countList[index].text = grilleElementManager.inventory[index].ToString();
     }
 
     // Enable pause menu

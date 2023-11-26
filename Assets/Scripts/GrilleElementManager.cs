@@ -19,7 +19,7 @@ public class GrilleElementManager : MonoBehaviour
 
     [SerializeField] private GameObject[] elementPrefabs;
     [SerializeField] private List<Vector2Int> initialSetup;
-    [SerializeField] public List<int> inventory = new List<int> { 0, 0, 0, 0, 0, 0} ;
+    [SerializeField] public List<int> inventory = new List<int> { 0, 0, 0, 0, 0, 0, 0 } ;
     [SerializeField] private AudioSource _placementSound;
     [SerializeField] private AudioSource _removeSound;
     [SerializeField] private UI ui;
@@ -139,7 +139,7 @@ public class GrilleElementManager : MonoBehaviour
         }
 
         //DEBUG
-        if (currentPlacingElement != Element.TypeElement.None && Input.GetMouseButtonDown(0))
+        if ((currentPlacingElement != Element.TypeElement.None && Input.GetMouseButtonDown(0)) || (currentPlacingElement != Element.TypeElement.None && Input.GetKeyDown(KeyCode.A)))
         {
             EndObjectPlacement();
         }
@@ -183,7 +183,7 @@ public class GrilleElementManager : MonoBehaviour
             BeginElementPlacement();
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.E))
         {
             RemoveElementFromCase();
         }
