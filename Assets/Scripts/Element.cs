@@ -48,10 +48,10 @@ public class Element : MonoBehaviour
         Ventilateur = 2,
         Poteau = 3,
         Eolienne = 4,
-        Piston = 5
-        //TODO : Add other elements
+        Piston = 5,
+        Antipiston = 6
     }
-    public const int ELEMENT_TO_SELECT_COUNT = 6;
+    public const int ELEMENT_TO_SELECT_COUNT = 7;
 
     public TypeElement type = TypeElement.None;
 

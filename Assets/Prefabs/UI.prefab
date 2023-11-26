@@ -2006,6 +2006,8 @@ MonoBehaviour:
   bottomImage: {fileID: 6661048894927332399}
   buttonPrefab: {fileID: 4802540116544598379, guid: fe5fe9e964dcf7540bbaac4d896bc281, type: 3}
   pausePanel: {fileID: 4460565371382116841}
-  buttonSize: 128
+  playButton: {fileID: 3344763694184184027}
+  buttonSize: 100
+  buttonBackgroundSize: 128
   buttonSpacing: 32
   indication: {fileID: 9873496972323657}
