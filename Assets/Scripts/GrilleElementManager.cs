@@ -340,6 +340,14 @@ void Start()
         return elementMaps[i, j];
     }
 
+    public GameObject GetObjetAtPosition(int i, int j)
+    {
+        //Check if in grid
+        if (!GlobalGrid.IsInGrid(i, j)) return null;
+
+        return elementObjects[i, j];
+    }
+
     public void setCurrentPlacingElement(int i)
     {
         curentElementPossibilities = relation_Element_Selection[i];
