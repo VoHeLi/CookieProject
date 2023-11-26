@@ -339,7 +339,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4840183752236941411, guid: 6becb68cedde6ec4ea81e3c458e51b5a, type: 3}
       propertyPath: nextLevel
-      value: Level 1
+      value: WinScreen
       objectReference: {fileID: 0}
     - target: {fileID: 7573345354483658201, guid: 6becb68cedde6ec4ea81e3c458e51b5a, type: 3}
       propertyPath: m_Name
