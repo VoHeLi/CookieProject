@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ventilateur : MonoBehaviour
-{
+public class Ventilateur : Element
+{ 
 
     [Header("Sprites ventilateur right")]
     [SerializeField] private Sprite[] ventilateurRightAnimation;
@@ -278,9 +278,16 @@ public class Ventilateur : MonoBehaviour
     }
 
 
+    public override void StopAnimation()
+    {
+        stopAnimation = true;
+    }
+
+
     // Coroutines de lancement d'animation de tournoiement
     IEnumerator startVentRightAnimation()
     {
+        stopAnimation = false;
         isBlowing = true;
         int i = 0;
         while(true)
@@ -308,6 +315,7 @@ public class Ventilateur : MonoBehaviour
     }
     IEnumerator startVentLeftAnimation()
     {
+        stopAnimation = false;
         isBlowing = true;
         int i = 0;
         while (true)
@@ -335,6 +343,7 @@ public class Ventilateur : MonoBehaviour
     }
     IEnumerator startVentUpAnimation()
     {
+        stopAnimation = false;
         isBlowing = true;
         int i = 0;
         while (true)
@@ -362,6 +371,7 @@ public class Ventilateur : MonoBehaviour
     }
     IEnumerator startVentDownAnimation()
     {
+        stopAnimation = false;
         isBlowing = true;
         int i = 0;
         while (true)

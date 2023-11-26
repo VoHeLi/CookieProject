@@ -186,6 +186,7 @@ void Start()
 
         elementMaps[initialSetup[0].x, initialSetup[0].y] = Element.TypeElement.Batterie;
         elementMaps[initialSetup[1].x, initialSetup[1].y] = Element.TypeElement.TargetBattery;
+        sourcePosition = initialSetup[0];
 
         UpdateAllElementObjects();
         //TODO : Load initial elements from level data

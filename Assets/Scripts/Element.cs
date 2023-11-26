@@ -71,4 +71,9 @@ public class Element : MonoBehaviour
     {
         this.yPos = y;
     }
+
+    public virtual void StopAnimation()
+    {
+
+    }
 }

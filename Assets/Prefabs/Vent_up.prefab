@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5560022864670111932}
   - component: {fileID: 4390132164212704245}
-  - component: {fileID: -5481866979592746729}
   - component: {fileID: -3149323637451861401}
   - component: {fileID: -2851042532876775564}
   m_Layer: 0
@@ -87,19 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-5481866979592746729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7810342651301071746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec2d6f4df6d311f4b80807b0b53f15b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 4
 --- !u!114 &-3149323637451861401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7b8b78cca63f8244aeaefffc2a968af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 4
   ventilateurRightAnimation: []
   ventilateurRightDefault: {fileID: 0}
   ventilateurRightBase: {fileID: 0}

@@ -364,6 +364,19 @@ public class EnergyResolver : MonoBehaviour
             Destroy(debugEnergyObject);
         }
         debugEnergyObjects.Clear();
+
+        for(int i = 0; i < visitedElements.GetLength(0); i++)
+        {
+            for(int j = 0; j < visitedElements.GetLength(1); j++)
+            {
+                if (visitedElements[i, j] == true)
+                {
+                    GrilleElementManager.instance.elementObjects[i, j].GetComponent<Element>().StopAnimation();
+                }
+
+                visitedElements[i, j] = false;
+            }
+        }
     }
 
     private void Update()
