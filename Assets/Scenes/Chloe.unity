@@ -327,6 +327,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1262070894}
   m_SourcePrefab: {fileID: 100100000, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+--- !u!114 &484485994 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+  m_PrefabInstance: {fileID: 484485993}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306ad1e0876a0b54a9ae90f87e03b41b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &742247566 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7796720995272768719, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
@@ -417,6 +428,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1739013005050941482, guid: c605d6a9494adca4f8f8c9805855f6a9, type: 3}
+      propertyPath: energyResolver
+      value: 
+      objectReference: {fileID: 1920964007}
+    - target: {fileID: 1739013005050941482, guid: c605d6a9494adca4f8f8c9805855f6a9, type: 3}
+      propertyPath: grilleElementManager
+      value: 
+      objectReference: {fileID: 484485994}
     - target: {fileID: 4485315538931125009, guid: c605d6a9494adca4f8f8c9805855f6a9, type: 3}
       propertyPath: m_Name
       value: UI
@@ -523,6 +542,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6becb68cedde6ec4ea81e3c458e51b5a, type: 3}
+--- !u!114 &1920964007 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4840183752236941411, guid: 6becb68cedde6ec4ea81e3c458e51b5a, type: 3}
+  m_PrefabInstance: {fileID: 1920964006}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7daf08392017f354faf14d6d4a0eae52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
