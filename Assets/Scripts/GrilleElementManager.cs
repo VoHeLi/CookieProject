@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class GrilleElementManager : MonoBehaviour
@@ -19,7 +18,7 @@ public class GrilleElementManager : MonoBehaviour
 
     [SerializeField] private GameObject[] elementPrefabs;
     [SerializeField] private List<Vector2Int> initialSetup;
-    [SerializeField] public List<int> inventory = new List<int> { 0, 0, 0, 0, 0, 0} ;
+    [SerializeField] public List<int> inventory = new List<int> { 0, 0, 0, 0, 0, 0 ,0} ;
     [SerializeField] private AudioSource _placementSound;
     [SerializeField] private AudioSource _removeSound;
 
@@ -77,7 +76,7 @@ public class GrilleElementManager : MonoBehaviour
            
             foreach (int value in element.Value)
             {
-                Debug.Log(index + " != " + value + " : " + element.Key);
+                //  Debug.Log(index + " != " + value + " : " + element.Key);
                 if (index == value) return element.Key;
             }
             
@@ -89,8 +88,9 @@ public class GrilleElementManager : MonoBehaviour
 
 
 
-    void Start()
+void Start()
     {
+        completeDictionnaries();
         elementMaps = new Element.TypeElement[GlobalGrid.nbCaseX, GlobalGrid.nbCaseY];
         for(int i = 0; i < GlobalGrid.nbCaseX; i++)
         {
@@ -332,7 +332,7 @@ public class GrilleElementManager : MonoBehaviour
 
         Debug.Log("Remove element from case");
         addToInventory((int)elementMaps[i, j]);
-        //elementMaps[i, j] = Element.TypeElement.None;
+        elementMaps[i, j] = Element.TypeElement.None;
         _removeSound.Play(0);
         UpdateElementObject(i, j);
     }

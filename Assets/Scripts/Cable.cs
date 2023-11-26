@@ -111,6 +111,10 @@ public class Cable : Element
         {
             return false;
         }
+        else if (voisinD.GetComponent<Element>().type == Element.TypeElement.Poteau && voisinD.GetComponent<SpriteRenderer>().flipX )
+        {
+            return false;
+        }
         else
         {
             return true;
