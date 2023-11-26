@@ -93,7 +93,6 @@ public class GrilleElementManager : MonoBehaviour
 
 void Start()
     {
-        completeDictionnaries();
         elementMaps = new Element.TypeElement[GlobalGrid.nbCaseX, GlobalGrid.nbCaseY];
         for(int i = 0; i < GlobalGrid.nbCaseX; i++)
         {
@@ -387,7 +386,7 @@ void Start()
     {
         // return true and decrement if you can remove from inv, false and do nothing  if not 
         int inventoryId = reverseDictionnaries(gridValue);
-        Debug.Log(inventoryId);
+        if (inventoryId == -1) return true;
         if (inventory[inventoryId] < 1) return false;
         inventory[inventoryId]--;
         return true;
