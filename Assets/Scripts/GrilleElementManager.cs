@@ -334,7 +334,7 @@ void Start()
         if (elementMaps[i, j] == Element.TypeElement.Poteau && GetElementTypeAtPosition(i, j+1) == Element.TypeElement.Poteau) return;
 
         Debug.Log("Remove element from case");
-        addToInventory((int)elementMaps[i, j]);
+        //addToInventory((int)elementMaps[i, j]);
         elementMaps[i, j] = Element.TypeElement.None;
         _removeSound.Play(0);
         UpdateElementObject(i, j);
@@ -377,16 +377,17 @@ void Start()
 
     public void addToInventory(int gridValue)
     {
-        /*if (gridValue == 0) return;
+        if (gridValue == 0) return;
         int inventoryId = reverseDictionnaries(gridValue);
         inventory[inventoryId]++;
-        Debug.Log("on m'apelle pour incrementer" + inventoryId);*/
+        Debug.Log("on m'apelle pour incrementer" + inventoryId);
     }
 
     public bool RemoveFromInventory(int gridValue)
     {
         // return true and decrement if you can remove from inv, false and do nothing  if not 
         int inventoryId = reverseDictionnaries(gridValue);
+        Debug.Log(inventoryId);
         if (inventory[inventoryId] < 1) return false;
         inventory[inventoryId]--;
         return true;
