@@ -118,12 +118,14 @@ MonoBehaviour:
   batterie50: {fileID: 21300000, guid: 8099245c277e221419002ff8d0d2ab5f, type: 3}
   batterie25: {fileID: 21300000, guid: ed22b7fce732fd14a93967771e42379f, type: 3}
   batterie0: {fileID: 21300000, guid: d48bd5a300d33ff47a2c8183e07042b7, type: 3}
-  dureeAnimation: 5
+  dureeAnimation: 2
   animationFPS: 10
   cableBatterieRight: {fileID: 21300000, guid: 79740fbf4ebb24446a2f1659d9c63a94, type: 3}
   cableBatterieLeft: {fileID: 21300000, guid: 6698aeb9a9057e74fbf208ecdb6a1030, type: 3}
-  smallSpark: {fileID: 21300000, guid: 9bdd1d44ab639804db54393d70466fa9, type: 3}
-  bigSpark: {fileID: 21300000, guid: 6aeeedafad2b4d5499d20d4689e5e566, type: 3}
+  smallSparkRight: {fileID: 21300000, guid: 57bd63f18e910974fb1b42ec1154008d, type: 3}
+  smallSparkLeft: {fileID: 21300000, guid: 9bdd1d44ab639804db54393d70466fa9, type: 3}
+  bigSparkRight: {fileID: 21300000, guid: 2cd16831a8eaf5a40835832f99a351a7, type: 3}
+  bigSparkLeft: {fileID: 21300000, guid: 6aeeedafad2b4d5499d20d4689e5e566, type: 3}
   isTargetBatterie: 0
 --- !u!61 &-3704332577883992816
 BoxCollider2D:
