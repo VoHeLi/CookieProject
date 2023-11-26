@@ -43903,6 +43903,18 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      propertyPath: inventory.Array.data[1]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      propertyPath: inventory.Array.data[2]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      propertyPath: inventory.Array.data[3]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
       propertyPath: inventory.Array.data[7]
       value: 10
       objectReference: {fileID: 0}
