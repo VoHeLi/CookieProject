@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private bool[] isLevelCompleted = new bool[6];
+
+    public bool getIsLevelFinished(int i)
     {
-        
+        if (isLevelCompleted[i])
+        {
+            return true;
+        }
+        return false;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void setLevelFinished(int i)
     {
-        
+        isLevelCompleted[i] = true;
     }
 }
