@@ -204,6 +204,11 @@ public class Batterie : Element
 
             yield return new WaitForSeconds(1 / (animationFPS * 2));
         }
+
+        if (this.transform.childCount >= 1)
+        {
+            Destroy(transform.GetChild(0).gameObject);
+        }
     }
     public IEnumerator StartFillingAnimation(float blabla)
     {
