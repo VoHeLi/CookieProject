@@ -289,6 +289,47 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6becb68cedde6ec4ea81e3c458e51b5a, type: 3}
+--- !u!1 &1038456970 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7796720995272768719, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+  m_PrefabInstance: {fileID: 1615870335}
+  m_PrefabAsset: {fileID: 0}
+--- !u!19719996 &1038456974
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038456970}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0
+  m_UseDelaunayMesh: 0
 --- !u!1001 &1421478249
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34004,7 +34045,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
       propertyPath: inventory.Array.size
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
       propertyPath: initialSetup.Array.size
@@ -34032,6 +34073,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
       propertyPath: inventory.Array.data[5]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      propertyPath: inventory.Array.data[6]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      propertyPath: inventory.Array.data[7]
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
@@ -34065,8 +34114,55 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7796720995272768719, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1038456974}
+    - targetCorrespondingSourceObject: {fileID: 8753766644693139980, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1993145898}
   m_SourcePrefab: {fileID: 100100000, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+--- !u!1 &1993145894 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8753766644693139980, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+  m_PrefabInstance: {fileID: 1615870335}
+  m_PrefabAsset: {fileID: 0}
+--- !u!19719996 &1993145898
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1993145894}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0
+  m_UseDelaunayMesh: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
