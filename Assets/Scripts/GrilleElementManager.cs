@@ -233,7 +233,8 @@ void Start()
                 Debug.Log("Source position changed : " + sourcePosition.ToString());
             }
 
-            addToInventory((int)elementMaps[i, j]);
+
+            addToInventory((int)elementObjects[i, j].GetComponent<Element>().type);
             Destroy(elementObjects[i, j]);
             elementObjects[i, j] = null;
 
@@ -373,6 +374,7 @@ void Start()
         if (gridValue == 0) return;
         int inventoryId = reverseDictionnaries(gridValue);
         inventory[inventoryId]++;
+        Debug.Log("on m'apelle pour incrementer" + inventoryId);
     }
 
     public bool RemoveFromInventory(int gridValue)
