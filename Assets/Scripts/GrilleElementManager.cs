@@ -45,11 +45,12 @@ public class GrilleElementManager : MonoBehaviour
     public void completeDictionnaries()
     {
         int[] possibilities_1 = new int[] { 1 };
-        int[] possibilities_2 = new int[] { 2, 3, 4, 5 };
-        int[] possibilities_3 = new int[] { 6 };
+        int[] possibilities_2 = new int[] { 6 };
+        int[] possibilities_3 = new int[] { 2, 3, 4, 5 };
         int[] possibilities_4 = new int[] { 9, 10, 11, 12 };
         int[] possibilities_5 = new int[] { 13, 14 };
         int[] possibilities_6 = new int[] { 19, 20 };
+        int[] possibilities_7 = new int[] { 15, 16, 17, 18 };
 
         relation_Element_Selection.Add(1, possibilities_1);
         relation_Element_Selection.Add(2, possibilities_2);
@@ -57,6 +58,7 @@ public class GrilleElementManager : MonoBehaviour
         relation_Element_Selection.Add(4, possibilities_4);
         relation_Element_Selection.Add(5, possibilities_5);
         relation_Element_Selection.Add(6, possibilities_6);
+        relation_Element_Selection.Add(7, possibilities_7);
 
         // Pour mémoriser dans quel état on était lors de la précédente sélection de l'objet
         elementIndexMemory.Add(possibilities_1, 0);
@@ -65,6 +67,7 @@ public class GrilleElementManager : MonoBehaviour
         elementIndexMemory.Add(possibilities_4, 0);
         elementIndexMemory.Add(possibilities_5, 0);
         elementIndexMemory.Add(possibilities_6, 0);
+        elementIndexMemory.Add(possibilities_7, 0);
 
         //Debug.Log("Dictionnaires complets");
         isDictionnariesCompleted = true;

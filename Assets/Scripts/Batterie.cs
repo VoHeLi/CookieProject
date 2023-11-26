@@ -299,7 +299,7 @@ public class Batterie : Element
         }
         else
         {
-            Debug.Log("Debug7");
+            //Debug.Log("Debug7");
             return true;
         }
     }

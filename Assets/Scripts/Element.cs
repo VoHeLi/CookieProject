@@ -45,13 +45,14 @@ public class Element : MonoBehaviour
     {
         None = 0,
         Cable = 1,
-        Ventilateur = 2,
-        Poteau = 3,
+        Poteau = 2,
+        Ventilateur = 3,
         Eolienne = 4,
         Piston = 5,
-        Antipiston = 6
+        Antipiston = 6,
+        SpongeCorner = 7
     }
-    public const int ELEMENT_TO_SELECT_COUNT = 7;
+    public const int ELEMENT_TO_SELECT_COUNT = 8;
 
     public TypeElement type = TypeElement.None;
 
