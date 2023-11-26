@@ -337,6 +337,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4840183752236941411, guid: 6becb68cedde6ec4ea81e3c458e51b5a, type: 3}
+      propertyPath: nextLevel
+      value: WinScreen
+      objectReference: {fileID: 0}
     - target: {fileID: 7573345354483658201, guid: 6becb68cedde6ec4ea81e3c458e51b5a, type: 3}
       propertyPath: m_Name
       value: EnergyResolver
@@ -34984,11 +34988,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
       propertyPath: inventory.Array.data[2]
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
       propertyPath: inventory.Array.data[3]
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
       propertyPath: inventory.Array.data[4]
