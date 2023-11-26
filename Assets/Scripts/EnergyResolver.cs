@@ -54,8 +54,8 @@ public class EnergyResolver : MonoBehaviour
 
     public void ResolveLevelPart(GrilleElementManager grilleElementManager, Vector2Int startPosition)
     {
-        if(visitedElements != null)
-        ClearEnergyObjects();
+        /*if(visitedElements != null)
+        ClearEnergyObjects();*/
 
         visitedElements = new bool[GlobalGrid.nbCaseX, GlobalGrid.nbCaseY]; //RESET ONLY FOR THE FIRST MECHANICAL PART OF THE LEVEL
         ResolveLevelPart(grilleElementManager, startPosition, 1.0f); //TODO : CHANGE START ENERGY
@@ -275,10 +275,10 @@ public class EnergyResolver : MonoBehaviour
     }
     public IEnumerator DisplayGraphAnimation(GraphNode beginNode, float energy)
     {
-        if(debugEnergyObjects != null)
+        /*if(debugEnergyObjects != null)
         {
             ClearEnergyObjects();
-        }
+        }*/
 
         debugEnergyObjects = new List<GameObject>();
 
