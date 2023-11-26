@@ -50,4 +50,11 @@ public class GlobalGrid : MonoBehaviour
         j = Mathf.FloorToInt(0.5f + mousePos.y / GlobalGrid.caseSize);
         return GlobalGrid.IsInGrid(i, j);
     }
+
+    public static Vector2Int GetGridPosition(Vector2 position)
+    {
+        int i = Mathf.FloorToInt(0.5f + position.x / GlobalGrid.caseSize);
+        int j = Mathf.FloorToInt(0.5f + position.y / GlobalGrid.caseSize);
+        return new Vector2Int(i, j);
+    }
 }

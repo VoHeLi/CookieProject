@@ -2,42 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
+    [Header("UI Customization")]
     [SerializeField] GameObject bottomImage;
     [SerializeField] GameObject buttonPrefab;
     [SerializeField] GameObject pausePanel;
     [SerializeField] float buttonSize;
     [SerializeField] float buttonSpacing;
+
+    [Header("Element Placement")]
     [SerializeField] EnergyResolver energyResolver;
     [SerializeField] GrilleElementManager grilleElementManager;
+    [SerializeField] GameObject indication;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
         startAgain(); // Desable the pause menu
+        indication.SetActive(false);
 
         //Create a new navigation
         Navigation newNav = new Navigation();
         newNav.mode = Navigation.Mode.Horizontal;
 
-
-
-
         Texture2D tex = Resources.Load<Texture2D>("Logo_AnimINT");
-
-        //createButton(0, tex, newNav);
-        //createButton(1, tex, newNav);
-        //createButton(2, tex, newNav);  
-
-        Debug.Log(Element.ELEMENT_TO_SELECT_COUNT);
 
         for (int i = 1; i < Element.ELEMENT_TO_SELECT_COUNT; i++)
         {
-            Debug.Log(i - (float)Element.ELEMENT_TO_SELECT_COUNT / 2f);
             createButton(i - (float)Element.ELEMENT_TO_SELECT_COUNT / 2f, i, tex, newNav);
         }
     }
@@ -74,6 +71,16 @@ public class UI : MonoBehaviour
     // Select the element wanted
     public void chooseItem(int i)
     {
+        if (grilleElementManager.getRelationElementSelection()[i].Length > 1)
+        {
+            indication.SetActive(true);
+        }
+        else
+        {
+            indication.SetActive(false);
+        }
+
+
         Debug.Log("Button press " + i);
         grilleElementManager.setCurrentPlacingElement(i);
     }
@@ -96,6 +103,12 @@ public class UI : MonoBehaviour
     public void startAgain()
     {
         pausePanel.SetActive(false);
+    }
+
+    // Return to the Title Screen
+    public void returnToMenu()
+    {
+        SceneManager.LoadScene("TitleScreen");
     }
 
     // Quit the game

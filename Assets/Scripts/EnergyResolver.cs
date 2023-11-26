@@ -50,11 +50,17 @@ public class EnergyResolver : MonoBehaviour
     [SerializeField] private List<Element.TypeElement> ventilatorElements;
     [SerializeField] private List<Element.TypeElement> eoliennesElements;
     [SerializeField] private List<Element.TypeElement> pistonsElements;
-    
-    
-    //On va créer un graphe de noeuds, chaque noeud représente un élément avec son rendement, son temps d'animation, ses noeuds sources et ses noeuds finaux
-    //On commence de la fin, puis on remonte jusqu'au début
+
+
     public void ResolveLevelPart(GrilleElementManager grilleElementManager, Vector2Int startPosition)
+    {
+        visitedElements = new bool[GlobalGrid.nbCaseX, GlobalGrid.nbCaseY]; //RESET ONLY FOR THE FIRST MECHANICAL PART OF THE LEVEL
+        ResolveLevelPart(grilleElementManager, startPosition, 1.0f); //TODO : CHANGE START ENERGY
+    }
+
+        //On va créer un graphe de noeuds, chaque noeud représente un élément avec son rendement, son temps d'animation, ses noeuds sources et ses noeuds finaux
+        //On commence de la fin, puis on remonte jusqu'au début
+    public void ResolveLevelPart(GrilleElementManager grilleElementManager, Vector2Int startPosition, float energy)
     {
         if(grilleElementManager.sourcePosition.x == -1000)
         {
@@ -62,7 +68,7 @@ public class EnergyResolver : MonoBehaviour
             return;
         }
 
-        visitedElements = new bool[GlobalGrid.nbCaseX, GlobalGrid.nbCaseY];
+        
 
         Queue<GraphNode> nodesToProcess = new Queue<GraphNode>();
 
@@ -106,7 +112,7 @@ public class EnergyResolver : MonoBehaviour
 
         }
 
-        StartCoroutine(DisplayGraphAnimation(beginNode));
+        StartCoroutine(DisplayGraphAnimation(beginNode, energy));
 
     }
 
@@ -262,7 +268,7 @@ public class EnergyResolver : MonoBehaviour
         node.spawnBall = true;
         node.ballDirection = node.type == Element.TypeElement.Piston_right ? Vector2Int.right : Vector2Int.left;
     }
-    public IEnumerator DisplayGraphAnimation(GraphNode beginNode)
+    public IEnumerator DisplayGraphAnimation(GraphNode beginNode, float energy)
     {
         if(debugEnergyObjects != null)
         {
@@ -274,7 +280,6 @@ public class EnergyResolver : MonoBehaviour
         Queue<GraphNode> nodesToProcess = new Queue<GraphNode>();
         nodesToProcess.Enqueue(beginNode);
 
-        float energy = 1.0f; //DEBUG ENERGY
 
         while (nodesToProcess.Count > 0)
         {
@@ -318,7 +323,6 @@ public class EnergyResolver : MonoBehaviour
 
         if(node.spawnBall)
         {
-            Debug.Log("test2");
             GrilleElementManager.instance.elementObjects[node.spatialPosition.x, node.spatialPosition.y].GetComponent<Piston>().LaunchBall(node.ballDirection, energy);
         }
     }
