@@ -40,6 +40,11 @@ public class TitleScreen : MonoBehaviour
 
     }
 
+    public void toControls()
+    {
+        SceneManager.LoadScene("Control Screen");
+    }
+
     // Quit the game
     public void quit()
     {
