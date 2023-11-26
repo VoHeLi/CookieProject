@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraSpeed: 5
-  border: 50
+  border: 5
   maxZoomDistance: 15
   minZoomDistance: 1
 --- !u!1001 &447178307
