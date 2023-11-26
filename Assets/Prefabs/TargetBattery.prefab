@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2172655200954668898}
   - component: {fileID: 120200974168387383}
-  - component: {fileID: 8180647645558019852}
   - component: {fileID: -6614436579097483037}
   m_Layer: 0
   m_Name: TargetBattery
@@ -86,19 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8180647645558019852
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2677536799563943731}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec2d6f4df6d311f4b80807b0b53f15b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 7
 --- !u!114 &-6614436579097483037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,4 +107,6 @@ MonoBehaviour:
   animationFPS: 10
   cableBatterieRight: {fileID: 21300000, guid: 79740fbf4ebb24446a2f1659d9c63a94, type: 3}
   cableBatterieLeft: {fileID: 21300000, guid: 6698aeb9a9057e74fbf208ecdb6a1030, type: 3}
+  smallSpark: {fileID: 0}
+  bigSpark: {fileID: 0}
   isTargetBatterie: 1
