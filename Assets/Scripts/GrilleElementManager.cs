@@ -201,6 +201,7 @@ void Start()
         {
             if (elementObjects[i, j].GetComponent<Element>().type == elementMaps[i, j]) //TODO create Element class
             {
+                addToInventory((int)elementObjects[i, j].GetComponent<Element>().type);
                 return;
             }
 
