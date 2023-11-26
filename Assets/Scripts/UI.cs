@@ -24,16 +24,19 @@ public class UI : MonoBehaviour
     
     public static UI instance;
     public bool isRunning = false;
+    private List<TMP_Text> countList = new List<TMP_Text>() { null, null, null, null, null, null, null };
 
     private void Awake()
     {
         if (instance != null)
         {
             Debug.LogError("Multiple instances of UI!");
+            return;
         }
-
         instance = this;
     }
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -88,9 +91,8 @@ public class UI : MonoBehaviour
         button.onClick.AddListener(delegate { chooseItem(index); });
 
         // Set inventory
-        TextMeshPro count = childO.GetChild(0).gameObject.GetComponent<TextMeshPro>();
-        //Debug.Log(grilleElementManager.inventory[index-1]);
-        //count.text = (grilleElementManager.inventory[index - 1]).ToString();
+        countList[index - 1] = childO.GetComponentInChildren<TMP_Text>();
+        updateCount(index - 1);
 
         //Assign the new navigation to the button
         button.navigation = newNav;
@@ -140,9 +142,15 @@ public class UI : MonoBehaviour
             isRunning = false;
             _electricSound.Stop();
             energyResolver.ClearEnergyObjects();
-        }
+        }        
+    }
 
-        
+    public void updateCount(int index)
+    {
+        Debug.Log("Update");
+        Debug.Log(index);
+        Debug.Log(grilleElementManager.inventory[index]);
+        countList[index].text = grilleElementManager.inventory[index].ToString();
     }
 
     // Enable pause menu
