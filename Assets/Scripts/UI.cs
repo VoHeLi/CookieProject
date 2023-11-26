@@ -21,6 +21,8 @@ public class UI : MonoBehaviour
     [SerializeField] EnergyResolver energyResolver;
     [SerializeField] GrilleElementManager grilleElementManager;
     [SerializeField] GameObject indication;
+
+    [SerializeField] TMPro.TextMeshProUGUI levelClear;
     
     public static UI instance;
     public bool isRunning = false;
@@ -188,5 +190,39 @@ public class UI : MonoBehaviour
     {
         Application.Quit();
         _electricSound.Stop();
+    }
+
+    public void levelClearDisplay()
+    {
+        levelClear.gameObject.SetActive(true);
+        //DO an animation with the text poping up
+        
+        StartCoroutine(LevelClearDisplayCoroutine());
+    }
+
+    public IEnumerator LevelClearDisplayCoroutine()
+    {
+        //DO an animation with the text poping up
+
+        float popingTime = 0.5f;
+
+        float beginTime = Time.time;
+        float endTime = beginTime + popingTime;
+        while (true)
+        {
+            float currentTime = Time.time;
+            float ratio = (currentTime - beginTime) / popingTime;
+            if (ratio > 1)
+            {
+                ratio = 1;
+            }
+            levelClear.transform.localScale = new Vector3(ratio, ratio, ratio);
+            if (currentTime > endTime)
+            {
+                break;
+            }
+            yield return null;
+        }
+
     }
 }

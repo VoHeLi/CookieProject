@@ -130,7 +130,7 @@ void Start()
             {
                 flags = 2;
             }
-            else if (currentPlacingElement == Element.TypeElement.Eolienne_up || currentPlacingElement == Element.TypeElement.Ventilateur_down)
+            else if (currentPlacingElement == Element.TypeElement.Eolienne_up || currentPlacingElement == Element.TypeElement.Ventilateur_down || currentPlacingElement == Element.TypeElement.Sponge_cornerTopLeft || currentPlacingElement == Element.TypeElement.Sponge_cornerTopRight)
             {
                 flags = 1;
             }
@@ -295,7 +295,7 @@ void Start()
         {
             flags = 2;
         }
-        else if (currentPlacingElement == Element.TypeElement.Eolienne_up || currentPlacingElement == Element.TypeElement.Ventilateur_down)
+        else if (currentPlacingElement == Element.TypeElement.Eolienne_up || currentPlacingElement == Element.TypeElement.Ventilateur_down || currentPlacingElement == Element.TypeElement.Sponge_cornerTopLeft || currentPlacingElement == Element.TypeElement.Sponge_cornerTopRight)
         {
             flags = 1;
         }

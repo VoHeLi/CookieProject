@@ -54,6 +54,15 @@ public class EnergyResolver : MonoBehaviour
     [SerializeField] private List<Element.TypeElement> eoliennesElements;
     [SerializeField] private List<Element.TypeElement> pistonsElements;
 
+    private AudioSource _victorySource;
+    private AudioSource _defeatSource;
+
+
+    private void Start()
+    {
+        _victorySource = GameObject.Find("VictorySound").GetComponent<AudioSource>();
+        _defeatSource = GameObject.Find("DefeatSound").GetComponent<AudioSource>();
+    }
 
     public void ResolveLevelPart(GrilleElementManager grilleElementManager, Vector2Int startPosition)
     {
@@ -288,16 +297,25 @@ public class EnergyResolver : MonoBehaviour
         Queue<GraphNode> nodesToProcess = new Queue<GraphNode>();
         nodesToProcess.Enqueue(beginNode);
 
+        Batterie sourceBattery = GrilleElementManager.instance.elementObjects[GrilleElementManager.instance.sourcePosition.x, GrilleElementManager.instance.sourcePosition.y].GetComponent<Batterie>();
+        StartCoroutine(sourceBattery.StartDrainingAnimation());
 
+        GraphNode lastNode = beginNode;
         while (nodesToProcess.Count > 0)
         {
             GraphNode currentNode = nodesToProcess.Dequeue();
 
             yield return new WaitForSeconds(currentNode.animationTime);
 
+            if(UI.instance.isRunning == false)
+            {
+                break;
+            }
+
             if (currentNode.type == Element.TypeElement.TargetBattery)
             {
                 Debug.Log("Draining...");
+                _victorySource.Play();
                 StartCoroutine(DrainBattery(currentNode, energy));
                 break;
             }
@@ -310,16 +328,28 @@ public class EnergyResolver : MonoBehaviour
             {
                 nodesToProcess.Enqueue(destNode);
             }
+
+            lastNode = currentNode;
         }
+
+        //DEFEAT
+        if(lastNode.type != Element.TypeElement.Piston_left && lastNode.type != Element.TypeElement.Piston_right)
+        {
+            _defeatSource.Play();
+        }
+
     }
 
     private IEnumerator DrainBattery(GraphNode destNode, float energy)
     {
         Batterie targetBattery = GrilleElementManager.instance.elementObjects[destNode.spatialPosition.x, destNode.spatialPosition.y].GetComponent<Batterie>();
-        Batterie sourceBattery = GrilleElementManager.instance.elementObjects[GrilleElementManager.instance.sourcePosition.x, GrilleElementManager.instance.sourcePosition.y].GetComponent<Batterie>();
+        
 
         StartCoroutine(targetBattery.StartFillingAnimation(energy));
-        StartCoroutine(sourceBattery.StartDrainingAnimation());
+
+        
+
+        UI.instance.levelClearDisplay();
 
         yield return new WaitForSeconds(5.0f);
 
