@@ -416,7 +416,7 @@ void Start()
     public bool RemoveFromInventory(int gridValue)
     {
         // return true and decrement if you can remove from inv, false and do nothing  if not 
-        int inventoryId = reverseDictionnaries(gridValue);
+        int inventoryId = reverseDictionnaries(gridValue) - 1;
         if (inventoryId == -1) return true;
         if (inventory[inventoryId] < 1) return false;
         inventory[inventoryId]--;
