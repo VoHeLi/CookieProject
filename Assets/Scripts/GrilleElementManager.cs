@@ -150,51 +150,12 @@ void Start()
         }
 
         //DEBUG
-        if (currentPlacingElement != Element.TypeElement.None && (Input.GetMouseButtonDown(0)) || Input.GetKeyDown(KeyCode.A))
+        if (currentPlacingElement != Element.TypeElement.None && (Input.GetMouseButtonDown(0)))
         {
             EndObjectPlacement();
         }
 
-        KeyCode[] keyCodes = new KeyCode[] { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8, KeyCode.Alpha9, KeyCode.Alpha0, KeyCode.Y, KeyCode.U, KeyCode.I, KeyCode.O, KeyCode.P };
-        for(int i = 0; i < keyCodes.Length; i++)
-        {
-            if (Input.GetKeyDown(keyCodes[i]))
-            {
-                currentPlacingElement = (Element.TypeElement)i;
-                BeginElementPlacement();
-                break;
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            currentPlacingElement = (Element.TypeElement)14;
-            BeginElementPlacement();
-        }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            currentPlacingElement = (Element.TypeElement)13;
-            BeginElementPlacement();
-        }
-
-        if(Input.GetKeyDown(KeyCode.N))
-        {
-            currentPlacingElement = (Element.TypeElement)15;
-            BeginElementPlacement();
-        }
-
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            currentPlacingElement = (Element.TypeElement)19;
-            BeginElementPlacement();
-        }
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            currentPlacingElement = (Element.TypeElement)20;
-            BeginElementPlacement();
-        }
-
-        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.E))
+        if (Input.GetMouseButtonDown(1))
         {
             RemoveElementFromCase();
         }
