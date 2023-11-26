@@ -9,7 +9,7 @@ public class Poteau : MonoBehaviour
     [SerializeField] private Sprite sprite_in;
 
     [SerializeField] private bool isBottom;
-    [SerializeField] private bool isMiddle;
+    [SerializeField] public bool isMiddle;
     [SerializeField] private bool isTop;
 
     [SerializeField] Element element;

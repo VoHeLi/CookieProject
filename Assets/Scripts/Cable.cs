@@ -74,8 +74,14 @@ public class Cable : Element
         } else if (voisinG.GetComponent<Element>().type == Element.TypeElement.None)
         {
             return false;
-        } else
+        }
+        else if (voisinG.GetComponent<Element>().type == Element.TypeElement.Poteau && voisinG.GetComponent<Poteau>().isMiddle)
         {
+            return false;
+        }
+
+        else
+            {
             return true;
         }
     }
@@ -111,7 +117,7 @@ public class Cable : Element
         {
             return false;
         }
-        else if (voisinD.GetComponent<Element>().type == Element.TypeElement.Poteau && voisinD.GetComponent<SpriteRenderer>().flipX )
+        else if (voisinD.GetComponent<Element>().type == Element.TypeElement.Poteau && voisinD.GetComponent<SpriteRenderer>().flipX && voisinD.GetComponent<Poteau>().isMiddle)
         {
             return false;
         }
