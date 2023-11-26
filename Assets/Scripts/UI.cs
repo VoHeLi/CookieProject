@@ -15,11 +15,13 @@ public class UI : MonoBehaviour
     [SerializeField] float buttonSize;
     [SerializeField] float buttonBackgroundSize;
     [SerializeField] float buttonSpacing;
+    [SerializeField] private AudioSource _electricSound;
 
     [Header("Element Placement")]
     [SerializeField] EnergyResolver energyResolver;
     [SerializeField] GrilleElementManager grilleElementManager;
     [SerializeField] GameObject indication;
+    
 
     private bool isRunning = false;
     private List<TMP_Text> countList = new List<TMP_Text>() { null, null, null, null, null, null, null };
@@ -116,6 +118,7 @@ public class UI : MonoBehaviour
 
             // Start simulation
             isRunning = true;
+            _electricSound.Play(0);
             energyResolver.ResolveLevelPart(grilleElementManager, grilleElementManager.sourcePosition);
         }
         else if (isRunning == true)
@@ -125,12 +128,16 @@ public class UI : MonoBehaviour
 
             // End simulation
             isRunning = false;
+            _electricSound.Stop();
             energyResolver.ClearEnergyObjects();
         }        
     }
 
     public void updateCount(int index)
     {
+        Debug.Log("Update");
+        Debug.Log(index);
+        Debug.Log(grilleElementManager.inventory[index]);
         countList[index].text = grilleElementManager.inventory[index].ToString();
     }
 
@@ -138,23 +145,27 @@ public class UI : MonoBehaviour
     public void pause()
     {
         pausePanel.SetActive(true);
+        _electricSound.Pause();
     }
 
     // Disable pause menu
     public void startAgain()
     {
         pausePanel.SetActive(false);
+        _electricSound.UnPause();
     }
 
     // Return to the Title Screen
     public void returnToMenu()
     {
         SceneManager.LoadScene("TitleScreen");
+        _electricSound.Stop();
     }
 
     // Quit the game
     public void quit()
     {
         Application.Quit();
+        _electricSound.Stop();
     }
 }

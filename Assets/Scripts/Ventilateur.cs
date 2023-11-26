@@ -111,11 +111,11 @@ public class Ventilateur : Element
         Element.TypeElement voisinGauche = GrilleElementManager.instance.GetElementTypeAtPosition(GetComponent<Element>().getXPos() - 1, GetComponent<Element>().getYPos());
         Element.TypeElement voisinDroite = GrilleElementManager.instance.GetElementTypeAtPosition(GetComponent<Element>().getXPos() + 1, GetComponent<Element>().getYPos());
 
-        if (isFacingLeft && ((voisinDroite == Element.TypeElement.Cable) || (voisinDroite == Element.TypeElement.Batterie) || (voisinDroite == Element.TypeElement.Poteau)))
+        if (isFacingLeft && ((voisinDroite == Element.TypeElement.Cable) || (voisinDroite == Element.TypeElement.Batterie) || (voisinDroite == Element.TypeElement.Poteau) || (voisinDroite == Element.TypeElement.Ventilateur_right) || (voisinDroite == Element.TypeElement.Ventilateur_up) || (voisinDroite == Element.TypeElement.Ventilateur_down) || (voisinDroite == Element.TypeElement.Eolienne_left) || (voisinDroite == Element.TypeElement.Eolienne_up) || (voisinDroite == Element.TypeElement.Eolienne_down)))
         {
             isConnected = true;
         }
-        else if (isFacingRight && ((voisinGauche == Element.TypeElement.Cable) || (voisinGauche == Element.TypeElement.Batterie) || (voisinGauche == Element.TypeElement.Poteau)))
+        else if (isFacingRight && ((voisinGauche == Element.TypeElement.Cable) || (voisinGauche == Element.TypeElement.Batterie) || (voisinGauche == Element.TypeElement.Poteau) || (voisinGauche == Element.TypeElement.Ventilateur_left) || (voisinGauche == Element.TypeElement.Ventilateur_up) || (voisinGauche == Element.TypeElement.Ventilateur_down) || (voisinGauche == Element.TypeElement.Eolienne_right) || (voisinGauche == Element.TypeElement.Eolienne_up) || (voisinGauche == Element.TypeElement.Eolienne_down)))
         {
             isConnected = true;
         } else if (isFacingLeft && voisinDroite == Element.TypeElement.None) {
@@ -125,22 +125,22 @@ public class Ventilateur : Element
             isConnected = false;
         }
 
-        if (isFacingUp && !isConnectedLeft && ((voisinGauche == Element.TypeElement.Cable) || (voisinGauche == Element.TypeElement.Batterie) || (voisinGauche == Element.TypeElement.Poteau)))
+        if (isFacingUp && !isConnectedLeft && ((voisinGauche == Element.TypeElement.Cable) || (voisinGauche == Element.TypeElement.Batterie) || (voisinGauche == Element.TypeElement.Poteau) || (voisinGauche == Element.TypeElement.Ventilateur_left) || (voisinGauche == Element.TypeElement.Ventilateur_up) || (voisinGauche == Element.TypeElement.Ventilateur_down) || (voisinGauche == Element.TypeElement.Eolienne_right) || (voisinGauche == Element.TypeElement.Eolienne_up) || (voisinGauche == Element.TypeElement.Eolienne_down)))
         {
             isConnected = true;
             isConnectedRight = true;
         } 
-        if (isFacingUp && !isConnectedRight && ((voisinDroite == Element.TypeElement.Cable) || (voisinDroite == Element.TypeElement.Batterie) || (voisinDroite == Element.TypeElement.Poteau)))
+        if (isFacingUp && !isConnectedRight && ((voisinDroite == Element.TypeElement.Cable) || (voisinDroite == Element.TypeElement.Batterie) || (voisinDroite == Element.TypeElement.Poteau) || (voisinDroite == Element.TypeElement.Ventilateur_right) || (voisinDroite == Element.TypeElement.Ventilateur_up) || (voisinDroite == Element.TypeElement.Ventilateur_down) || (voisinDroite == Element.TypeElement.Eolienne_left) || (voisinDroite == Element.TypeElement.Eolienne_up) || (voisinDroite == Element.TypeElement.Eolienne_down)))
         {
             isConnected = true;
             isConnectedLeft = true;
         } 
-        if (isFacingDown && !isConnectedLeft && ((voisinGauche == Element.TypeElement.Cable) || (voisinGauche == Element.TypeElement.Batterie) || (voisinGauche == Element.TypeElement.Poteau)))
+        if (isFacingDown && !isConnectedLeft && ((voisinGauche == Element.TypeElement.Cable) || (voisinGauche == Element.TypeElement.Batterie) || (voisinGauche == Element.TypeElement.Poteau) || (voisinGauche == Element.TypeElement.Ventilateur_left) || (voisinGauche == Element.TypeElement.Ventilateur_up) || (voisinGauche == Element.TypeElement.Ventilateur_down) || (voisinGauche == Element.TypeElement.Eolienne_right) || (voisinGauche == Element.TypeElement.Eolienne_up) || (voisinGauche == Element.TypeElement.Eolienne_down)))
         {
             isConnected = true;
             isConnectedRight = true;
         }
-        if (isFacingDown && !isConnectedRight && ((voisinDroite == Element.TypeElement.Cable) || (voisinDroite == Element.TypeElement.Batterie) || (voisinDroite == Element.TypeElement.Poteau)))
+        if (isFacingDown && !isConnectedRight && ((voisinDroite == Element.TypeElement.Cable) || (voisinDroite == Element.TypeElement.Batterie) || (voisinDroite == Element.TypeElement.Poteau) || (voisinDroite == Element.TypeElement.Ventilateur_right) || (voisinDroite == Element.TypeElement.Ventilateur_up) || (voisinDroite == Element.TypeElement.Ventilateur_down) || (voisinDroite == Element.TypeElement.Eolienne_left) || (voisinDroite == Element.TypeElement.Eolienne_up) || (voisinDroite == Element.TypeElement.Eolienne_down)))
         {
             isConnected = true;
             isConnectedLeft = true;

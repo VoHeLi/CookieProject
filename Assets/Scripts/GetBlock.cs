@@ -56,7 +56,7 @@ public class GetBlock : MonoBehaviour
                 !_gates.HasTile(new Vector3Int(xtile, ytile)) && 
                     (
                         (_ground.HasTile(new Vector3Int(xtile, ytile + 1)) && flags == 1) || 
-                        _ground.HasTile(new Vector3Int(xtile, ytile - 1)) || 
+                        (_ground.HasTile(new Vector3Int(xtile, ytile - 1)) && flags != 1) || 
                         (flags == 2 && GrilleElementManager.instance.GetElementTypeAtPosition(xtile, ytile-1) == Element.TypeElement.Poteau)         
                      )
                     )

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4248936840216545979}
   - component: {fileID: 3640584156929536152}
   - component: {fileID: 1224528216629096003}
+  - component: {fileID: 7597251355074368800}
   m_Layer: 0
   m_Name: Poteau
   m_TagString: Untagged
@@ -98,3 +99,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 6
+--- !u!114 &7597251355074368800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958623610247343638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7abbde2304e5e43bbc463fb68f97dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultSprite: {fileID: 21300000, guid: 750c3dd36688e124784ec1400a33d046, type: 3}
+  sprite_middle: {fileID: 21300000, guid: e6ca8da02c91d2e46971fde3cab758cd, type: 3}
+  sprite_in: {fileID: 21300000, guid: 66dfcb02579606a419f522aa45bd4566, type: 3}
+  isBottom: 0
+  isMiddle: 0
+  isTop: 0
+  element: {fileID: 0}
+  spriteRenderer: {fileID: 0}
