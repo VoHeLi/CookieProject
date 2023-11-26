@@ -52,7 +52,6 @@ public class GrilleElementManager : MonoBehaviour
         relation_Element_Selection.Add(3, possibilities_3);
         relation_Element_Selection.Add(4, possibilities_4);
         relation_Element_Selection.Add(5, possibilities_5);
-        Debug.Log(relation_Element_Selection[1]);
 
         // Pour mémoriser dans quel état on était lors de la précédente sélection de l'objet
         elementIndexMemory.Add(possibilities_1, 0);
@@ -241,6 +240,7 @@ void Start()
         if (currentPlacingElementObject != null)
         {
             Destroy(currentPlacingElementObject);
+            Debug.Log("je suis detruit ptn");
 
         }
 
@@ -301,18 +301,6 @@ void Start()
         if (curentElementPossibilities.Length <= elementIndexMemory[curentElementPossibilities])
         {
             elementIndexMemory[curentElementPossibilities] = 0;
-        }
-
-        currentPlacingElement = (Element.TypeElement)curentElementPossibilities[elementIndexMemory[curentElementPossibilities]];
-        BeginElementPlacement();
-    }
-
-    public void decreaseCurrentElementIndex()
-    {
-        elementIndexMemory[curentElementPossibilities]--;
-        if (elementIndexMemory[curentElementPossibilities] < 0)
-        {
-            elementIndexMemory[curentElementPossibilities] = curentElementPossibilities.Length - 1;
         }
 
         currentPlacingElement = (Element.TypeElement)curentElementPossibilities[elementIndexMemory[curentElementPossibilities]];
