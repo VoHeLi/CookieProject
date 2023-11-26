@@ -186,9 +186,9 @@ public class Batterie : Element
             yield return new WaitForSeconds(1 / (animationFPS * 2));
         }
     }
-    public IEnumerator StartFillingAnimation(float energy)
+    public IEnumerator StartFillingAnimation(float blabla)
     {
-        for (float energyLevel = 0f; energyLevel >= 100; energyLevel += 100 / (animationFPS * dureeAnimation))
+        for (float energyLevel = 0f; energyLevel <= 100; energyLevel += 100 / (animationFPS * dureeAnimation))
         {
             energy = energyLevel;
 
