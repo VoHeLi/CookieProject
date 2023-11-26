@@ -19,7 +19,9 @@ public class GrilleElementManager : MonoBehaviour
 
     [SerializeField] private GameObject[] elementPrefabs;
     [SerializeField] private List<Vector2Int> initialSetup;
-    [SerializeField] public List<int> inventory = new List<int> { 0, 0, 0, 0, 0, 0 } ;
+    [SerializeField] public List<int> inventory = new List<int> { 0, 0, 0, 0, 0, 0 ,0} ;
+    [SerializeField] private AudioSource _placementSound;
+    [SerializeField] private AudioSource _removeSound;
 
     [HideInInspector] public Element.TypeElement[,] elementMaps;
     [HideInInspector] public GameObject[,] elementObjects;
@@ -75,7 +77,7 @@ public class GrilleElementManager : MonoBehaviour
            
             foreach (int value in element.Value)
             {
-                //Debug.Log(value + " : " + element.Key);
+                Debug.Log(index + " != " + value + " : " + element.Key);
                 if (index == value) return element.Key;
             }
             
@@ -89,6 +91,7 @@ public class GrilleElementManager : MonoBehaviour
 
     void Start()
     {
+        completeDictionnaries();
         elementMaps = new Element.TypeElement[GlobalGrid.nbCaseX, GlobalGrid.nbCaseY];
         for(int i = 0; i < GlobalGrid.nbCaseX; i++)
         {
@@ -127,7 +130,7 @@ public class GrilleElementManager : MonoBehaviour
         }
 
         // Changer le type de currentElement choisi
-        if (currentPlacingElement != Element.TypeElement.None && Input.GetKeyDown(KeyCode.E))
+        if (currentPlacingElement != Element.TypeElement.None && Input.GetKeyDown(KeyCode.R))
         {
             increaseCurrentElementIndex();
         }
@@ -138,7 +141,7 @@ public class GrilleElementManager : MonoBehaviour
             EndObjectPlacement();
         }
 
-        KeyCode[] keyCodes = new KeyCode[] { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8, KeyCode.Alpha9, KeyCode.Alpha0, KeyCode.R, KeyCode.T, KeyCode.Y, KeyCode.U, KeyCode.I };
+        KeyCode[] keyCodes = new KeyCode[] { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8, KeyCode.Alpha9, KeyCode.Alpha0, KeyCode.Y, KeyCode.U, KeyCode.I, KeyCode.O, KeyCode.P };
         for(int i = 0; i < keyCodes.Length; i++)
         {
             if (Input.GetKeyDown(keyCodes[i]))
@@ -232,8 +235,9 @@ public class GrilleElementManager : MonoBehaviour
                 Debug.Log("Source position changed : " + sourcePosition.ToString());
             }
 
+
+            addToInventory((int)elementObjects[i, j].GetComponent<Element>().type);
             Destroy(elementObjects[i, j]);
-            addToInventory((int)elementMaps[i, j]);
             elementObjects[i, j] = null;
 
             // rajouter l'ajout dans l'inventaire
@@ -314,6 +318,7 @@ public class GrilleElementManager : MonoBehaviour
 
         elementMaps[i, j] = currentPlacingElement;
 
+        _placementSound.Play(0);
 
         UpdateElementObject(i, j);
     }
@@ -329,6 +334,7 @@ public class GrilleElementManager : MonoBehaviour
         Debug.Log("Remove element from case");
         addToInventory((int)elementMaps[i, j]);
         elementMaps[i, j] = Element.TypeElement.None;
+        _removeSound.Play(0);
         UpdateElementObject(i, j);
     }
 
@@ -372,6 +378,7 @@ public class GrilleElementManager : MonoBehaviour
         if (gridValue == 0) return;
         int inventoryId = reverseDictionnaries(gridValue);
         inventory[inventoryId]++;
+        Debug.Log("on m'apelle pour incrementer" + inventoryId);
     }
 
     public bool RemoveFromInventory(int gridValue)
