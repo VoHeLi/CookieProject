@@ -401,9 +401,9 @@ public class EnergyResolver : MonoBehaviour
 
                     Element.TypeElement type = GrilleElementManager.instance.elementMaps[i, j];
                     GrilleElementManager.instance.elementMaps[i, j] = Element.TypeElement.None;
-                    GrilleElementManager.instance.UpdateElementObject(i, j);
+                    GrilleElementManager.instance.UpdateElementObject(i, j, false);
                     GrilleElementManager.instance.elementMaps[i, j] = type;
-                    GrilleElementManager.instance.UpdateElementObject(i, j);
+                    GrilleElementManager.instance.UpdateElementObject(i, j, false);
 
                     GrilleElementManager.instance.LoadInitialElements();
                 }
