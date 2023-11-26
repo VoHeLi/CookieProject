@@ -18,9 +18,10 @@ public class GrilleElementManager : MonoBehaviour
 
     [SerializeField] private GameObject[] elementPrefabs;
     [SerializeField] private List<Vector2Int> initialSetup;
-    [SerializeField] public List<int> inventory = new List<int> { 0, 0, 0, 0, 0, 0 ,0} ;
+    [SerializeField] public List<int> inventory/* = new List<int> { 0, 0, 0, 0, 0, 0 ,0}*/ ;
     [SerializeField] private AudioSource _placementSound;
     [SerializeField] private AudioSource _removeSound;
+    [SerializeField] private UI ui;
 
     [HideInInspector] public Element.TypeElement[,] elementMaps;
     [HideInInspector] public GameObject[,] elementObjects;
@@ -113,6 +114,7 @@ void Start()
         {
             if (currentPlacingElementObject != null)
             {
+                currentPlacingElement = Element.TypeElement.None;
                 Destroy(currentPlacingElementObject);
             }
             return;
@@ -146,7 +148,7 @@ void Start()
         }
 
         //DEBUG
-        if (currentPlacingElement != Element.TypeElement.None && Input.GetMouseButtonDown(0))
+        if ((currentPlacingElement != Element.TypeElement.None && Input.GetMouseButtonDown(0)) || (currentPlacingElement != Element.TypeElement.None && Input.GetKeyDown(KeyCode.A)))
         {
             EndObjectPlacement();
         }
@@ -190,7 +192,7 @@ void Start()
             BeginElementPlacement();
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.E))
         {
             RemoveElementFromCase();
         }
@@ -230,7 +232,7 @@ void Start()
         }
     }
 
-    public void UpdateElementObject(int i, int j)
+    public void UpdateElementObject(int i, int j, bool addToi = true)
     {
         if (elementObjects[i, j] != null)
         {
@@ -245,8 +247,11 @@ void Start()
                 Debug.Log("Source position changed : " + sourcePosition.ToString());
             }
 
-
-            addToInventory((int)elementObjects[i, j].GetComponent<Element>().type);
+            if (addToi)
+            {
+                addToInventory((int)elementObjects[i, j].GetComponent<Element>().type);
+            }
+            
             Destroy(elementObjects[i, j]);
             elementObjects[i, j] = null;
 
@@ -403,7 +408,8 @@ void Start()
     {
         if (gridValue == 0) return;
         int inventoryId = reverseDictionnaries(gridValue);
-        inventory[inventoryId]++;
+        inventory[inventoryId-1]++;
+        ui.updateCount(inventoryId - 1);
         Debug.Log("on m'apelle pour incrementer" + inventoryId);
     }
 
@@ -414,6 +420,8 @@ void Start()
         if (inventoryId == -1) return true;
         if (inventory[inventoryId] < 1) return false;
         inventory[inventoryId]--;
+        Debug.Log("From remove");
+        ui.updateCount(inventoryId);
         return true;
     }
     

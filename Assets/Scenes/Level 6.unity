@@ -232,7 +232,7 @@ MonoBehaviour:
   border: 50
   maxZoomDistance: 15
   minZoomDistance: 1
---- !u!1001 &242904819
+--- !u!1001 &515669583
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -34035,10 +34035,6 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
-      propertyPath: inventory.Array.data[6]
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6449007984911782091, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
       propertyPath: inventory.Array.data[7]
       value: 10
       objectReference: {fileID: 0}
@@ -34073,8 +34069,52 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7796720995272768719, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1615870337}
   m_SourcePrefab: {fileID: 100100000, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+--- !u!1 &1615870336 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7796720995272768719, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+  m_PrefabInstance: {fileID: 1615870335}
+  m_PrefabAsset: {fileID: 0}
+--- !u!19719996 &1615870337
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615870336}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0
+  m_UseDelaunayMesh: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -34082,4 +34122,4 @@ SceneRoots:
   - {fileID: 171237331}
   - {fileID: 677648947}
   - {fileID: 1615870335}
-  - {fileID: 242904819}
+  - {fileID: 515669583}
