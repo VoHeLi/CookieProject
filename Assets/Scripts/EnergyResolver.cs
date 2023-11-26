@@ -164,7 +164,7 @@ public class EnergyResolver : MonoBehaviour
         }
             
         GraphNode neighbourNode = new GraphNode();
-        neighbourNode.rendement = 0.9f;
+        neighbourNode.rendement = 0.99f;
         neighbourNode.animationTime = 0.2f;
         neighbourNode.sourceNodes = new List<GraphNode>();
         neighbourNode.destNodes = new List<GraphNode>();
@@ -234,14 +234,14 @@ public class EnergyResolver : MonoBehaviour
         }
 
         int distance = 1;
-        float rendement = 0.9f; //TODO : GET REAL RENDEMENT
+        float rendement = 0.95f; //TODO : GET REAL RENDEMENT
         Vector2Int nextBlock = node.spatialPosition + windDir;
         while(!eoliennesElements.Contains(grilleElementManager.GetElementTypeAtPosition(nextBlock.x, nextBlock.y)))
         {
             Debug.Log("Next block : " + nextBlock); 
 
             nextBlock += windDir;
-            rendement *= 0.8f;
+            rendement *= 0.95f;
             distance++;
 
             if (!GlobalGrid.IsInGrid(nextBlock.x, nextBlock.y) || !GetBlock.instance.CanWindGoThrought(nextBlock.x, nextBlock.y))
