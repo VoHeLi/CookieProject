@@ -349,7 +349,7 @@ public class EnergyResolver : MonoBehaviour
 
         if(node.spawnBall)
         {
-            GrilleElementManager.instance.elementObjects[node.spatialPosition.x, node.spatialPosition.y].GetComponent<Piston>().LaunchBall(node.ballDirection, energy);
+            GrilleElementManager.instance.elementObjects[node.spatialPosition.x, node.spatialPosition.y].GetComponent<Piston>().LaunchBall(node.ballDirection, energy*30);
         }
     }
 
