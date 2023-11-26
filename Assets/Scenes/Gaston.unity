@@ -383,6 +383,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 168055930401147780, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      propertyPath: m_Volume
+      value: 0.301
+      objectReference: {fileID: 0}
     - target: {fileID: 4336971218782696255, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
@@ -502,6 +506,18 @@ PrefabInstance:
     - target: {fileID: 7162507356916951654, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214307117872882845, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      propertyPath: m_Volume
+      value: 0.674
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214307117872882845, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      propertyPath: rolloffMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214307117872882845, guid: 5afb31a3826ff6947807570c0f1e9c37, type: 3}
+      propertyPath: reverbZoneMixCustomCurve.m_Curve.Array.data[0].value
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
