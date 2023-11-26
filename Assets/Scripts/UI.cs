@@ -17,8 +17,8 @@ public class UI : MonoBehaviour
     [SerializeField] float buttonSpacing;
 
     [Header("Element Placement")]
-    private EnergyResolver energyResolver;
-    private GrilleElementManager grilleElementManager;
+    [SerializeField] EnergyResolver energyResolver;
+    [SerializeField] GrilleElementManager grilleElementManager;
     [SerializeField] GameObject indication;
 
     private bool isRunning = false;
@@ -77,8 +77,8 @@ public class UI : MonoBehaviour
 
         // Set inventory
         TextMeshPro count = childO.GetChild(0).gameObject.GetComponent<TextMeshPro>();
-        Debug.Log(grilleElementManager.inventory[0]);
-        //count.text = grilleElementManager.inventory.Le.ToString();
+        Debug.Log(grilleElementManager.inventory[index-1]);
+        //count.text = (grilleElementManager.inventory[index - 1]).ToString();
 
         //Assign the new navigation to the button
         button.navigation = newNav;
