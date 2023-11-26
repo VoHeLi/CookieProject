@@ -2009,5 +2009,5 @@ MonoBehaviour:
   playButton: {fileID: 3344763694184184027}
   buttonSize: 100
   buttonBackgroundSize: 128
-  buttonSpacing: 32
+  buttonSpacing: 64
   indication: {fileID: 9873496972323657}
