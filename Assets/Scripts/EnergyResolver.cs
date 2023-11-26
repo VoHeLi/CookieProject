@@ -363,7 +363,7 @@ public class EnergyResolver : MonoBehaviour
     {
         GameObject debugEnergyObject = Instantiate(debugEnergyPrefab, new Vector3(node.spatialPosition.x * GlobalGrid.caseSize, node.spatialPosition.y * GlobalGrid.caseSize, 0), Quaternion.identity);
         debugEnergyObject.transform.parent = transform;
-        debugEnergyObject.transform.localScale = Vector3.one * energy;
+        debugEnergyObject.transform.localScale = Vector3.one * energy * 0.1f;
         debugEnergyObjects.Add(debugEnergyObject);
 
         if (ventilatorElements.Contains(node.type))
