@@ -84,6 +84,8 @@ public class Batterie : Element
             {
                 Destroy(transform.GetChild(1).gameObject);
             }
+            isBatterieConnectedRight = false;
+            isBatterieConnectedLeft = false;
         }
         if (!canConnectLeft() && canConnectRight() && !isBatterieConnectedRight)
         {
