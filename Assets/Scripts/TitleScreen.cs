@@ -24,7 +24,7 @@ public class TitleScreen : MonoBehaviour
 
     public void startGame()
     {
-        SceneManager.LoadScene("UI");
+        SceneManager.LoadScene("Level 1");
     }
 
     public void showLevelSelection()
