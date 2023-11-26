@@ -31,8 +31,9 @@ public class UI : MonoBehaviour
         if (instance != null)
         {
             Debug.LogError("Multiple instances of UI!");
-            instance = this;
+            return;
         }
+        instance = this;
     }
 
 

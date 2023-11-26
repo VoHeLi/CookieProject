@@ -363,7 +363,11 @@ public class Ventilateur : Element
     public void StartAnimation()
     {
         // Debug.Log("Click");
-        _windSound.Play(0);
+        if(_windSound != null)
+        {
+            _windSound.Play();
+        }
+        
         if (isFacingRight)
         {
             StartCoroutine(startVentRightAnimation());
