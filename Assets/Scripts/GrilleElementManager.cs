@@ -19,7 +19,7 @@ public class GrilleElementManager : MonoBehaviour
 
     [SerializeField] private GameObject[] elementPrefabs;
     [SerializeField] private List<Vector2Int> initialSetup;
-    [SerializeField] public List<int> inventory = new List<int> { 0, 0, 0, 0, 0, 0 } ;
+    [SerializeField] public List<int> inventory = new List<int> { 0, 0, 0, 0, 0, 0 ,0} ;
 
     [HideInInspector] public Element.TypeElement[,] elementMaps;
     [HideInInspector] public GameObject[,] elementObjects;
@@ -75,7 +75,7 @@ public class GrilleElementManager : MonoBehaviour
            
             foreach (int value in element.Value)
             {
-                //Debug.Log(value + " : " + element.Key);
+                Debug.Log(index + " != " + value + " : " + element.Key);
                 if (index == value) return element.Key;
             }
             
@@ -89,6 +89,7 @@ public class GrilleElementManager : MonoBehaviour
 
 void Start()
     {
+        completeDictionnaries();
         elementMaps = new Element.TypeElement[GlobalGrid.nbCaseX, GlobalGrid.nbCaseY];
         for(int i = 0; i < GlobalGrid.nbCaseX; i++)
         {
@@ -232,8 +233,8 @@ void Start()
                 Debug.Log("Source position changed : " + sourcePosition.ToString());
             }
 
-            Destroy(elementObjects[i, j]);
             addToInventory((int)elementMaps[i, j]);
+            Destroy(elementObjects[i, j]);
             elementObjects[i, j] = null;
 
             // rajouter l'ajout dans l'inventaire
