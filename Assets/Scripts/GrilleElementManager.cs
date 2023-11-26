@@ -113,6 +113,7 @@ void Start()
         {
             if (currentPlacingElementObject != null)
             {
+                currentPlacingElement = Element.TypeElement.None;
                 Destroy(currentPlacingElementObject);
             }
             return;
