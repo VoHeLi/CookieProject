@@ -109,6 +109,15 @@ void Start()
 
     private void Update()
     {
+        if (UI.instance.isRunning)
+        {
+            if (currentPlacingElementObject != null)
+            {
+                Destroy(currentPlacingElementObject);
+            }
+            return;
+        }
+
         //current Placing Element at good position
         if (currentPlacingElement != Element.TypeElement.None)
         {
@@ -286,9 +295,9 @@ void Start()
 
     private void BeginElementPlacement()
     {
-        
-        
-        Debug.Log("Begin element placement : " + currentPlacingElement.ToString());
+        if (UI.instance.isRunning) return;
+
+            Debug.Log("Begin element placement : " + currentPlacingElement.ToString());
         if (currentPlacingElementObject != null)
         {
             Destroy(currentPlacingElementObject);
@@ -302,6 +311,16 @@ void Start()
     {
         int i = 0, j = 0;
         if (!GlobalGrid.GetMouseCase(ref i, ref j)) return;
+
+        if (UI.instance.isRunning) return;
+
+        //Check if there is a battery or a target battery and return if there is
+        if (elementMaps[i,j] == Element.TypeElement.Batterie || elementMaps[i,j] == Element.TypeElement.TargetBattery)
+        {
+            return;
+        }
+
+
 		if (elementMaps[i, j] == Element.TypeElement.Batterie || elementMaps[i, j] == Element.TypeElement.TargetBattery) return;
         int flags = 0;
         if (currentPlacingElement == Element.TypeElement.Poteau)
@@ -325,10 +344,16 @@ void Start()
     }
     private void RemoveElementFromCase()
     {
-        
+        if (UI.instance.isRunning) return;
 
         int i = 0, j = 0;
         if (!GlobalGrid.GetMouseCase(ref i, ref j)) return;
+
+        //Check if there is a battery or a target battery and return if there is
+        if (elementMaps[i, j] == Element.TypeElement.Batterie || elementMaps[i, j] == Element.TypeElement.TargetBattery)
+        {
+            return;
+        }
 
         if (elementMaps[i, j] == Element.TypeElement.Poteau && GetElementTypeAtPosition(i, j+1) == Element.TypeElement.Poteau) return;
 
