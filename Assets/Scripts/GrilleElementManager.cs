@@ -234,7 +234,7 @@ void Start()
         GameObject elementObject = Instantiate(elementPrefabs[(int)elementMaps[i, j]], new Vector3(i * GlobalGrid.caseSize, j * GlobalGrid.caseSize, 0), Quaternion.identity);
         elementObject.GetComponent<Element>().setXPos(i);
         elementObject.GetComponent<Element>().setYPos(j);
-        Debug.Log("Position de l'�l�ment en positon " + (i, j));
+        Debug.Log("Position de l'element en positon " + (i, j));
         elementObject.transform.parent = transform;
         elementObjects[i, j] = elementObject;
 
@@ -274,7 +274,7 @@ void Start()
     {
         int i = 0, j = 0;
         if (!GlobalGrid.GetMouseCase(ref i, ref j)) return;
-
+		if (elementMaps[i, j] == Element.TypeElement.Batterie || elementMaps[i, j] == Element.TypeElement.TargetBattery) return;
         int flags = 0;
         if (currentPlacingElement == Element.TypeElement.Poteau)
         {
@@ -286,6 +286,7 @@ void Start()
         }
 
         if (!GetBlock.instance.CanBePlacedOn(i,j, flags)) return;
+        
         elementMaps[i, j] = currentPlacingElement;
         UpdateElementObject(i, j);
     }

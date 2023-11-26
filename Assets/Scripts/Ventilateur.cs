@@ -107,7 +107,7 @@ public class Ventilateur : MonoBehaviour
         }
 
 
-        // Si cable voisins, cable attaché
+        // Si cable voisins, cable attache
         Element.TypeElement voisinGauche = GrilleElementManager.instance.GetElementTypeAtPosition(GetComponent<Element>().getXPos() - 1, GetComponent<Element>().getYPos());
         Element.TypeElement voisinDroite = GrilleElementManager.instance.GetElementTypeAtPosition(GetComponent<Element>().getXPos() + 1, GetComponent<Element>().getYPos());
 
