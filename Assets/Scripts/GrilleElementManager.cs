@@ -19,7 +19,7 @@ public class GrilleElementManager : MonoBehaviour
 
     [SerializeField] private GameObject[] elementPrefabs;
     [SerializeField] private List<Vector2Int> initialSetup;
-    [SerializeField] public List<int> inventory = new List<int> { 0, 0, 0, 0, 0, 0 } ;
+    [SerializeField] public List<int> inventory = new List<int> { 0, 0, 0, 0, 0, 0 };
 
     [HideInInspector] public Element.TypeElement[,] elementMaps;
     [HideInInspector] public GameObject[,] elementObjects;
