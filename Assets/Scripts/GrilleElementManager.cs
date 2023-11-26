@@ -187,7 +187,7 @@ public class GrilleElementManager : MonoBehaviour
 
     
 
-    private void LoadInitialElements()
+    public void LoadInitialElements()
     {
 
         elementMaps[initialSetup[0].x, initialSetup[0].y] = Element.TypeElement.Batterie;
@@ -219,7 +219,7 @@ public class GrilleElementManager : MonoBehaviour
         }
     }
 
-    private void UpdateElementObject(int i, int j)
+    public void UpdateElementObject(int i, int j)
     {
         if (elementObjects[i, j] != null)
         {
@@ -374,10 +374,10 @@ public class GrilleElementManager : MonoBehaviour
 
     public void addToInventory(int gridValue)
     {
-        if (gridValue == 0) return;
+        /*if (gridValue == 0) return;
         int inventoryId = reverseDictionnaries(gridValue);
         inventory[inventoryId]++;
-        Debug.Log("on m'apelle pour incrementer" + inventoryId);
+        Debug.Log("on m'apelle pour incrementer" + inventoryId);*/
     }
 
     public bool RemoveFromInventory(int gridValue)
