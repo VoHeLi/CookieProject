@@ -22,8 +22,18 @@ public class UI : MonoBehaviour
     [SerializeField] GrilleElementManager grilleElementManager;
     [SerializeField] GameObject indication;
     
+    public static UI instance;
+    public bool isRunning = false;
 
-    private bool isRunning = false;
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogError("Multiple instances of UI!");
+        }
+
+        instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
