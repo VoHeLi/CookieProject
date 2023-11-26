@@ -214,6 +214,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1739013005050941482, guid: c605d6a9494adca4f8f8c9805855f6a9, type: 3}
+      propertyPath: buttonSpacing
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 1739013005050941482, guid: c605d6a9494adca4f8f8c9805855f6a9, type: 3}
       propertyPath: grilleElementManager
       value: 
       objectReference: {fileID: 1258165987}
