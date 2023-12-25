@@ -152,7 +152,10 @@ public class AntiPiston : MonoBehaviour
 
             float speed = Vector2.Dot(collision.rigidbody.velocity, idealDir);
 
-            Destroy(collision.collider.gameObject);
+            collision.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+            collision.gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+            collision.gameObject.transform.position = Vector3.zero;
+            //Destroy(collision.collider.gameObject);
 
             float energy = 0.5f * ballMass * speed * speed;
 

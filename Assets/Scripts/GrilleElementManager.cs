@@ -214,7 +214,7 @@ void Start()
 
             if (addToi)
             {
-                addToInventory((int)elementObjects[i, j].GetComponent<Element>().type);
+                 addToInventory((int)elementObjects[i, j].GetComponent<Element>().type);
             }
             
             Destroy(elementObjects[i, j]);

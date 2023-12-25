@@ -447,12 +447,13 @@ public class EnergyResolver : MonoBehaviour
                 }
 
 
-                GrilleElementManager.instance.LoadInitialElements();
 
 
                 //visitedElements[i, j] = false;
             }
         }
+
+        // GrilleElementManager.instance.LoadInitialElements();
 
 
     }
