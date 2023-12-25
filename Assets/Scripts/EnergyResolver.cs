@@ -177,7 +177,7 @@ public class EnergyResolver : MonoBehaviour
         neighbourNode.sourceNodes.Add(node);
 
 
-        Debug.Log("Adding node to process : " + neighbourNode.spatialPosition);
+        // Debug.Log("Adding node to process : " + neighbourNode.spatialPosition);
         nodesToProcess.Enqueue(neighbourNode);
         
     }
@@ -238,7 +238,7 @@ public class EnergyResolver : MonoBehaviour
         Vector2Int nextBlock = node.spatialPosition + windDir;
         while(!eoliennesElements.Contains(grilleElementManager.GetElementTypeAtPosition(nextBlock.x, nextBlock.y)))
         {
-            Debug.Log("Next block : " + nextBlock); 
+            // Debug.Log("Next block : " + nextBlock); 
 
             nextBlock += windDir;
             rendement *= 0.95f;
@@ -259,7 +259,7 @@ public class EnergyResolver : MonoBehaviour
         }
 
 
-        Debug.Log("Distance to next Node : " + distance + " SpatialPos : " + node.spatialPosition.ToString());
+        // Debug.Log("Distance to next Node : " + distance + " SpatialPos : " + node.spatialPosition.ToString());
         node.distanceToNextNode = distance;
 
         GraphNode neighbourNode = new GraphNode();
@@ -276,7 +276,7 @@ public class EnergyResolver : MonoBehaviour
         node.destNodes.Add(neighbourNode);
         neighbourNode.sourceNodes.Add(node);
 
-        Debug.Log("Adding node to process : " + neighbourNode.spatialPosition);
+        // Debug.Log("Adding node to process : " + neighbourNode.spatialPosition);
         nodesToProcess.Enqueue(neighbourNode);
     }
 
@@ -314,7 +314,7 @@ public class EnergyResolver : MonoBehaviour
 
             if (currentNode.type == Element.TypeElement.TargetBattery)
             {
-                Debug.Log("Draining...");
+                // Debug.Log("Draining...");
                 _victorySource.Play();
                 StartCoroutine(DrainBattery(currentNode, energy));
                 break;
@@ -421,28 +421,40 @@ public class EnergyResolver : MonoBehaviour
         }
         //debugEnergyObjects.Clear();
 
+        // Debug.Log(visitedElements.GetLength(0) + "," + visitedElements.GetLength(1));
         for(int i = 0; i < visitedElements.GetLength(0); i++)
         {
             for(int j = 0; j < visitedElements.GetLength(1); j++)
             {
+                // Debug.Log("ici : (" + i + ";" + j + ")");
                 if (visitedElements[i, j])
                 {
-                    GrilleElementManager.instance.elementObjects[i, j].GetComponent<Element>().StopAnimation();
+                    GameObject gO = GrilleElementManager.instance.elementObjects[i, j];
+                    gO.GetComponent<Element>().StopAnimation();
 
                     Element.TypeElement type = GrilleElementManager.instance.elementMaps[i, j];
-                    GrilleElementManager.instance.elementMaps[i, j] = Element.TypeElement.None;
-                    GrilleElementManager.instance.UpdateElementObject(i, j, false);
+                    // GrilleElementManager.instance.elementMaps[i, j] = Element.TypeElement.None;
+                    // GrilleElementManager.instance.UpdateElementObject(i, j, false);
                     GrilleElementManager.instance.elementMaps[i, j] = type;
-                    GrilleElementManager.instance.UpdateElementObject(i, j, false);
+                    // GrilleElementManager.instance.UpdateElementObject(i, j, false);
+                    if(type == Element.TypeElement.Piston_left || type == Element.TypeElement.Piston_right)
+                    {
+                        gO.TryGetComponent<Piston>(out Piston piston);
+                        piston.ResetBall();
+                    }
+                    // Debug.Log(type);
 
-                    GrilleElementManager.instance.LoadInitialElements();
                 }
 
+
+                GrilleElementManager.instance.LoadInitialElements();
 
 
                 //visitedElements[i, j] = false;
             }
         }
+
+
     }
 
     private void Update()

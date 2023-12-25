@@ -39,7 +39,7 @@ public class GetBlock : MonoBehaviour
             int xtile = 0, ytile = 0;
             if (GlobalGrid.GetMouseCase(ref xtile,ref ytile))
             {
-                Debug.Log("Can be placed on? " + CanBePlacedOn(xtile,ytile,0));
+                // Debug.Log("Can be placed on? " + CanBePlacedOn(xtile,ytile,0));
             }
             
         }

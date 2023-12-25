@@ -201,7 +201,8 @@ void Start()
         {
             if (elementObjects[i, j].GetComponent<Element>().type == elementMaps[i, j]) //TODO create Element class
             {
-                addToInventory((int)elementObjects[i, j].GetComponent<Element>().type);
+                Element.TypeElement type = elementObjects[i, j].GetComponent<Element>().type;
+                if (type != Element.TypeElement.Batterie || type != Element.TypeElement.TargetBattery) addToInventory((int) type);
                 return;
             }
 
@@ -242,7 +243,7 @@ void Start()
         GameObject elementObject = Instantiate(elementPrefabs[(int)elementMaps[i, j]], new Vector3(i * GlobalGrid.caseSize, j * GlobalGrid.caseSize, 0), elementPrefabs[(int)elementMaps[i, j]].transform.rotation);
         elementObject.GetComponent<Element>().setXPos(i);
         elementObject.GetComponent<Element>().setYPos(j);
-        Debug.Log("Position de l'element en positon " + (i, j));
+        // Debug.Log("Position de l'element en positon " + (i, j));
         elementObject.transform.parent = transform;
         elementObjects[i, j] = elementObject;
 
@@ -266,7 +267,7 @@ void Start()
     {
         if (UI.instance.isRunning) return;
 
-            Debug.Log("Begin element placement : " + currentPlacingElement.ToString());
+            // Debug.Log("Begin element placement : " + currentPlacingElement.ToString());
         if (currentPlacingElementObject != null)
         {
             Destroy(currentPlacingElementObject);
@@ -326,7 +327,7 @@ void Start()
 
         if (elementMaps[i, j] == Element.TypeElement.Poteau && GetElementTypeAtPosition(i, j+1) == Element.TypeElement.Poteau) return;
 
-        Debug.Log("Remove element from case");
+        // Debug.Log("Remove element from case");
         //addToInventory((int)elementMaps[i, j]);
         elementMaps[i, j] = Element.TypeElement.None;
         if(_removeSound != null) _removeSound.Play(0);
@@ -370,11 +371,12 @@ void Start()
 
     public void addToInventory(int gridValue)
     {
-        if (gridValue == 0) return;
+        // do not add air, batterie or target batterie
+        if (gridValue == 0 || gridValue == 7 || gridValue == 8) return;
+        // Debug.Log("on m'apelle pour incrementer" + gridValue);
         int inventoryId = reverseDictionnaries(gridValue);
         inventory[inventoryId-1]++;
         UI.instance.updateCount(inventoryId - 1);
-        Debug.Log("on m'apelle pour incrementer" + inventoryId);
     }
 
     public bool RemoveFromInventory(int gridValue)
@@ -384,7 +386,7 @@ void Start()
         if (inventoryId == -1) return true;
         if (inventory[inventoryId] < 1) return false;
         inventory[inventoryId]--;
-        Debug.Log("From remove");
+        // Debug.Log("From remove");
         UI.instance.updateCount(inventoryId);
         return true;
     }

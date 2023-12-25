@@ -113,7 +113,7 @@ public class UI : MonoBehaviour
         }
 
 
-        Debug.Log("Button press " + i);
+        // Debug.Log("Button press " + i);
         grilleElementManager.setCurrentPlacingElement(i);
     }
 
@@ -149,9 +149,11 @@ public class UI : MonoBehaviour
 
     public void updateCount(int index)
     {
+        /*
         Debug.Log("Update");
         Debug.Log(index);
         Debug.Log(grilleElementManager.inventory[index]);
+        */
         countList[index].text = grilleElementManager.inventory[index].ToString();
 
         if (countList[index].text == "0")

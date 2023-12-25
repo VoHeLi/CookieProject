@@ -41,7 +41,7 @@ public class Batterie : Element
             energy = 100f;
         }
         GetComponent<SpriteRenderer>().sortingOrder = 1;
-        Debug.Log("Energy de depart : " + energy);
+        // Debug.Log("Energy de depart : " + energy);
     }
 
     // Update is called once per frame
@@ -149,7 +149,7 @@ public class Batterie : Element
     public IEnumerator StartDrainingAnimation()
     {
         int i = 1;
-        Debug.Log(energy);
+        //Debug.Log(energy);
 
         for (float energyLevel = 100f; energyLevel >= 0; energyLevel -= 100/(animationFPS*dureeAnimation))
         {
@@ -173,7 +173,7 @@ public class Batterie : Element
                 }
                 smallSparkSpriteRenderer.sortingOrder = 2;
             }
-            Debug.Log(i);
+            // Debug.Log(i);
             i++;
 
             yield return new WaitForSeconds(1/(animationFPS*2));
@@ -324,32 +324,32 @@ public class Batterie : Element
         }
         else if ((voisinD.GetComponent<Element>().type == Element.TypeElement.Eolienne_right) || (voisinD.GetComponent<Element>().type == Element.TypeElement.Piston_left) || (voisinD.GetComponent<Element>().type == Element.TypeElement.Ventilateur_left))
         {
-            Debug.Log("Debug1");
+            // Debug.Log("Debug1");
             return false;
         }
         else if ((voisinD.GetComponent<Element>().type == Element.TypeElement.Eolienne_up) && voisinD.GetComponent<Ventilateur>().getIsConnectedLeft())
         {
-            Debug.Log("Debug2");
+            // Debug.Log("Debug2");
             return false;
         }
         else if ((voisinD.GetComponent<Element>().type == Element.TypeElement.Eolienne_down) && voisinD.GetComponent<Ventilateur>().getIsConnectedLeft())
         {
-            Debug.Log("Debug3");
+            // Debug.Log("Debug3");
             return false;
         }
         else if ((voisinD.GetComponent<Element>().type == Element.TypeElement.Ventilateur_up) && voisinD.GetComponent<Ventilateur>().getIsConnectedLeft())
         {
-            Debug.Log("Debug4");
+            // Debug.Log("Debug4");
             return false;
         }
         else if ((voisinD.GetComponent<Element>().type == Element.TypeElement.Ventilateur_down) && voisinD.GetComponent<Ventilateur>().getIsConnectedLeft())
         {
-            Debug.Log("Debug5");
+            // Debug.Log("Debug5");
             return false;
         }
         else if (voisinD.GetComponent<Element>().type == Element.TypeElement.None)
         {
-            Debug.Log("Debug6");
+            // Debug.Log("Debug6");
             return false;
         }
         else

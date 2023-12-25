@@ -143,10 +143,10 @@ public class AntiPiston : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Truc toucher piston.");
+        // Debug.Log("Truc toucher piston.");
         if (collision.collider.gameObject.tag == "Ball") //COUILLE
         {
-            Debug.Log("Baballe toucher piston.");
+            // Debug.Log("Baballe toucher piston.");
 
             Vector2 idealDir = isFacingLeft ? Vector2.right : Vector2.left;
 

@@ -153,6 +153,14 @@ public class Piston : MonoBehaviour
         
         ball.velocity = speed * new Vector2(ballDirection.x, ballDirection.y);
 
-        Debug.Log("test");
+        // Debug.Log("test");
+    }
+
+    public void ResetBall()
+    {
+        ball.transform.position = transform.position + new Vector3(0.5f, -0.125f, 0f);
+        ball.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        ball.GetComponent<Rigidbody2D>().angularVelocity = 0;
+        ball.bodyType = RigidbodyType2D.Kinematic;
     }
 }
