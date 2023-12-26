@@ -91,7 +91,7 @@ public class GrilleElementManager : MonoBehaviour
 
 
 
-void Start()
+    void Start()
     {
         elementMaps = new Element.TypeElement[GlobalGrid.nbCaseX, GlobalGrid.nbCaseY];
         for(int i = 0; i < GlobalGrid.nbCaseX; i++)
@@ -125,17 +125,8 @@ void Start()
         //current Placing Element at good position
         if (currentPlacingElement != Element.TypeElement.None)
         {
-            int flags = 0;
-            if (currentPlacingElement == Element.TypeElement.Poteau)
-            {
-                flags = 2;
-            }
-            else if (currentPlacingElement == Element.TypeElement.Eolienne_up || currentPlacingElement == Element.TypeElement.Ventilateur_down || currentPlacingElement == Element.TypeElement.Sponge_cornerTopLeft || currentPlacingElement == Element.TypeElement.Sponge_cornerTopRight)
-            {
-                flags = 1;
-            }
             int i = 0, j = 0;
-            if (!GlobalGrid.GetMouseCase(ref i, ref j) || !GetBlock.instance.CanBePlacedOn(i, j, flags))
+            if (!GlobalGrid.GetMouseCase(ref i, ref j) || !GetBlock.instance.CanBePlacedOn(i, j, currentPlacingElement))
             {
                   currentPlacingElementObject.transform.position = new Vector3(-1000, -1000, 0);
             }
@@ -285,24 +276,9 @@ void Start()
         if (UI.instance.isRunning) return;
 
         //Check if there is a battery or a target battery and return if there is
-        if (elementMaps[i,j] == Element.TypeElement.Batterie || elementMaps[i,j] == Element.TypeElement.TargetBattery)
-        {
-            return;
-        }
-
-
 		if (elementMaps[i, j] == Element.TypeElement.Batterie || elementMaps[i, j] == Element.TypeElement.TargetBattery) return;
-        int flags = 0;
-        if (currentPlacingElement == Element.TypeElement.Poteau)
-        {
-            flags = 2;
-        }
-        else if (currentPlacingElement == Element.TypeElement.Eolienne_up || currentPlacingElement == Element.TypeElement.Ventilateur_down || currentPlacingElement == Element.TypeElement.Sponge_cornerTopLeft || currentPlacingElement == Element.TypeElement.Sponge_cornerTopRight)
-        {
-            flags = 1;
-        }
 
-        if (!GetBlock.instance.CanBePlacedOn(i,j, flags)) return;
+        if (!GetBlock.instance.CanBePlacedOn(i,j, currentPlacingElement)) return;
 
         if (!RemoveFromInventory((int)currentPlacingElement)) return;
 
